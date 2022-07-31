@@ -2033,7 +2033,7 @@ const monsterWords monsterText[NUMBER_MONSTER_KINDS] = {
     {"This slimy mass lurks in the shadows, invisible to the naked eye. Although weak, when it splits, it can disorient an adventure.",
 		"absorbing", "Feeding",
 		{"smears", "slimes", "drenches"}},
-    {"Much less tribal in nature than others, this goblin relies on $HISHER own cunning and agility to relive adventurers of their treasures. $HESHE wields a stone arrowhead as a makeshift dagger.",
+    {"Much less tribal in nature than others, this goblin outcast will only occasionally work with other thieves to relieve adventurers of their treasures. $HESHE wields a stone arrowhead as a makeshift dagger.",
 		"studying", "Studying",
 		{"stabs", "cuts", {0}}}, 
     {"This floating membrane is filled with paralytic gas. $HESHE can be weaponized if burst from a distance, but $HESHE can also be quite deadly to adventurers distracted by other monsters and unaware of $HISHER presence.",

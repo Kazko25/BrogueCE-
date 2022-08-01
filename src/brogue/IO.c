@@ -378,9 +378,9 @@ short actionMenu(short x, boolean playingBack) {
         buttons[buttonCount].hotkey[0] = DISCOVERIES_KEY;
         buttonCount++;
         if (KEYBOARD_LABELS) {
-            sprintf(buttons[buttonCount].text, "  %s~: %sView dungeon seed  ",  yellowColorEscape, whiteColorEscape);
+            sprintf(buttons[buttonCount].text, "  %s~: %sView playthrough information  ",  yellowColorEscape, whiteColorEscape);
         } else {
-            strcpy(buttons[buttonCount].text, "  View dungeon seed  ");
+            strcpy(buttons[buttonCount].text, "  View playthrough information  ");
         }
         buttons[buttonCount].hotkey[0] = SEED_KEY;
         buttonCount++;
@@ -4140,39 +4140,38 @@ void printHelpScreen() {
     cellDisplayBuffer dbuf[COLS][ROWS], rbuf[COLS][ROWS];
     char helpText[BROGUE_HELP_LINE_COUNT][DCOLS*3] = {
         "",
+        "                 --- Commands ---",
         "",
-        "          -- Commands --",
+        "numpad, arrow keys, or hjklyubn ****to move or attack (control or shift to run)",
         "",
-        "          mouse  ****move cursor (including to examine monsters and terrain)",
-        "          click  ****travel",
-        "  control-click  ****advance one space",
-        "       <return>  ****enable keyboard cursor control",
-        "    <space/esc>  ****disable keyboard cursor control",
-        "hjklyubn, arrow keys, or numpad  ****move or attack (control or shift to run)",
+        "    i, right-click  ****view inventory",
+        "                 D  ****list discovered items",
+        "                 M  ****display old messages",
         "",
-        "a/e/r/t/d/c/R/w  ****apply/equip/remove/throw/drop/call/relabel/swap an item",
-        "              T  ****re-throw last item at last monster",
-        " i, right-click  ****view inventory",
-        "              D  ****list discovered items",
+        "                 z  ****rest once",
+        "                 Z  ****rest for 100 turns or until something happens",
+        "                 s  ****search for secrets (control-s: long search)",
+        "              <, >  ****travel to stairs",
+        "                 x  ****auto-explore (control-x: fast forward)",
+        "                 A  ****autopilot (control-A: fast forward)",
         "",
-        "              z  ****rest once",
-        "              Z  ****rest for 100 turns or until something happens",
-        "              s  ****search for secrets (control-s: long search)",
-        "           <, >  ****travel to stairs",
-        "              x  ****auto-explore (control-x: fast forward)",
-        "              A  ****autopilot (control-A: fast forward)",
-        "              M  ****display old messages",
-        "              G  ****toggle graphical tiles (when available)",
+        "   a/e/r/t/d/c/R/w  ****apply/equip/remove/throw/drop/call/relabel/swap an item",
+        "                 T  ****re-throw last item at last monster targeted",
         "",
-        "              S  ****suspend game and quit",
-        "              Q  ****quit to title screen",
+        "             mouse  ****move cursor (including to examine monsters and terrain)",
+        "             click  ****travel",
+        "     control-click  ****advance one space",
+        "          <return>  ****enable keyboard cursor control",
+        "       <space/esc>  ****disable keyboard cursor control",
+        "                    ****clear message",
+        "                    ****cancel command",
         "",
-        "              \\  ****disable/enable color effects",
-        "              ]  ****display/hide stealth range",
-        "              %  ****display/hide hit points",
-        "    <space/esc>  ****clear message or cancel command",
+        "                 S  ****suspend game and quit",
+        "                 Q  ****quit to title screen",
         "",
-        "        -- press space or click to continue --"
+        "",
+        "",
+        "       --- press space or click to continue ---"
     };
 
     // Replace the "****"s with color escapes.
@@ -4339,7 +4338,7 @@ void printGameInfoScreen()
         y+=2;
         sprintf(buf, "Dungeon Seed: %lu", rogue.seed);
         printString(buf, mapToWindowX(2), y++, &white, &black, dbuf);
-        sprintf(buf, "Total Turns: %lu", rogue.playerTurnNumber);
+        sprintf(buf, "Turns: %lu", rogue.playerTurnNumber);
         printString(buf, mapToWindowX(2), y++, &white, &black, dbuf);
         //sprintf(buf, "Area discovered: %i ca", rogue.numCellsDiscovered); // in units of centiares; legit but obscure enough to be abstract -- gsr
         //printString(buf, mapToWindowX(2), y++, &white, &black, dbuf);

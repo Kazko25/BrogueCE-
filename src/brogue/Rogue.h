@@ -2848,6 +2848,7 @@ extern "C" {
     void refreshSideBar(short focusX, short focusY, boolean focusedEntityMustGoFirst);
     void printHelpScreen();
     void printDiscoveriesScreen();
+    void printGameInfoScreen();
     void printHighScores(boolean hiliteMostRecent);
     void displayGrid(short **map);
     void printSeed();

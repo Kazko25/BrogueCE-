@@ -2750,12 +2750,12 @@ void executeKeystroke(signed long keystroke, boolean controlKey, boolean shiftKe
             }*/
             // DEBUG displayLoops();
             // DEBUG displayChokeMap();
-            DEBUG displayMachines();
+            //DEBUG displayMachines();
             //DEBUG displayWaypoints();
             // DEBUG {displayGrid(safetyMap); displayMoreSign(); displayLevel();}
             // parseFile();
             // DEBUG spawnDungeonFeature(player.loc.x, player.loc.y, &dungeonFeatureCatalog[DF_METHANE_GAS_ARMAGEDDON], true, false);
-            printSeed();
+            printGameInfoScreen();
             break;
         case EASY_MODE_KEY:
             //if (shiftKey) {
@@ -4133,7 +4133,7 @@ char nextKeyPress(boolean textInput) {
     return theEvent.param1;
 }
 
-#define BROGUE_HELP_LINE_COUNT  33
+#define BROGUE_HELP_LINE_COUNT  34
 
 void printHelpScreen() {
     short i, j;
@@ -4288,6 +4288,76 @@ void printDiscoveriesScreen() {
     waitForKeystrokeOrMouseClick();
 
     overlayDisplayBuffer(rbuf, NULL);
+}
+
+//gBrogue
+void printGameInfoScreen()
+{
+	short i, j, x, y;
+	char buf[COLS];
+	cellDisplayBuffer dbuf[COLS][ROWS], rbuf[COLS][ROWS];
+
+	clearDisplayBuffer(dbuf);
+
+	//printString("-- Current playthrough information --", x = mapToWindowX(11), y = 2, &itemMessageColor, &black, dbuf);
+
+	// Feats
+        y = 2;
+        printString("-- Eligible feats --", mapToWindowX(2), y, &itemMessageColor, &black, dbuf);
+        y+=2;
+        for (i = 0; i < FEAT_COUNT; i++) {
+            //printf("\nConduct %i (%s) is %s.", i, featTable[i].name, rogue.featRecord[i] ? "true" : "false");
+            // Achieved (pending ascension)
+            if (rogue.featRecord[i]) {
+
+                sprintf(buf, "%s: %s", featTable[i].name, featTable[i].description);
+                printString(buf, mapToWindowX(3), y, &white, &black, dbuf);
+                sprintf(buf, "%s:", featTable[i].name);
+                printString(buf, mapToWindowX(3), y, &itemMessageColor, &black, dbuf);
+                y++;
+            }
+            // Failed/violated
+            else if (!rogue.featRecord[i] && featTable[i].initialValue) {
+                sprintf(buf, "%s: %s", featTable[i].name, featTable[i].description);
+                printString(buf, mapToWindowX(3), y, &darkRed, &black, dbuf);
+                sprintf(buf, "%s:", featTable[i].name);
+                printString(buf, mapToWindowX(3), y, &red, &black, dbuf);
+                y++;
+            }
+            // Not yet earned, but could be
+            else {
+                sprintf(buf, "%s: %s", featTable[i].name, featTable[i].description);
+                printString(buf, mapToWindowX(3), y, &darkGray, &black, dbuf);
+                sprintf(buf, "%s:", featTable[i].name);
+                printString(buf, mapToWindowX(3), y, &gray, &black, dbuf);
+                y++;
+            }
+        }
+    // Seed etc.
+        y++;
+        printString("-- Playthrough info --", mapToWindowX(2), y, &itemMessageColor, &black, dbuf);
+        y+=2;
+        sprintf(buf, "Dungeon Seed: %lu", rogue.seed);
+        printString(buf, mapToWindowX(2), y++, &white, &black, dbuf);
+        sprintf(buf, "Total Turns: %lu", rogue.playerTurnNumber);
+        printString(buf, mapToWindowX(2), y++, &white, &black, dbuf);
+        //sprintf(buf, "Area discovered: %i ca", rogue.numCellsDiscovered); // in units of centiares; legit but obscure enough to be abstract -- gsr
+        //printString(buf, mapToWindowX(2), y++, &white, &black, dbuf);
+
+
+    printString(KEYBOARD_LABELS ? "-- press any key to continue --" : "-- touch anywhere to continue --",
+                mapToWindowX(20), mapToWindowY(DROWS-2), &itemMessageColor, &black, dbuf);
+
+	for (i=0; i<COLS; i++) {
+		for (j=0; j<ROWS; j++) {
+			dbuf[i][j].opacity = (i < STAT_BAR_WIDTH ? 0 : INTERFACE_OPACITY);
+		}
+	}
+	overlayDisplayBuffer(dbuf, rbuf);
+
+    waitForKeystrokeOrMouseClick();
+
+	overlayDisplayBuffer(rbuf, NULL);
 }
 
 // Creates buttons for the discoveries screen in the buttons pointer; returns the number of buttons created.

@@ -4338,7 +4338,9 @@ void printGameInfoScreen()
         y+=2;
         sprintf(buf, "Dungeon Seed: %lu", rogue.seed);
         printString(buf, mapToWindowX(2), y++, &white, &black, dbuf);
-        sprintf(buf, "Turns: %lu", rogue.playerTurnNumber);
+        sprintf(buf, "Version: %s", BROGUE_VERSION_STRING);
+        printString(buf, mapToWindowX(2), y++, &white, &black, dbuf);
+        sprintf(buf, "Turn: %lu", rogue.playerTurnNumber);
         printString(buf, mapToWindowX(2), y++, &white, &black, dbuf);
         //sprintf(buf, "Area discovered: %i ca", rogue.numCellsDiscovered); // in units of centiares; legit but obscure enough to be abstract -- gsr
         //printString(buf, mapToWindowX(2), y++, &white, &black, dbuf);
@@ -4459,8 +4461,8 @@ void printGameInfoScreen()
 //}
 
 void printHighScores(boolean hiliteMostRecent) {
-    short i, hiliteLineNum, maxLength = 0, leftOffset;
-    rogueHighScoresEntry list[HIGH_SCORES_COUNT] = {{0}};
+    short i, y, hiliteLineNum, maxLength = 0, leftOffset;
+    rogueHighScoresEntry list[20] = {{0}};
     char buf[DCOLS*3];
     color scoreColor;
 
@@ -4472,7 +4474,7 @@ void printHighScores(boolean hiliteMostRecent) {
 
     blackOutScreen();
 
-    for (i = 0; i < HIGH_SCORES_COUNT && list[i].score > 0; i++) {
+    for (i = 0; i < 20 && list[i].score > 0; i++) {
         if (strLenWithoutEscapes(list[i].description) > maxLength) {
             maxLength = strLenWithoutEscapes(list[i].description);
         }
@@ -4484,7 +4486,7 @@ void printHighScores(boolean hiliteMostRecent) {
     applyColorAverage(&scoreColor, &itemMessageColor, 100);
     printString("-- HIGH SCORES --", (COLS - 17 + 1) / 2, 0, &scoreColor, &black, 0);
 
-    for (i = 0; i < HIGH_SCORES_COUNT && list[i].score > 0; i++) {
+    for (i = 0; i < 20 && list[i].score > 0; i++) {
         scoreColor = black;
         if (i == hiliteLineNum) {
             applyColorAverage(&scoreColor, &itemMessageColor, 100);
@@ -4507,6 +4509,32 @@ void printHighScores(boolean hiliteMostRecent) {
         // description
         printString(list[i].description, leftOffset + 23, i + 2, &scoreColor, &black, 0);
     }
+    //Work in Progress
+    /*y = 25;
+    printString("-- ACHIEVED FEATS --", (COLS - 24 + 1) / 2, 23, &scoreColor, &black, 0);
+        for (i = 0; i < FEAT_COUNT; i++) {
+            //printf("\nConduct %i (%s) is %s.", i, featTable[i].name, rogue.featRecord[i] ? "true" : "false");
+            // Achieved (pending ascension)
+            if (list[i+3].score) {
+                if (i < 7){
+                    sprintf(buf, "%s", featTable[i].name);
+                    printString(buf, leftOffset + 12, y, &advancementMessageColor, &black, 0);
+                } else {
+                    sprintf(buf, "%s", featTable[i].name);
+                    printString(buf, leftOffset +37, y -7, &advancementMessageColor, &black, 0);
+                }
+                y++;
+            }else{
+                if (i < 7){
+                    sprintf(buf, "%s", featTable[i].name);
+                    printString(buf, leftOffset + 12, y, &darkGray, &black, 0);
+                } else {
+                    sprintf(buf, "%s", featTable[i].name);
+                    printString(buf, leftOffset +37, y -7, &darkGray, &black, 0);
+                }
+                y++;
+            }
+        }*/
 
     scoreColor = black;
     applyColorAverage(&scoreColor, &goodMessageColor, 100);

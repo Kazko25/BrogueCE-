@@ -2107,7 +2107,7 @@ const hordeType hordeCatalog[NUMBER_HORDES] = {
     {MK_EEL,            1,      {MK_EEL},                               {{2, 4, 1}},                    8,      22,     70,     DEEP_WATER},
     {MK_ACID_MOUND,     1,      {MK_ACID_MOUND},                        {{2, 4, 1}},                    9,      13,     30},
     {MK_SPIDER,         0,      {0},                                    {{0}},                          9,      16,     100},
-    {MK_GOBLIN_THIEF,   1,      {MK_GOBLIN_THIEF},                      {{1,3,1}},                      9,      14,     20},
+    {MK_GOBLIN_THIEF,   1,      {MK_GOBLIN_THIEF},                      {{1,2,1}},                      9,      14,     20},
     {MK_ADOLECENT_DRAGON,1,     {MK_KOBOLD},                            {{3, 6, 1}},                    10,     16,     20,      0,             0,               HORDE_NO_PERIODIC_SPAWN},
     {MK_DAR_BLADEMASTER,1,      {MK_DAR_BLADEMASTER},                   {{0, 1, 1}},                    10,     14,     100},
     {MK_WILL_O_THE_WISP,0,      {0},                                    {{0}},                          10,     17,     100},

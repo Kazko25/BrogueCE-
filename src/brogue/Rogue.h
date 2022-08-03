@@ -186,7 +186,7 @@ typedef struct pos {
 #define INPUT_RECORD_BUFFER     1000        // how many bytes of input data to keep in memory before saving it to disk
 #define DEFAULT_PLAYBACK_DELAY  50
 
-#define HIGH_SCORES_COUNT       30
+#define HIGH_SCORES_COUNT       20
 
 // color escapes
 #define COLOR_ESCAPE            25

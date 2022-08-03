@@ -655,7 +655,7 @@ void magicWeaponHit(creature *defender, item *theItem, boolean backstabbed) {
 
     color *effectColors[NUMBER_WEAPON_RUNIC_KINDS] = {&white, &black,
         &yellow, &pink, &green, &confusionGasColor, NULL, NULL, &darkRed, &rainbow};
-    //  W_SPEED, W_QUIETUS, W_PARALYSIS, W_MULTIPLICITY, W_SLOWING, W_CONFUSION, W_FORCE, W_SLAYING, W_MERCY, W_PLENTY
+    //  W_SPEED, W_QUIETUS, W_PARALYSIS, W_MULTIPLICITY, W_SLOWING, W_CONFUSION, W_FORCE, W_SLAYING, W_POISON W_MERCY, W_PLENTY
     short chance, i;
     fixpt enchant;
     enum weaponEnchants enchantType = theItem->enchant2;
@@ -693,6 +693,9 @@ void magicWeaponHit(creature *defender, item *theItem, boolean backstabbed) {
                     break;
                 case W_SLAYING:
                     createFlare(defender->loc.x, defender->loc.y, SLAYING_FLARE_LIGHT);
+                    break;
+                case W_POISON:
+                    createFlare(defender->loc.x, defender->loc.y, FUNGUS_LIGHT);
                     break;
                 default:
                     flashMonster(defender, effectColors[enchantType], 100);
@@ -733,6 +736,17 @@ void magicWeaponHit(creature *defender, item *theItem, boolean backstabbed) {
                     combatMessage(buf, messageColorFromVictim(defender));
                     autoID = true;
                 }
+                break;
+            case W_POISON:
+				defender->status[STATUS_POISONED] = max(defender->status[STATUS_POISONED], weaponConfusionDuration(enchant));
+				defender->maxStatus[STATUS_POISONED] = defender->status[STATUS_POISONED];
+				defender->poisonAmount++;
+				if (canDirectlySeeMonster(defender)) {
+					sprintf(buf, "%s looks sick", monstName);
+					buf[DCOLS] = '\0';
+					combatMessage(buf, messageColorFromVictim(defender));
+                    autoID = true;
+				}
                 break;
             case W_MULTIPLICITY:
                 sprintf(buf, "Your %s emits a flash of light, and %sspectral duplicate%s appear%s!",
@@ -1069,8 +1083,8 @@ void processStaggerHit(creature *attacker, creature *defender) {
 
         return;
     }
-    short newX = clamp(defender->loc.x - attacker->loc.x, -1, 1) + defender->loc.x;
-    short newY = clamp(defender->loc.y - attacker->loc.y, -1, 1) + defender->loc.y;
+    short newX = clamp(defender->loc.x - attacker->loc.x, -1, 2) + defender->loc.x;
+    short newY = clamp(defender->loc.y - attacker->loc.y, -1, 2) + defender->loc.y;
     if (coordinatesAreInMap(newX, newY)
         && !cellHasTerrainFlag(newX, newY, T_OBSTRUCTS_PASSABILITY)
         && !(pmap[newX][newY].flags & (HAS_MONSTER | HAS_PLAYER))) {

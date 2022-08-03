@@ -378,9 +378,9 @@ short actionMenu(short x, boolean playingBack) {
         buttons[buttonCount].hotkey[0] = DISCOVERIES_KEY;
         buttonCount++;
         if (KEYBOARD_LABELS) {
-            sprintf(buttons[buttonCount].text, "  %s~: %sView playthrough information  ",  yellowColorEscape, whiteColorEscape);
+            sprintf(buttons[buttonCount].text, "  %s~: %sPlaythrough information  ",  yellowColorEscape, whiteColorEscape);
         } else {
-            strcpy(buttons[buttonCount].text, "  View playthrough information  ");
+            strcpy(buttons[buttonCount].text, "  Playthrough information  ");
         }
         buttons[buttonCount].hotkey[0] = SEED_KEY;
         buttonCount++;

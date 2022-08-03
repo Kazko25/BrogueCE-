@@ -3283,7 +3283,8 @@ boolean updateMonsterCorpseAbsorption(creature *monst) {
                 }
                 resolvePronounEscapes(buf, monst);
                 messageWithColor(buf, &advancementMessageColor, 0);
-                if((monst->info.flags & MONST_RESTRICTED_TO_LIQUID) && monst->status[STATUS_LEVITATING]){
+                //used to determine that it is indeed a kraken that is levitating
+                if((monst->info.flags & MONST_IMMUNE_TO_WATER) && (monst->info.flags & MONST_FLEES_NEAR_DEATH) && monst->status[STATUS_LEVITATING]){
                     rogue.featRecord[FEAT_ESOTERIC] = true;
                 }
             }

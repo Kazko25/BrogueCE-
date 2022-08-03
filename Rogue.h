@@ -36,9 +36,9 @@
 #define USE_UNICODE
 
 // Brogue version number
-#define BROGUE_MAJOR 1
-#define BROGUE_MINOR 2
-#define BROGUE_PATCH 1
+#define BROGUE_MAJOR 2
+#define BROGUE_MINOR 0
+#define BROGUE_PATCH 0
 
 // Expanding a macro as a string constant requires two levels of macros
 #define _str(x) #x
@@ -186,7 +186,7 @@ typedef struct pos {
 #define INPUT_RECORD_BUFFER     1000        // how many bytes of input data to keep in memory before saving it to disk
 #define DEFAULT_PLAYBACK_DELAY  50
 
-#define HIGH_SCORES_COUNT       30
+#define HIGH_SCORES_COUNT       20
 
 // color escapes
 #define COLOR_ESCAPE            25
@@ -826,6 +826,7 @@ enum weaponEnchants {
     W_CONFUSION,
     W_FORCE,
     W_SLAYING,
+    W_POISON,
     W_MERCY,
     NUMBER_GOOD_WEAPON_ENCHANT_KINDS = W_MERCY,
     W_PLENTY,
@@ -851,6 +852,7 @@ enum armorEnchants {
     A_REFLECTION,
     A_RESPIRATION,
     A_DAMPENING,
+    A_VANISHING,
     A_BURDEN,
     NUMBER_GOOD_ARMOR_ENCHANT_KINDS = A_BURDEN,
     A_VULNERABILITY,
@@ -922,6 +924,7 @@ enum boltType {
     BOLT_ANCIENT_SPIRIT_VINES,
     BOLT_WHIP,
     BOLT_THROWN_SPEAR,
+    BOLT_POISON_BREATH,
     NUMBER_BOLT_KINDS
 };
 
@@ -1057,16 +1060,18 @@ enum monsterTypes {
     MK_NETHER_JELLY,
     MK_GOBLIN_THIEF,
     MK_PARALYTIC_BLOAT,
+    MK_BLACK_DRAGON,
 
     //kBrogue
     MK_CRYSTAL_JELLY,
+    MK_ADOLECENT_DRAGON,
 
     NUMBER_MONSTER_KINDS
 };
 
 #define NUMBER_MUTATORS             8
 
-#define NUMBER_HORDES               186
+#define NUMBER_HORDES               196
 
 #define MONSTER_CLASS_COUNT         15
 
@@ -2844,6 +2849,7 @@ extern "C" {
     void refreshSideBar(short focusX, short focusY, boolean focusedEntityMustGoFirst);
     void printHelpScreen();
     void printDiscoveriesScreen();
+    void printGameInfoScreen();
     void printHighScores(boolean hiliteMostRecent);
     void displayGrid(short **map);
     void printSeed();

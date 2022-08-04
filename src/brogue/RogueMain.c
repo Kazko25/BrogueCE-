@@ -1089,6 +1089,7 @@ void gameOver(char *killedBy, boolean useCustomPhrasing) {
 
                 sprintf(buf, "%s: %s", featTable[i].name, featTable[i].description);
                 printString(buf, (COLS - strLenWithoutEscapes(buf)) / 2, y, &advancementMessageColor, &black, 0);
+                saveFeatAccomplished(i + HIGH_SCORES_COUNT);
                 y++;
             }
         }

@@ -2840,8 +2840,9 @@ extern "C" {
     enum graphicsModes setGraphicsMode(enum graphicsModes mode);
     boolean controlKeyIsDown();
     boolean shiftKeyIsDown();
-    short getHighScoresList(rogueHighScoresEntry returnList[HIGH_SCORES_COUNT]);
+    short getHighScoresList(rogueHighScoresEntry returnList[HIGH_SCORES_COUNT + FEAT_COUNT]);
     boolean saveHighScore(rogueHighScoresEntry theEntry);
+    boolean saveFeatAccomplished(short i);
     fileEntry *listFiles(short *fileCount, char **dynamicMemoryBuffer);
     void initializeLaunchArguments(enum NGCommands *command, char *path, uint64_t *seed);
 

@@ -4292,13 +4292,11 @@ void printDiscoveriesScreen() {
 //gBrogue
 void printGameInfoScreen()
 {
-	short i, j, x, y;
+	short i, j, y;
 	char buf[COLS];
 	cellDisplayBuffer dbuf[COLS][ROWS], rbuf[COLS][ROWS];
 
 	clearDisplayBuffer(dbuf);
-
-	//printString("-- Current playthrough information --", x = mapToWindowX(11), y = 2, &itemMessageColor, &black, dbuf);
 
 	// Feats
         y = 2;
@@ -4336,7 +4334,7 @@ void printGameInfoScreen()
         y++;
         printString("-- Playthrough info --", mapToWindowX(2), y, &itemMessageColor, &black, dbuf);
         y+=2;
-        sprintf(buf, "Dungeon Seed: %lu", rogue.seed);
+        sprintf(buf, "Dungeon Seed: %llu", rogue.seed);
         printString(buf, mapToWindowX(2), y++, &white, &black, dbuf);
         sprintf(buf, "Version: %s", BROGUE_VERSION_STRING);
         printString(buf, mapToWindowX(2), y++, &white, &black, dbuf);
@@ -4462,7 +4460,7 @@ void printGameInfoScreen()
 
 void printHighScores(boolean hiliteMostRecent) {
     short i, y, hiliteLineNum, maxLength = 0, leftOffset;
-    rogueHighScoresEntry list[20] = {{0}};
+    rogueHighScoresEntry list[HIGH_SCORES_COUNT + FEAT_COUNT] = {{0}};
     char buf[DCOLS*3];
     color scoreColor;
 
@@ -4474,7 +4472,7 @@ void printHighScores(boolean hiliteMostRecent) {
 
     blackOutScreen();
 
-    for (i = 0; i < 20 && list[i].score > 0; i++) {
+    for (i = 0; i < HIGH_SCORES_COUNT; i++) {
         if (strLenWithoutEscapes(list[i].description) > maxLength) {
             maxLength = strLenWithoutEscapes(list[i].description);
         }
@@ -4486,7 +4484,7 @@ void printHighScores(boolean hiliteMostRecent) {
     applyColorAverage(&scoreColor, &itemMessageColor, 100);
     printString("-- HIGH SCORES --", (COLS - 17 + 1) / 2, 0, &scoreColor, &black, 0);
 
-    for (i = 0; i < 20 && list[i].score > 0; i++) {
+    for (i = 0; i < HIGH_SCORES_COUNT; i++) {
         scoreColor = black;
         if (i == hiliteLineNum) {
             applyColorAverage(&scoreColor, &itemMessageColor, 100);
@@ -4494,28 +4492,30 @@ void printHighScores(boolean hiliteMostRecent) {
             applyColorAverage(&scoreColor, &white, 100);
             applyColorAverage(&scoreColor, &black, (i * 50 / 24));
         }
+        if(list[i].score > 0)
+        {
+            // rank
+            sprintf(buf, "%s%i)", (i + 1 < 10 ? " " : ""), i + 1);
+            printString(buf, leftOffset, i + 2, &scoreColor, &black, 0);
 
-        // rank
-        sprintf(buf, "%s%i)", (i + 1 < 10 ? " " : ""), i + 1);
-        printString(buf, leftOffset, i + 2, &scoreColor, &black, 0);
+            // score
+            sprintf(buf, "%li", list[i].score);
+            printString(buf, leftOffset + 5, i + 2, &scoreColor, &black, 0);
 
-        // score
-        sprintf(buf, "%li", list[i].score);
-        printString(buf, leftOffset + 5, i + 2, &scoreColor, &black, 0);
+            // date
+            printString(list[i].date, leftOffset + 12, i + 2, &scoreColor, &black, 0);
 
-        // date
-        printString(list[i].date, leftOffset + 12, i + 2, &scoreColor, &black, 0);
-
-        // description
-        printString(list[i].description, leftOffset + 23, i + 2, &scoreColor, &black, 0);
+            // description
+            printString(list[i].description, leftOffset + 23, i + 2, &scoreColor, &black, 0);
+        }
     }
     //Work in Progress
-    /*y = 25;
+    y = 25;
     printString("-- ACHIEVED FEATS --", (COLS - 24 + 1) / 2, 23, &scoreColor, &black, 0);
         for (i = 0; i < FEAT_COUNT; i++) {
             //printf("\nConduct %i (%s) is %s.", i, featTable[i].name, rogue.featRecord[i] ? "true" : "false");
             // Achieved (pending ascension)
-            if (list[i+3].score) {
+            if (list[i + HIGH_SCORES_COUNT].score > 0) {
                 if (i < 7){
                     sprintf(buf, "%s", featTable[i].name);
                     printString(buf, leftOffset + 12, y, &advancementMessageColor, &black, 0);
@@ -4534,7 +4534,7 @@ void printHighScores(boolean hiliteMostRecent) {
                 }
                 y++;
             }
-        }*/
+        }
 
     scoreColor = black;
     applyColorAverage(&scoreColor, &goodMessageColor, 100);

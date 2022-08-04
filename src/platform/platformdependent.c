@@ -39,6 +39,7 @@ typedef struct brogueScoreEntry {
 } brogueScoreEntry;
 
 brogueScoreEntry scoreBuffer[HIGH_SCORES_COUNT];
+long int featBuffer[FEAT_COUNT];
 
 unsigned int glyphToUnicode(enum displayGlyph glyph) {
     if (glyph < 128) return glyph;
@@ -278,8 +279,11 @@ void initScores() {
     FILE *scoresFile;
 
     scoresFile = fopen("BrogueHighScores.txt", "w");
-    for (i=0; i<HIGH_SCORES_COUNT; i++) {
-        fprintf(scoresFile, "%li\t%li\t%s", (long) 0, (long) 0, "(empty entry)\n");
+    for (i=0; i< (HIGH_SCORES_COUNT); i++) {
+        fprintf(scoresFile, "%li\t%li\t%s", (long) 0, (long) 0, "(Blank Entry)\n");
+    }
+    for (i=0; i< (FEAT_COUNT); i++) {
+        fprintf(scoresFile, "%li\t%li\t%s", (long) 0, (long) 0, "(Blank Entry)\n");
     }
     fclose(scoresFile);
 }
@@ -337,19 +341,21 @@ short loadScoreBuffer() {
         scoresFile = fopen("BrogueHighScores.txt", "r");
     }
 
-    for (i=0; i<HIGH_SCORES_COUNT; i++) {
+    for (i=0; i< (HIGH_SCORES_COUNT + FEAT_COUNT); i++) {
         // load score and also the date in seconds
         fscanf(scoresFile, "%li\t%li\t", &(scoreBuffer[i].score), &(scoreBuffer[i].dateNumber));
 
         // load description
         fgets(scoreBuffer[i].description, COLS, scoresFile);
-        // strip the newline off the end
-        scoreBuffer[i].description[strlen(scoreBuffer[i].description) - 1] = '\0';
+        if (i < HIGH_SCORES_COUNT) {
+            // strip the newline off the end
+            scoreBuffer[i].description[strlen(scoreBuffer[i].description) - 1] = '\0';
 
-        // convert date to DATE_FORMAT
-        rawtime = (time_t) scoreBuffer[i].dateNumber;
-        timeinfo = localtime(&rawtime);
-        strftime(scoreBuffer[i].dateText, DCOLS, DATE_FORMAT, timeinfo);
+            // convert date to DATE_FORMAT
+            rawtime = (time_t) scoreBuffer[i].dateNumber;
+            timeinfo = localtime(&rawtime);
+            strftime(scoreBuffer[i].dateText, DCOLS, DATE_FORMAT, timeinfo);
+        }
     }
     fclose(scoresFile);
     return sortScoreBuffer();
@@ -400,7 +406,7 @@ void saveScoreBuffer() {
 
     scoresFile = fopen("BrogueHighScores.txt", "w");
 
-    for (i=0; i<HIGH_SCORES_COUNT; i++) {
+    for (i=0; i<(HIGH_SCORES_COUNT + FEAT_COUNT); i++) {
         // save the entry
         fprintf(scoresFile, "%li\t%li\t%s\n", scoreBuffer[i].score, scoreBuffer[i].dateNumber, scoreBuffer[i].description);
     }
@@ -411,7 +417,7 @@ void saveScoreBuffer() {
 void dumpScores() {
     int i;
 
-    rogueHighScoresEntry list[HIGH_SCORES_COUNT];
+    rogueHighScoresEntry list[(HIGH_SCORES_COUNT + FEAT_COUNT)];
     getHighScoresList(list);
 
     for (i = 0; i < HIGH_SCORES_COUNT; i++) {
@@ -421,12 +427,12 @@ void dumpScores() {
     }
 }
 
-short getHighScoresList(rogueHighScoresEntry returnList[HIGH_SCORES_COUNT]) {
+short getHighScoresList(rogueHighScoresEntry returnList[(HIGH_SCORES_COUNT+FEAT_COUNT)]) {
     short i, mostRecentLineNumber;
 
     mostRecentLineNumber = loadScoreBuffer();
 
-    for (i=0; i<HIGH_SCORES_COUNT; i++) {
+    for (i=0; i<HIGH_SCORES_COUNT + FEAT_COUNT; i++) {
         returnList[i].score =               scoreBuffer[i].score;
         strcpy(returnList[i].date,          scoreBuffer[i].dateText);
         strcpy(returnList[i].description,   scoreBuffer[i].description);
@@ -441,7 +447,7 @@ boolean saveHighScore(rogueHighScoresEntry theEntry) {
 
     loadScoreBuffer();
 
-    for (i=0; i<HIGH_SCORES_COUNT; i++) {
+    for (i=0; i<(HIGH_SCORES_COUNT); i++) {
         if (scoreBuffer[i].score < lowestScore || i == 0) {
             lowestScore = scoreBuffer[i].score;
             lowestScoreIndex = i;
@@ -455,6 +461,17 @@ boolean saveHighScore(rogueHighScoresEntry theEntry) {
     scoreBuffer[lowestScoreIndex].score =               theEntry.score;
     scoreBuffer[lowestScoreIndex].dateNumber =          (long) time(NULL);
     strcpy(scoreBuffer[lowestScoreIndex].description,   theEntry.description);
+
+    saveScoreBuffer();
+
+    return true;
+}
+
+boolean saveFeatAccomplished(short i) {
+
+    loadScoreBuffer();
+
+    scoreBuffer[i].score++;
 
     saveScoreBuffer();
 

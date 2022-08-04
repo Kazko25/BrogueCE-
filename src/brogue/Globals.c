@@ -2673,20 +2673,20 @@ const bolt boltCatalog[NUMBER_BOLT_KINDS] = {
 };
 
 const feat featTable[FEAT_COUNT] = {
+    {"Archivist",       "Ascend without drinking a potion or reading a scroll.", true},
+    {"Ascetic",         "Ascend without eating.", true},
+    {"Companion",       "Journey with an ally through 20 depths.", false},
+    {"Dragonslayer",    "Kill a dragon with a melee attack.", false},
+    {"Esoteric",        "Obtain a flying allied Kraken.", false},
+    {"Gemini",          "Create a clone of yourself.", false},
+    {"Indomitable",     "Ascend without taking damage.", true},
+    {"Jellymancer",     "Obtain at least 90 jelly allies simultaneously.", false},
+    {"Pacifist",        "Ascend without attacking a creature.", true},
+    {"Paladin",         "Ascend without attacking an unaware or fleeing creature.", true},
     {"Pure Mage",       "Ascend without using fists or a weapon.", true},
     {"Pure Warrior",    "Ascend without using a staff, wand or charm.", true},
-    {"Pacifist",        "Ascend without attacking a creature.", true},
-    {"Archivist",       "Ascend without drinking a potion or reading a scroll.", true},
-    {"Companion",       "Journey with an ally through 20 depths.", false},
     {"Specialist",      "Enchant an item up to or above +16.", false},
-    {"Jellymancer",     "Obtain at least 90 jelly allies simultaneously.", false},
-    {"Indomitable",     "Ascend without taking damage.", true},
-    {"Ascetic",         "Ascend without eating.", true},
-    {"Dragonslayer",    "Kill a dragon with a melee attack.", false},
-    {"Paladin",         "Ascend without attacking an unaware or fleeing creature.", true},
     {"Untempted",       "Ascend without picking up gold.", true},
-    {"Gemini",          "Create a clone of yourself.", false},
-    {"Esoteric",        "Obtain a flying allied Kraken.", false},
 };
 
 const char monsterBehaviorFlagDescriptions[32][COLS] = {

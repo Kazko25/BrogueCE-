@@ -1083,8 +1083,8 @@ void processStaggerHit(creature *attacker, creature *defender) {
 
         return;
     }
-    short newX = clamp(defender->loc.x - attacker->loc.x, -1, 2) + defender->loc.x;
-    short newY = clamp(defender->loc.y - attacker->loc.y, -1, 2) + defender->loc.y;
+    short newX = clamp(defender->loc.x - attacker->loc.x, -1, 1) + defender->loc.x;
+    short newY = clamp(defender->loc.y - attacker->loc.y, -1, 1) + defender->loc.y;
     if (coordinatesAreInMap(newX, newY)
         && !cellHasTerrainFlag(newX, newY, T_OBSTRUCTS_PASSABILITY)
         && !(pmap[newX][newY].flags & (HAS_MONSTER | HAS_PLAYER))) {

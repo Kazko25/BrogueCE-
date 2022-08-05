@@ -4338,6 +4338,8 @@ void printGameInfoScreen()
         printString(buf, mapToWindowX(2), y++, &white, &black, dbuf);
         sprintf(buf, "Version: %s", BROGUE_VERSION_STRING);
         printString(buf, mapToWindowX(2), y++, &white, &black, dbuf);
+        sprintf(buf, "Gold: %lu", rogue.gold);
+        printString(buf, mapToWindowX(2), y++, &white, &black, dbuf);
         sprintf(buf, "Turn: %lu", rogue.playerTurnNumber);
         printString(buf, mapToWindowX(2), y++, &white, &black, dbuf);
         //sprintf(buf, "Area discovered: %i ca", rogue.numCellsDiscovered); // in units of centiares; legit but obscure enough to be abstract -- gsr
@@ -4511,17 +4513,27 @@ void printHighScores(boolean hiliteMostRecent) {
     }
     //Work in Progress
     y = 25;
-    printString("-- ACHIEVED FEATS --", (COLS - 24 + 1) / 2, 23, &scoreColor, &black, 0);
+    printString("-- FEATS ACCOMPLISHED --", (COLS - 24 + 1) / 2, 23, &scoreColor, &black, 0);
         for (i = 0; i < FEAT_COUNT; i++) {
             //printf("\nConduct %i (%s) is %s.", i, featTable[i].name, rogue.featRecord[i] ? "true" : "false");
             // Achieved (pending ascension)
             if (list[i + HIGH_SCORES_COUNT].score > 0) {
                 if (i < 7){
-                    sprintf(buf, "%s", featTable[i].name);
-                    printString(buf, leftOffset + 12, y, &advancementMessageColor, &black, 0);
+                    if (list[i + HIGH_SCORES_COUNT].score > 1) {
+                        sprintf(buf, "%s (%li)", featTable[i].name, list[i + HIGH_SCORES_COUNT].score);
+                        printString(buf, leftOffset + 12, y, &advancementMessageColor, &black, 0);
+                    } else {
+                        sprintf(buf, "%s", featTable[i].name);
+                        printString(buf, leftOffset + 12, y, &advancementMessageColor, &black, 0);
+                    }
                 } else {
-                    sprintf(buf, "%s", featTable[i].name);
-                    printString(buf, leftOffset +37, y -7, &advancementMessageColor, &black, 0);
+                    if (list[i + HIGH_SCORES_COUNT].score > 1) {
+                        sprintf(buf, "%s(%li)", featTable[i].name, list[i + HIGH_SCORES_COUNT].score);
+                        printString(buf, leftOffset + 37, y -7, &advancementMessageColor, &black, 0);
+                    } else {
+                        sprintf(buf, "%s", featTable[i].name);
+                        printString(buf, leftOffset +37, y -7, &advancementMessageColor, &black, 0);
+                    }
                 }
                 y++;
             }else{

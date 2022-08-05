@@ -1217,7 +1217,7 @@ void victory(boolean superVictory) {
     blackOutScreen();
 
     i = 4;
-    printString("Achievements", mapToWindowX(2), i++, &lightBlue, &black, NULL);
+    printString("Feats Accomplished", mapToWindowX(2), i++, &lightBlue, &black, NULL);
 
     i++;
     for (j = 0; i < ROWS && j < FEAT_COUNT; j++) {

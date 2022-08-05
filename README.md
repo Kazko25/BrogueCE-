@@ -65,10 +65,12 @@ ENEMIES
 
 WEAPON CHANGES
 - Added armor runic of invisibility
+- Added weapon runic of poison
 - Ring of light reveals invisible enemies within physical vision
 
 MISC CHANGES
 - % toggles hit points On/Off in game
+- ~ now shows feat progress and other playthrough information
 - Feature added to commutation room as a hint on what the altars do
 - Hybrid tileset adjusted to show more ASCII characters than before
 - New Feat: Gemini (Clone Yourself)

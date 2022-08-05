@@ -417,6 +417,7 @@ const autoGenerator autoGeneratorCatalog[NUMBER_AUTOGENERATORS] = {
     // Flavor machines
     {0,                         0,      DF_LUMINESCENT_FUNGUS,      0,                          FLOOR,      NOTHING,    DEEPEST_LEVEL,DEEPEST_LEVEL,100,0,      0,          200},
     {0,                         0,      0,                          MT_BLOODFLOWER_AREA,        FLOOR,      NOTHING,    1,      30,             25,     140,    -10,        3},
+    {0,                         0,      0,                          MT_STINKFRUIT_AREA,			FLOOR,		NOTHING,	3,      30,             25,		0,		0,			2},
     {0,                         0,      0,                          MT_SHRINE_AREA,             FLOOR,      NOTHING,    5,      AMULET_LEVEL,   7,      0,      0,          1},
     {0,                         0,      0,                          MT_IDYLL_AREA,              FLOOR,      NOTHING,    1,      5,              15,     0,      0,          1},
     {0,                         0,      0,                          MT_REMNANT_AREA,            FLOOR,      NOTHING,    10,     DEEPEST_LEVEL,  15,     0,      0,          2},
@@ -628,7 +629,11 @@ const floorTileType tileCatalog[NUMBER_TILETYPES] = {
 
     // bloodwort pods
     {G_BLOODWORT_STALK,  &bloodflowerForeColor,  &bloodflowerBackColor,  10, 20, DF_PLAIN_FIRE,  0,          DF_BLOODFLOWER_PODS_GROW, 100,  NO_LIGHT,       (T_OBSTRUCTS_PASSABILITY | T_OBSTRUCTS_ITEMS | T_IS_FLAMMABLE), (TM_LIST_IN_SIDEBAR | TM_VISUALLY_DISTINCT), "a bloodwort stalk", "this spindly plant grows seed pods famous for their healing properties."},
-    {G_BLOODWORT_POD,     &bloodflowerPodForeColor, 0,                    11, 20, DF_BLOODFLOWER_POD_BURST,0, DF_BLOODFLOWER_POD_BURST, 0,    NO_LIGHT,       (T_OBSTRUCTS_PASSABILITY | T_OBSTRUCTS_ITEMS | T_IS_FLAMMABLE), (TM_STAND_IN_TILE | TM_VANISHES_UPON_PROMOTION | TM_PROMOTES_ON_PLAYER_ENTRY | TM_VISUALLY_DISTINCT | TM_INVERT_WHEN_HIGHLIGHTED), "a bloodwort pod", "the bloodwort seed pod bursts, releasing a cloud of healing spores."},
+    {G_BLOODWORT_POD,    &bloodflowerPodForeColor, 0,                    11, 20, DF_BLOODFLOWER_POD_BURST,0, DF_BLOODFLOWER_POD_BURST, 0,    NO_LIGHT,       (T_OBSTRUCTS_PASSABILITY | T_OBSTRUCTS_ITEMS | T_IS_FLAMMABLE), (TM_STAND_IN_TILE | TM_VANISHES_UPON_PROMOTION | TM_PROMOTES_ON_PLAYER_ENTRY | TM_VISUALLY_DISTINCT | TM_INVERT_WHEN_HIGHLIGHTED), "a bloodwort pod", "the bloodwort seed pod bursts, releasing a cloud of healing spores."},
+
+    // stinkfruit bushes
+	{G_BLOODWORT_STALK,  &darkGreen,			0,						10, 20, DF_PLAIN_FIRE,  0,          DF_STINKFRUIT_PODS_GROW, 200,	NO_LIGHT,	 (T_OBSTRUCTS_PASSABILITY | T_OBSTRUCTS_ITEMS | T_IS_FLAMMABLE), (TM_LIST_IN_SIDEBAR | TM_VISUALLY_DISTINCT), "a stinkfruit stalk",  "this tendrilled bush grows foul smelling fruit."},
+	{G_BLOODWORT_POD,	 &orange,			    0,						11, 20, DF_STINKFRUIT_POD_BURST,0,	DF_STINKFRUIT_POD_BURST, 0,		NO_LIGHT,	 (T_OBSTRUCTS_PASSABILITY | T_OBSTRUCTS_ITEMS | T_IS_FLAMMABLE), (TM_STAND_IN_TILE | TM_VANISHES_UPON_PROMOTION | TM_PROMOTES_ON_PLAYER_ENTRY | TM_VISUALLY_DISTINCT | TM_INVERT_WHEN_HIGHLIGHTED), "a stinkfruit", "the stinkfruit bursts, releasing a foul smelling cloud of spores."},
 
     // shrine accoutrements
     {G_BEDROLL,   &black,                 &bedrollBackColor,      57, 50, DF_PLAIN_FIRE,  0,          0,              0,              NO_LIGHT,       (T_IS_FLAMMABLE), (TM_VANISHES_UPON_PROMOTION),                                                     "an abandoned bedroll", "a bedroll lies in the corner, disintegrating with age."},
@@ -802,6 +807,11 @@ dungeonFeature dungeonFeatureCatalog[NUMBER_DUNGEON_FEATURES] = {
     {BLOODFLOWER_POD,           SURFACE,    60,     60,     DFF_EVACUATE_CREATURES_FIRST},
     {BLOODFLOWER_POD,           SURFACE,    10,     10,     DFF_EVACUATE_CREATURES_FIRST},
     {HEALING_CLOUD,             GAS,        350,    0,      0},
+
+    // stinkfruit
+	{STINKFRUIT_POD,			SURFACE,    60,     60,     DFF_EVACUATE_CREATURES_FIRST},
+	{STINKFRUIT_POD,			SURFACE,    10,     10,     DFF_EVACUATE_CREATURES_FIRST},
+	{ROT_GAS,					GAS,		300,	0,		0,	"",	0, &vomitColor,4},
 
     // dewars
     {POISON_GAS,                GAS,        20000,  0,      0, "the dewar shatters and pressurized caustic gas explodes outward!", 0, &poisonGasColor, 4, 0, DF_DEWAR_GLASS},
@@ -1557,6 +1567,11 @@ const blueprint blueprintCatalog[NUMBER_BLUEPRINTS] = {
     {{1,DEEPEST_LEVEL}, {5, 5},     0,          2,      0,                  (BP_TREAT_AS_BLOCKING), {
         {DF_GRASS,  BLOODFLOWER_STALK, SURFACE, {1, 1},     1,          0,          -1,         0,              0,              0,          0,          (MF_BUILD_AT_ORIGIN | MF_NOT_IN_HALLWAY)},
         {DF_BLOODFLOWER_PODS_GROW_INITIAL,0, 0, {1, 1},     1,          0,          -1,         0,              1,              0,          0,          (MF_BUILD_AT_ORIGIN | MF_TREAT_AS_BLOCKING)}}},
+
+    // Stinkfruit bushes -- stinkfruit stalk, some pods, blocking traffic
+	{{3,DEEPEST_LEVEL},	{9, 9},    0,		    2,	    0,		            (BP_REQUIRE_BLOCKING), {
+		{0,			DEAD_GRASS,			SURFACE,	{1, 1},     1,		0,			-1,			0,				0,				0,			0,          (MF_EVERYWHERE)},
+		{DF_STINKFRUIT_PODS_GROW_INITIAL,STINKFRUIT_STALK,	SURFACE,{2, 3},	2,0,	-1,			0,				1,				0,			0,			(MF_NOT_IN_HALLWAY | MF_TREAT_AS_BLOCKING)}}},
     // Shrine -- safe haven constructed and abandoned by a past adventurer
     {{1,DEEPEST_LEVEL}, {15, 25},   0,          3,      0,                  (BP_ROOM | BP_PURGE_INTERIOR | BP_SURROUND_WITH_WALLS | BP_OPEN_INTERIOR), {
         {0,         SACRED_GLYPH,  DUNGEON,     {1, 1},     1,          0,          -1,         0,              3,              0,          0,          (MF_BUILD_AT_ORIGIN)},

@@ -602,6 +602,9 @@ enum tileType {
     BLOODFLOWER_STALK,
     BLOODFLOWER_POD,
 
+    STINKFRUIT_STALK,
+	STINKFRUIT_POD,
+
     HAVEN_BEDROLL,
 
     DEEP_WATER_ALGAE_WELL,
@@ -1522,6 +1525,11 @@ enum dungeonFeatureTypes {
     DF_BLOODFLOWER_PODS_GROW_INITIAL,
     DF_BLOODFLOWER_PODS_GROW,
     DF_BLOODFLOWER_POD_BURST,
+
+    // stinkfruit bushes
+    DF_STINKFRUIT_PODS_GROW_INITIAL,
+    DF_STINKFRUIT_PODS_GROW,
+	DF_STINKFRUIT_POD_BURST,
 
     // dewars
     DF_DEWAR_CAUSTIC,
@@ -2640,6 +2648,7 @@ enum machineTypes {
 
     // Thematic machines:
     MT_BLOODFLOWER_AREA,
+    MT_STINKFRUIT_AREA,
     MT_SHRINE_AREA,
     MT_IDYLL_AREA,
     MT_SWAMP_AREA,
@@ -2677,7 +2686,7 @@ typedef struct autoGenerator {
     short maxNumber;
 } autoGenerator;
 
-#define NUMBER_AUTOGENERATORS 49
+#define NUMBER_AUTOGENERATORS 50
 
 typedef struct feat {
     char name[100];

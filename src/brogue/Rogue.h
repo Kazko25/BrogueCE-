@@ -605,6 +605,11 @@ enum tileType {
     STINKFRUIT_STALK,
 	STINKFRUIT_POD,
 
+    MANDRAKE_ROOT_MACHINE,
+	DEAD_MANDRAKE_ROOT,
+	MANDRAKE_SAC_MACHINE,
+	SPLIT_MANDRAKE_SAC,
+
     HAVEN_BEDROLL,
 
     DEEP_WATER_ALGAE_WELL,
@@ -1064,6 +1069,9 @@ enum monsterTypes {
     MK_GOBLIN_THIEF,
     MK_PARALYTIC_BLOAT,
     MK_BLACK_DRAGON,
+
+    //unBrogue
+    MK_MANDRAKE,
 
     //kBrogue
     MK_CRYSTAL_JELLY,
@@ -1530,6 +1538,12 @@ enum dungeonFeatureTypes {
     DF_STINKFRUIT_PODS_GROW_INITIAL,
     DF_STINKFRUIT_PODS_GROW,
 	DF_STINKFRUIT_POD_BURST,
+
+    // mandrake roots
+	DF_MANDRAKE_ROOTS_BUILD,
+	DF_LUMINESCENT_FUNGUS_BORDER,
+	DF_MANDRAKE_ROOT_DIES,
+	DF_MANDRAKE_SAC_SPLITS,
 
     // dewars
     DF_DEWAR_CAUSTIC,
@@ -2031,6 +2045,7 @@ enum hordeFlags {
     HORDE_MACHINE_GOBLIN_WARREN     = Fl(17),   // can spawn in goblin warrens
     HORDE_SACRIFICE_TARGET          = Fl(18),   // can be the target of an assassination challenge; leader will get scary light.
     HORDE_MACHINE_AMBUSH            = Fl(19),   // monsters ambush from foliage, fungus forests, chasm edges and under stone bridges
+    HORDE_MACHINE_MANDRAKE			= Fl(20),	// horde planted in mandrake roots by bolt of nature, summoned by bolt of mandrakes
 
     HORDE_MACHINE_ONLY              = (HORDE_MACHINE_BOSS | HORDE_MACHINE_WATER_MONSTER
                                        | HORDE_MACHINE_CAPTIVE | HORDE_MACHINE_STATUE
@@ -2038,7 +2053,8 @@ enum hordeFlags {
                                        | HORDE_MACHINE_KENNEL | HORDE_VAMPIRE_FODDER
                                        | HORDE_MACHINE_LEGENDARY_ALLY | HORDE_MACHINE_THIEF
                                        | HORDE_MACHINE_GOBLIN_WARREN
-                                       | HORDE_SACRIFICE_TARGET | HORDE_MACHINE_AMBUSH),
+                                       | HORDE_SACRIFICE_TARGET | HORDE_MACHINE_AMBUSH
+                                       | HORDE_MACHINE_MANDRAKE),
 };
 
 enum monsterBehaviorFlags {
@@ -2649,6 +2665,7 @@ enum machineTypes {
     // Thematic machines:
     MT_BLOODFLOWER_AREA,
     MT_STINKFRUIT_AREA,
+    MT_MANDRAKE_ROOT_AREA,
     MT_SHRINE_AREA,
     MT_IDYLL_AREA,
     MT_SWAMP_AREA,
@@ -2686,7 +2703,7 @@ typedef struct autoGenerator {
     short maxNumber;
 } autoGenerator;
 
-#define NUMBER_AUTOGENERATORS 50
+#define NUMBER_AUTOGENERATORS 51
 
 typedef struct feat {
     char name[100];

@@ -215,6 +215,7 @@ const color altarBackColor =        {35,    18,     18,     0,      0,          
 const color greenAltarBackColor =   {18,    25,     18,     0,      0,          0,          0,      false};
 const color goldAltarBackColor =    {25,    24,     12,     0,      0,          0,          0,      false};
 const color pedestalBackColor =     {10,    5,      20,     0,      0,          0,          0,      false};
+const color mandrakeRootColor =		{100,	45,		50,		10,		30,			30,			0,		true};
 
 // monster colors
 const color goblinColor =           {40,    30,     20,     0,      0,          0,          0,      false};
@@ -417,7 +418,8 @@ const autoGenerator autoGeneratorCatalog[NUMBER_AUTOGENERATORS] = {
     // Flavor machines
     {0,                         0,      DF_LUMINESCENT_FUNGUS,      0,                          FLOOR,      NOTHING,    DEEPEST_LEVEL,DEEPEST_LEVEL,100,0,      0,          200},
     {0,                         0,      0,                          MT_BLOODFLOWER_AREA,        FLOOR,      NOTHING,    1,      30,             25,     140,    -10,        3},
-    {0,                         0,      0,                          MT_STINKFRUIT_AREA,			FLOOR,		NOTHING,	3,      30,             25,		0,		0,			2},
+    {0,                         0,      0,                          MT_STINKFRUIT_AREA,			FLOOR,		NOTHING,	3,      30,             20,		0,		0,			2},
+    {0,                         0,      0,                          MT_MANDRAKE_ROOT_AREA,      FLOOR,      NOTHING,    7,      30,             6,		0,		0,			2},
     {0,                         0,      0,                          MT_SHRINE_AREA,             FLOOR,      NOTHING,    5,      AMULET_LEVEL,   7,      0,      0,          1},
     {0,                         0,      0,                          MT_IDYLL_AREA,              FLOOR,      NOTHING,    1,      5,              15,     0,      0,          1},
     {0,                         0,      0,                          MT_REMNANT_AREA,            FLOOR,      NOTHING,    10,     DEEPEST_LEVEL,  15,     0,      0,          2},
@@ -635,6 +637,12 @@ const floorTileType tileCatalog[NUMBER_TILETYPES] = {
 	{G_BLOODWORT_STALK,  &darkGreen,			0,						10, 20, DF_PLAIN_FIRE,  0,          DF_STINKFRUIT_PODS_GROW, 200,	NO_LIGHT,	 (T_OBSTRUCTS_PASSABILITY | T_OBSTRUCTS_ITEMS | T_IS_FLAMMABLE), (TM_LIST_IN_SIDEBAR | TM_VISUALLY_DISTINCT), "a stinkfruit stalk",  "this tendrilled bush grows foul smelling fruit."},
 	{G_BLOODWORT_POD,	 &orange,			    0,						11, 20, DF_STINKFRUIT_POD_BURST,0,	DF_STINKFRUIT_POD_BURST, 0,		NO_LIGHT,	 (T_OBSTRUCTS_PASSABILITY | T_OBSTRUCTS_ITEMS | T_IS_FLAMMABLE), (TM_STAND_IN_TILE | TM_VANISHES_UPON_PROMOTION | TM_PROMOTES_ON_PLAYER_ENTRY | TM_VISUALLY_DISTINCT | TM_INVERT_WHEN_HIGHLIGHTED), "a stinkfruit", "the stinkfruit bursts, releasing a foul smelling cloud of spores."},
 
+    // mandrake roots
+    {G_VINE,	        &mandrakeRootColor,		0,						51,	10,	DF_MANDRAKE_ROOT_DIES,	0,	DF_MANDRAKE_ROOT_DIES, 0,		NO_LIGHT,		(T_IS_FLAMMABLE), (TM_VANISHES_UPON_PROMOTION | TM_IS_WIRED | TM_PROMOTES_ON_PLAYER_ENTRY),				"mandrake roots",	"sensitive tubers which are crushed when you stand on them."},
+	{G_VINE,	        &humanBloodColor,		0,						51,	10,	DF_PLAIN_FIRE,	0,			0,				0,				NO_LIGHT,		(T_IS_FLAMMABLE), (TM_VANISHES_UPON_PROMOTION),														    "dead mandrake roots",	"once sensitive tubers now sticky with blood-like fluids."},
+	{G_BLOODWORT_POD,	&mandrakeRootColor,		0,			            10,	20,	DF_MANDRAKE_SAC_SPLITS, 0,	DF_MANDRAKE_SAC_SPLITS, 0,      NO_LIGHT,		(T_OBSTRUCTS_PASSABILITY | T_IS_FLAMMABLE), (TM_VANISHES_UPON_PROMOTION | TM_IS_WIRED),				    "a mandrake sac",		"a fluid filled sac with something quivering inside. It seems to know you."},
+	{G_FOLIAGE,	        &humanBloodColor,		0,						45,	20,	DF_PLAIN_FIRE,	0,			0,				0,				NO_LIGHT,		(T_IS_FLAMMABLE), (TM_STAND_IN_TILE | TM_VANISHES_UPON_PROMOTION),									    "a split sac",		"a ruptured sac of fluids, split asunder from the inside."},
+
     // shrine accoutrements
     {G_BEDROLL,   &black,                 &bedrollBackColor,      57, 50, DF_PLAIN_FIRE,  0,          0,              0,              NO_LIGHT,       (T_IS_FLAMMABLE), (TM_VANISHES_UPON_PROMOTION),                                                     "an abandoned bedroll", "a bedroll lies in the corner, disintegrating with age."},
 
@@ -812,6 +820,12 @@ dungeonFeature dungeonFeatureCatalog[NUMBER_DUNGEON_FEATURES] = {
 	{STINKFRUIT_POD,			SURFACE,    60,     60,     DFF_EVACUATE_CREATURES_FIRST},
 	{STINKFRUIT_POD,			SURFACE,    10,     10,     DFF_EVACUATE_CREATURES_FIRST},
 	{ROT_GAS,					GAS,		300,	0,		0,	"",	0, &vomitColor,4},
+
+    // mandrake roots
+	{MANDRAKE_ROOT_MACHINE,		SURFACE,	100,	45,		DFF_BLOCKED_BY_OTHER_LAYERS,  "", 0, 0, 0, 0, DF_LUMINESCENT_FUNGUS_BORDER},
+	{LUMINESCENT_FUNGUS,		SURFACE,	100,	75,		DFF_BLOCKED_BY_OTHER_LAYERS},
+	{DEAD_MANDRAKE_ROOT,		SURFACE,	0,		0,		0,	"",	0, 0, 0, 0, DF_RED_BLOOD},
+	{SPLIT_MANDRAKE_SAC,		SURFACE,	0,		0,		DFF_ACTIVATE_DORMANT_MONSTER,	"the sac splits open and something slides out",	0, 0, 0, 0, DF_RED_BLOOD},
 
     // dewars
     {POISON_GAS,                GAS,        20000,  0,      0, "the dewar shatters and pressurized caustic gas explodes outward!", 0, &poisonGasColor, 4, 0, DF_DEWAR_GLASS},
@@ -1572,6 +1586,11 @@ const blueprint blueprintCatalog[NUMBER_BLUEPRINTS] = {
 	{{3,DEEPEST_LEVEL},	{9, 9},    0,		    2,	    0,		            (BP_REQUIRE_BLOCKING), {
 		{0,			DEAD_GRASS,			SURFACE,	{1, 1},     1,		0,			-1,			0,				0,				0,			0,          (MF_EVERYWHERE)},
 		{DF_STINKFRUIT_PODS_GROW_INITIAL,STINKFRUIT_STALK,	SURFACE,{2, 3},	2,0,	-1,			0,				1,				0,			0,			(MF_NOT_IN_HALLWAY | MF_TREAT_AS_BLOCKING)}}},
+    // Mandrake roots -- mandrake sacs, mandrake roots and luminescent fungus
+	{{7,DEEPEST_LEVEL},	{10, 10},     0,        2,		0,              	(BP_TREAT_AS_BLOCKING), {
+		{DF_LUMINESCENT_FUNGUS,	MANDRAKE_SAC_MACHINE,	SURFACE,{1, 1},	1,	0,		-1,			0,				1,				HORDE_MACHINE_MANDRAKE,0,	(MF_BUILD_AT_ORIGIN | MF_NOT_IN_HALLWAY | MF_TREAT_AS_BLOCKING | MF_GENERATE_HORDE | MF_MONSTERS_DORMANT)},
+		{DF_MANDRAKE_ROOTS_BUILD,	0,	SURFACE,{1, 1},	1,				0,			-1,			0,				1,				0,			0,			(MF_BUILD_AT_ORIGIN)}}},
+
     // Shrine -- safe haven constructed and abandoned by a past adventurer
     {{1,DEEPEST_LEVEL}, {15, 25},   0,          3,      0,                  (BP_ROOM | BP_PURGE_INTERIOR | BP_SURROUND_WITH_WALLS | BP_OPEN_INTERIOR), {
         {0,         SACRED_GLYPH,  DUNGEON,     {1, 1},     1,          0,          -1,         0,              3,              0,          0,          (MF_BUILD_AT_ORIGIN)},
@@ -1794,9 +1813,12 @@ creatureType monsterCatalog[NUMBER_MONSTER_KINDS] = {
         (MONST_NEVER_SLEEPS),  (MA_AVOID_CORRIDORS | MA_HIT_STEAL_FLEE)},
     {0, "paralytic bloat",	G_BLOAT,&pink,           4,		 0,		100,	    {0, 0, 0},		5,	120,	100,	DF_RED_BLOOD,   0,		  false, 0,	DF_PARALYSIS_GAS_CLOUD_POTION, {0},
 		(MONST_FLIES | MONST_FLITS), (MA_KAMIKAZE | MA_DF_ON_DEATH)},
-    {0, "black dragon",	G_DRAGON,	&darkGray,	 50,	100,     250,	{12, 15, 4},	20,	70,		200,	DF_ECTOPLASM_BLOOD,	LICH_LIGHT, true, 0,	0,              {BOLT_POISON_BREATH},
+    {0, "black dragon",	G_DRAGON,	&darkGray,	     50,	 100,     250,	    {12, 15, 4},	20,	70,		200,	DF_ECTOPLASM_BLOOD,	LICH_LIGHT, true, 0,0,              {BOLT_POISON_BREATH},
 		(MONST_CARRY_ITEM_100 | MONST_IMMUNE_TO_WEAPONS), (MA_ATTACKS_ALL_ADJACENT)},
 
+    //New Monsters -> unBrogue
+    {0,	"mandrake",	G_PLAYER,          &humanBloodColor,  30,	  0,	  100,	{4, 12, 2},	     30,100,	100,	DF_RED_BLOOD,	0,        true,   0,	0,           {BOLT_SLOW_2, BOLT_DISCORD},
+		(MONST_MAINTAINS_DISTANCE | MONST_MALE | MONST_FEMALE), (MA_ATTACKS_ALL_ADJACENT)},
     //kBrogue
     {0, "crystal jelly",   G_JELLY,    &goblinMysticColor,70,     0,      100,     {1, 4, 1},      0,  100,    100,    DF_FORCEFIELD,0,        true,   3, DF_FORCEFIELD, {0},
         (MONST_NEVER_SLEEPS), (MA_CLONE_SELF_ON_DEFEND) },
@@ -2058,6 +2080,10 @@ const monsterWords monsterText[NUMBER_MONSTER_KINDS] = {
     {"Though this creature is clearly undead, the dark hide on this dragon shimmers in what little light trickles in to the lower depths of the dungeon. $HISHER penetrating yellow eyes and noxious breath round out its horrifying form.",
 		"consuming", "Consuming",
 		{"claws", "tail-whips", "bites", {0}}},
+    //unBrogue
+    {"Looking strangely similar to yourself, $HESHE is half-formed and feverish, still dripping with the fluid from the sac which gave $HIMHER life.",
+		"gazing at", "Gazing",
+		{"wails at","shrieks at", {0}}},
     //kBrogue
     {"A jelly that abosorbs crystals which have dissolved into the floor. Occasionally, parts of this jelly fall off and solidify once agian.",
         "absorbing", "Feeding",
@@ -2239,6 +2265,7 @@ const hordeType hordeCatalog[NUMBER_HORDES] = {
     //unBrogue
     // group ambushes -- elevator, chasm, stone bridge, deep water. note chasm edge ambushes are larger here because they are not multiplied in a machine
 	{MK_KOBOLD,			1,		{MK_KOBOLD},							{{2, 2, 1}},					1,		4,		100,	   TRAP_DOOR_ELEVATOR,0,			HORDE_MACHINE_AMBUSH},
+	{MK_MANDRAKE,		0,		{0},									{{0}},							1,		DEEPEST_LEVEL,	100,		0,			0,			HORDE_ALLIED_WITH_PLAYER | HORDE_NO_PERIODIC_SPAWN | HORDE_MACHINE_MANDRAKE},
 
     // machine turrets
     {MK_ARROW_TURRET,   0,      {0},                                    {{0}},                          5,      13,     100,        TURRET_DORMANT, 0,              HORDE_MACHINE_TURRET},

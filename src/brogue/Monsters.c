@@ -174,6 +174,9 @@ boolean monsterRevealed(creature *monst) {
         return true;
     } else if (playerCanSee(monst->loc.x, monst->loc.y) && (rogue.lightMultiplier > 1) && (monst->status[STATUS_INVISIBLE])) {
         return true;
+    //telepathic mutation
+    } else if ((monst->info.flags & MONST_ALWAYS_HUNTING) && !(monst->info.flags & MONST_WILL_NOT_USE_STAIRS) && !(monst->info.flags & MONST_INVULNERABLE)) {
+        return true;
     }
     return false;
 }

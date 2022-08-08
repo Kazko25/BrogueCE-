@@ -579,6 +579,10 @@ enum tileType {
     MANACLE_R,
     PORTAL_LIGHT,
     GUARDIAN_GLOW,
+    STICKY_BUNDLE_DORMANT,
+	STICKY_BUNDLE_EMPTY,
+	BURNING_BUNDLE,
+	SPIDERWEB_DORMANT,
 
     PLAIN_FIRE,
     BRIMSTONE_FIRE,
@@ -1080,9 +1084,9 @@ enum monsterTypes {
     NUMBER_MONSTER_KINDS
 };
 
-#define NUMBER_MUTATORS             8
+#define NUMBER_MUTATORS             11
 
-#define NUMBER_HORDES               196
+#define NUMBER_HORDES               203
 
 #define MONSTER_CLASS_COUNT         15
 
@@ -1735,6 +1739,11 @@ enum dungeonFeatureTypes {
     DF_MUD_DORMANT,
     DF_MUD_ACTIVATE,
 
+    // sticky bundles
+	DF_BURNING_BUNDLE,
+	DF_SPIDER_BURNS,
+	DF_SPIDER_CLIMBS,
+
     // crystals charge when hit by lightning
     DF_ELECTRIC_CRYSTAL_ON,
     DF_TURRET_LEVER,
@@ -2046,6 +2055,8 @@ enum hordeFlags {
     HORDE_SACRIFICE_TARGET          = Fl(18),   // can be the target of an assassination challenge; leader will get scary light.
     HORDE_MACHINE_AMBUSH            = Fl(19),   // monsters ambush from foliage, fungus forests, chasm edges and under stone bridges
     HORDE_MACHINE_MANDRAKE			= Fl(20),	// horde planted in mandrake roots by bolt of nature, summoned by bolt of mandrakes
+    HORDE_MACHINE_BUNDLE			= Fl(21),	// monsters that can be captured but not killed by spiders
+    HORDE_MACHINE_SPIDER            = Fl(22),   // spiders that spawn from the ceiling with webs
 
     HORDE_MACHINE_ONLY              = (HORDE_MACHINE_BOSS | HORDE_MACHINE_WATER_MONSTER
                                        | HORDE_MACHINE_CAPTIVE | HORDE_MACHINE_STATUE
@@ -2054,7 +2065,8 @@ enum hordeFlags {
                                        | HORDE_MACHINE_LEGENDARY_ALLY | HORDE_MACHINE_THIEF
                                        | HORDE_MACHINE_GOBLIN_WARREN
                                        | HORDE_SACRIFICE_TARGET | HORDE_MACHINE_AMBUSH
-                                       | HORDE_MACHINE_MANDRAKE),
+                                       | HORDE_MACHINE_MANDRAKE | HORDE_MACHINE_BUNDLE
+                                       | HORDE_MACHINE_SPIDER),
 };
 
 enum monsterBehaviorFlags {
@@ -2661,6 +2673,7 @@ enum machineTypes {
     MT_KEY_WORM_TUNNEL_ROOM,
     MT_KEY_TURRET_TRAP_ROOM,
     MT_KEY_BOSS_ROOM,
+    MT_KEY_STICKY_BUNDLE_AREA,
 
     // Thematic machines:
     MT_BLOODFLOWER_AREA,

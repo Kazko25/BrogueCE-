@@ -584,16 +584,16 @@ const floorTileType tileCatalog[NUMBER_TILETYPES] = {
     {G_BONES,    &bonesForeColor,        0,                      70, 0,  DF_PLAIN_FIRE,  0,          0,              0,              NO_LIGHT,       (0), (TM_STAND_IN_TILE),                                                                            "a pile of bones",      "unidentifiable bones, yellowed with age, litter the ground."},
     {G_RUBBLE,    &gray,                 0,                      70, 0,  DF_PLAIN_FIRE,  0,          0,              0,              NO_LIGHT,       (0), (TM_STAND_IN_TILE),                                                                            "a pile of rubble",     "rocky rubble covers the ground."},
     {G_BONES,    &mudBackColor,          &refuseBackColor,       50, 20, DF_PLAIN_FIRE,  0,          0,              0,              NO_LIGHT,       (0), (TM_STAND_IN_TILE),                                                                            "a pile of filthy effects","primitive tools, carvings and trinkets are strewn about the area."},
-    {G_ASHES,     &white,                 0,                      70, 0,  DF_PLAIN_FIRE,  0,          0,              0,              NO_LIGHT,       (0), (TM_STAND_IN_TILE),                                                                            "shattered glass",      "jagged chunks of glass litter the ground."},
+    {G_ASHES,    &white,                 0,                      70, 0,  DF_PLAIN_FIRE,  0,          0,              0,              NO_LIGHT,       (0), (TM_STAND_IN_TILE),                                                                            "shattered glass",      "jagged chunks of glass litter the ground."},
     {G_FLOOR_ALT,    &ectoplasmColor,    0,                      70, 0,  DF_PLAIN_FIRE,  0,          0,              0,              ECTOPLASM_LIGHT,(0), (TM_STAND_IN_TILE),                                                                            "ectoplasmic residue",  "a thick, glowing substance has congealed on the ground."},
     {G_ASHES,      &fireForeColor,       0,                      70, 0,  DF_PLAIN_FIRE,  0,          DF_ASH,         300,            EMBER_LIGHT,    (0), (TM_STAND_IN_TILE | TM_VANISHES_UPON_PROMOTION),                                               "sputtering embers",    "sputtering embers cover the ground."},
     {G_WEB,      &white,                 0,                      19, 100,DF_PLAIN_FIRE,  0,          0,              0,              NO_LIGHT,       (T_ENTANGLES | T_IS_FLAMMABLE), (TM_STAND_IN_TILE | TM_VANISHES_UPON_PROMOTION | TM_VISUALLY_DISTINCT),"a spiderweb",       "thick, sticky spiderwebs fill the area."},
     {G_NET,      &brown,                 0,                      19, 40, DF_PLAIN_FIRE,  0,          0,              0,              NO_LIGHT,       (T_ENTANGLES | T_IS_FLAMMABLE), (TM_STAND_IN_TILE | TM_VANISHES_UPON_PROMOTION | TM_VISUALLY_DISTINCT),"a net",             "a dense tangle of netting fills the area."},
     {G_FOLIAGE,  &foliageColor,          0,                      45, 15, DF_PLAIN_FIRE,  0,          DF_TRAMPLED_FOLIAGE, 0,         NO_LIGHT,       (T_OBSTRUCTS_VISION | T_IS_FLAMMABLE), (TM_STAND_IN_TILE | TM_VANISHES_UPON_PROMOTION | TM_PROMOTES_ON_STEP), "dense foliage",   "dense foliage fills the area, thriving on what sunlight trickles in."},
     {G_FOLIAGE,  &deadFoliageColor,      0,                      45, 80, DF_PLAIN_FIRE,  0,          DF_SMALL_DEAD_GRASS, 0,         NO_LIGHT,       (T_OBSTRUCTS_VISION | T_IS_FLAMMABLE), (TM_STAND_IN_TILE | TM_VANISHES_UPON_PROMOTION | TM_PROMOTES_ON_STEP), "dead foliage",    "the decaying husk of a fungal growth fills the area."},
-    {G_GRASS,    &foliageColor,   0,                      60, 15, DF_PLAIN_FIRE,  0,          DF_FOLIAGE_REGROW, 100,         NO_LIGHT,       (T_IS_FLAMMABLE), (TM_VANISHES_UPON_PROMOTION),                                                     "trampled foliage",     "dense foliage fills the area, thriving on what sunlight trickles in."},
+    {G_GRASS,    &foliageColor,          0,                      60, 15, DF_PLAIN_FIRE,  0,          DF_FOLIAGE_REGROW, 100,         NO_LIGHT,       (T_IS_FLAMMABLE), (TM_VANISHES_UPON_PROMOTION),                                                     "trampled foliage",     "dense foliage fills the area, thriving on what sunlight trickles in."},
     {G_FOLIAGE,  &fungusForestLightColor,0,                      45, 15, DF_PLAIN_FIRE,  0,          DF_TRAMPLED_FUNGUS_FOREST, 0,   FUNGUS_FOREST_LIGHT,(T_OBSTRUCTS_VISION | T_IS_FLAMMABLE), (TM_STAND_IN_TILE | TM_VANISHES_UPON_PROMOTION | TM_PROMOTES_ON_STEP),"a luminescent fungal forest", "luminescent fungal growth fills the area, groping upward from the rich soil."},
-    {G_GRASS,    &fungusForestLightColor,0,               60, 15, DF_PLAIN_FIRE,  0,          DF_FUNGUS_FOREST_REGROW, 100,   FUNGUS_LIGHT,   (T_IS_FLAMMABLE), (TM_VANISHES_UPON_PROMOTION),                                                     "trampled fungal foliage", "luminescent fungal growth fills the area, groping upward from the rich soil."},
+    {G_GRASS,    &fungusForestLightColor,0,                      60, 15, DF_PLAIN_FIRE,  0,          DF_FUNGUS_FOREST_REGROW, 100,   FUNGUS_LIGHT,   (T_IS_FLAMMABLE), (TM_VANISHES_UPON_PROMOTION),                                                     "trampled fungal foliage", "luminescent fungal growth fills the area, groping upward from the rich soil."},
     {G_CRYSTAL,  &forceFieldColor,       &forceFieldColor,       0,  0,  0,              0,          DF_FORCEFIELD_MELT, -200,       FORCEFIELD_LIGHT, (T_OBSTRUCTS_PASSABILITY | T_OBSTRUCTS_GAS | T_OBSTRUCTS_DIAGONAL_MOVEMENT), (TM_STAND_IN_TILE | TM_VANISHES_UPON_PROMOTION | TM_PROMOTES_ON_CREATURE),       "a green crystal",      "The translucent green crystal is melting away in front of your eyes."},
     {G_CRYSTAL,  &black,                 &forceFieldColor,       0,  0,  0,              0,          0,              -10000,         FORCEFIELD_LIGHT, (T_OBSTRUCTS_PASSABILITY | T_OBSTRUCTS_GAS | T_OBSTRUCTS_DIAGONAL_MOVEMENT), (TM_STAND_IN_TILE | TM_VANISHES_UPON_PROMOTION | TM_PROMOTES_ON_CREATURE),     "a dissolving crystal",     "The translucent green crystal is melting away in front of your eyes."},
     {G_MAGIC_GLYPH,    &sacredGlyphColor,      0,                      7, 0,  0,              0,          0,              0,              SACRED_GLYPH_LIGHT, (T_SACRED), 0,                                                                                  "a sacred glyph",       "a sacred glyph adorns the floor, glowing with a powerful warding enchantment."},
@@ -607,6 +607,10 @@ const floorTileType tileCatalog[NUMBER_TILETYPES] = {
     {G_CHAIN_RIGHT,   &gray,                  0,                      20, 0,  0,              0,          0,              0,              NO_LIGHT,       0, 0,                                                                                               "an iron manacle",      "a thick iron manacle is anchored to the wall."},
     {0,             0,                      0,                      1,  0,  0,              0,          0,              10000,          PORTAL_ACTIVATE_LIGHT,(0), (TM_STAND_IN_TILE | TM_VANISHES_UPON_PROMOTION),                                         "blinding light",       "blinding light streams out of the archway."},
     {0,             0,                      0,                      100,0,  0,              0,          0,              10000,          GLYPH_LIGHT_BRIGHT,(0), (TM_STAND_IN_TILE | TM_VANISHES_UPON_PROMOTION),                                            "a red glow",           "a red glow fills the area."},
+    {G_WALL,		&gray,					0,						19,	100,DF_BURNING_BUNDLE,0,		DF_BURNING_BUNDLE,	0,				NO_LIGHT,		(T_OBSTRUCTS_EVERYTHING | T_IS_FLAMMABLE), (TM_STAND_IN_TILE | TM_VANISHES_UPON_PROMOTION | TM_PROMOTES_ON_PLAYER_ENTRY),			"a sticky bundle",		"you cut open the tightly wrapped bundle of webs."},
+	{G_WALL,		&gray,					0,						19,	100,DF_BURNING_BUNDLE,0,		DF_BURNING_BUNDLE,	0,				NO_LIGHT,		(T_OBSTRUCTS_EVERYTHING | T_IS_FLAMMABLE), (TM_STAND_IN_TILE | TM_VANISHES_UPON_PROMOTION | TM_PROMOTES_ON_PLAYER_ENTRY),			"a sticky bundle",		"you cut open the tightly wrapped bundle of webs."},
+	{G_WALL,		&gray,					0,						19,	100,0,				0,			0,	10000,			NO_LIGHT,		(T_OBSTRUCTS_PASSABILITY), (TM_STAND_IN_TILE | TM_VANISHES_UPON_PROMOTION | TM_IS_WIRED),			"a burning bundle",		"the bundle of webs burns with a thick, black smoke."},
+	{G_WEB,		    &white,					0,						19,	100,DF_SPIDER_BURNS,0,			DF_SPIDER_CLIMBS,0,				NO_LIGHT,		(T_ENTANGLES | T_IS_FLAMMABLE), (TM_STAND_IN_TILE | TM_VANISHES_UPON_PROMOTION | TM_IS_WIRED),		"a spiderweb",			"thick, sticky spiderwebs fill the area."},
 
     // fire tiles
     {G_FIRE,     &fireForeColor,         0,                      10, 0,  0,              0,          DF_EMBERS,      500,            FIRE_LIGHT,     (T_IS_FIRE), (TM_STAND_IN_TILE | TM_VANISHES_UPON_PROMOTION | TM_VISUALLY_DISTINCT),                "billowing flames",     "flames billow upward."},
@@ -1023,6 +1027,11 @@ dungeonFeature dungeonFeatureCatalog[NUMBER_DUNGEON_FEATURES] = {
     {MACHINE_MUD_DORMANT,       LIQUID,     100,    100,    0},
     {MUD,                       LIQUID,     0,      0,      DFF_ACTIVATE_DORMANT_MONSTER,   "across the bog, bubbles rise ominously from the mud."},
 
+    // sticky bundles
+	{BURNING_BUNDLE,			SURFACE,	50,		40,		DFF_ACTIVATE_DORMANT_MONSTER,	""},
+	{PLAIN_FIRE,				SURFACE,	0,		0,		DFF_ACTIVATE_DORMANT_MONSTER,	"a burning spider tumbles from the ceiling!", 0, 0, 0, 0, DF_EMBERS_PATCH},
+	{SPIDERWEB,					SURFACE,	0,		0,		DFF_ACTIVATE_DORMANT_MONSTER,	"spiders lower themselves from the ceiling on silken strands!"},
+
     // electric crystals:
     {ELECTRIC_CRYSTAL_ON,       DUNGEON,    0,      0,      0, "the crystal absorbs the electricity and begins to glow.", CHARGE_FLASH_LIGHT},
     {WALL,                      DUNGEON,    0,      0,      DFF_ACTIVATE_DORMANT_MONSTER,   "the wall above the lever shifts to reveal a spark turret!"},
@@ -1423,7 +1432,7 @@ const blueprint blueprintCatalog[NUMBER_BLUEPRINTS] = {
         {0,         TRAP_DOOR_HIDDEN,DUNGEON,   {30, 40},   1,          0,          -1,         0,              1,              0,          0,          (MF_TREAT_AS_BLOCKING | MF_REPEAT_UNTIL_NO_PROGRESS)},
         {0,         SECRET_DOOR,DUNGEON,        {1,1},      1,          0,          0,          0,              1,              0,          0,          (MF_PERMIT_BLOCKING | MF_BUILD_AT_ORIGIN)}}},
     // Levitation challenge -- key on an altar, room filled with pit, levitation or lever elsewhere on level, bridge appears when you grab the key/lever.
-    {{1, 13},           {75, 120},  10,     9,          0,                  (BP_ROOM | BP_ADOPT_ITEM | BP_PURGE_INTERIOR | BP_OPEN_INTERIOR | BP_SURROUND_WITH_WALLS),  {
+    {{1, 7},           {75, 120},  10,     9,          0,                  (BP_ROOM | BP_ADOPT_ITEM | BP_PURGE_INTERIOR | BP_OPEN_INTERIOR | BP_SURROUND_WITH_WALLS),  {
         {0,         ALTAR_SWITCH,DUNGEON,       {1,1},      1,          0,          -1,         0,              3,              0,          0,          (MF_ADOPT_ITEM | MF_FAR_FROM_ORIGIN | MF_TREAT_AS_BLOCKING)},
         {0,         TORCH_WALL, DUNGEON,        {1,4},      0,          0,          0,          0,              1,              0,          0,          (MF_BUILD_IN_WALLS)},
         {0,         0,          0,              {1,1},      1,          0,          0,          0,              3,              0,          0,          MF_BUILD_AT_ORIGIN},
@@ -1464,11 +1473,11 @@ const blueprint blueprintCatalog[NUMBER_BLUEPRINTS] = {
         {0,         WALL_LEVER_HIDDEN_DORMANT,DUNGEON,{1,1},1,          0,          -1,         0,              1,              0,          0,          (MF_BUILD_IN_WALLS)},
         {0,         PORTCULLIS_DORMANT,DUNGEON,{1,1},       1,          0,          0,          0,              1,              0,          0,          (MF_BUILD_AT_ORIGIN | MF_PERMIT_BLOCKING)}}},
     // Explosive situation -- key on an altar; take key to cause a methane gas vent to appear and a pilot light to ignite
-    {{7, AMULET_LEVEL}, {80, 90},   10,     5,          0,                  (BP_ROOM | BP_PURGE_LIQUIDS | BP_SURROUND_WITH_WALLS | BP_ADOPT_ITEM),  {
+    {{6, AMULET_LEVEL}, {30, 60},   10,     5,          0,                  (BP_ROOM | BP_PURGE_LIQUIDS | BP_SURROUND_WITH_WALLS | BP_ADOPT_ITEM),  {
         {0,         DOOR,       DUNGEON,        {1,1},      1,          0,          0,          0,              1,              0,          0,          (MF_BUILD_AT_ORIGIN)},
         {0,         FLOOR,      DUNGEON,        {0,0},      0,          0,          -1,         0,              0,              0,          0,          (MF_EVERYWHERE)},
         {0,         ALTAR_SWITCH,DUNGEON,       {1,1},      1,          0,          -1,         0,              1,              0,          0,          (MF_ADOPT_ITEM | MF_TREAT_AS_BLOCKING | MF_FAR_FROM_ORIGIN)},
-        {0,         MACHINE_METHANE_VENT_HIDDEN,DUNGEON,{1,1}, 1,       0,          -1,         0,              1,              0,          0,          MF_NEAR_ORIGIN},
+        {0,         MACHINE_METHANE_VENT_HIDDEN,DUNGEON,{1,1}, 1,       0,          -1,         0,              1,              0,          0,          MF_ADJACENT_TO_ORIGIN},
         {0,         PILOT_LIGHT_DORMANT,DUNGEON,{1,1},      1,          0,          -1,         0,              1,              0,          0,          (MF_FAR_FROM_ORIGIN | MF_BUILD_IN_WALLS)}}},
     // Burning grass -- key on an altar; take key to cause pilot light to ignite grass in room
     {{1, 7},            {40, 110},  10,     6,          0,                  (BP_ROOM | BP_PURGE_INTERIOR | BP_SURROUND_WITH_WALLS | BP_ADOPT_ITEM | BP_OPEN_INTERIOR),  {
@@ -1514,7 +1523,7 @@ const blueprint blueprintCatalog[NUMBER_BLUEPRINTS] = {
         {0,         DEMONIC_STATUE,DUNGEON,     {1,1},      1,          0,          -1,         0,              2,              0,          0,          (MF_FAR_FROM_ORIGIN | MF_NOT_IN_HALLWAY | MF_IMPREGNABLE)},
         {0,         STATUE_INSTACRACK,DUNGEON,  {1,1},      1,          0,          -1,         0,              2,              (HORDE_SACRIFICE_TARGET), 0, (MF_BUILD_ANYWHERE_ON_LEVEL | MF_GENERATE_HORDE | MF_MONSTERS_DORMANT | MF_TREAT_AS_BLOCKING | MF_IMPREGNABLE | MF_NOT_IN_HALLWAY)}}},
     // Summoning circle -- key in a room with an eldritch totem, glyphs unavoidable. // enabled again, with unBrogue adjustments
-    {{12, AMULET_LEVEL}, {50, 100}, 7,      4,          0,                  (BP_ROOM | BP_OPEN_INTERIOR | BP_ADOPT_ITEM),   {
+    {{12, AMULET_LEVEL}, {50, 100}, 10,      4,          0,                  (BP_ROOM | BP_OPEN_INTERIOR | BP_ADOPT_ITEM),   {
         {DF_GLYPH_CIRCLE,ALTAR_SWITCH,DUNGEON,   {1,1},      1,         0,          -1,         0,              3,              0,          0,          (MF_ADOPT_ITEM | MF_TREAT_AS_BLOCKING | MF_NOT_IN_HALLWAY | MF_FAR_FROM_ORIGIN)},
 		{0,			MACHINE_POISON_GAS_VENT_HIDDEN,DUNGEON,{1,2}, 1,	0,			-1,			0,				2,				0,			0,			(MF_FAR_FROM_ORIGIN | MF_ALTERNATIVE)},
         {DF_GLYPH_CIRCLE,0,     0,              {1,1},      1,          0,          -1,         MK_ELDRITCH_TOTEM,3,            0,          0,          (MF_FAR_FROM_ORIGIN | MF_TREAT_AS_BLOCKING | MF_NOT_IN_HALLWAY)},
@@ -1575,6 +1584,14 @@ const blueprint blueprintCatalog[NUMBER_BLUEPRINTS] = {
         {DF_LUMINESCENT_FUNGUS, STATUE_INERT,DUNGEON,{7,7}, 0,          0,          -1,         0,              2,              0,          0,          (MF_TREAT_AS_BLOCKING)},
         {DF_BONES,  0,          0,              {1,1},      1,          0,          -1,         0,              1,              HORDE_MACHINE_BOSS, 0,  (MF_ADOPT_ITEM | MF_FAR_FROM_ORIGIN | MF_MONSTER_TAKE_ITEM | MF_GENERATE_HORDE | MF_MONSTER_SLEEPING)}}},
 
+    // Sticky bundles - key is in bundle. Bundles must be cut open which awakes spiders hidden in webs. Some bundles contain monsters that become allies.
+	{{7, AMULET_LEVEL}, {80,160},	10,		6,			0,                  (BP_ROOM | BP_ADOPT_ITEM | BP_REDESIGN_INTERIOR | BP_PURGE_LIQUIDS | BP_MAXIMIZE_INTERIOR),	{ 
+        {0,			SPIDERWEB,SURFACE,			    {5,10},	1,			0,			-1,			0,				0,				0,		0,			    (MF_BUILD_IN_WALLS | MF_NOT_ON_LEVEL_PERIMETER)},
+        {0,			SPIDERWEB,SURFACE,			{15,20},	1,			0,			-1,			0,				0,				0,		0,			    (MF_PERMIT_BLOCKING)},
+		{0,			STICKY_BUNDLE_DORMANT,DUNGEON,{1,1},	1,			0,			-1,			0,				2,				0,		0,				(MF_ADOPT_ITEM | MF_TREAT_AS_BLOCKING | MF_NOT_IN_HALLWAY)},
+		{0,			STICKY_BUNDLE_EMPTY,DUNGEON,{1,2},		0,			0,			-1,			0,				2,				0,		0,				(MF_TREAT_AS_BLOCKING | MF_NOT_IN_HALLWAY)},
+		{0,			STICKY_BUNDLE_DORMANT,DUNGEON,{4,5},	1,			0,			-1,			0,				2,				(HORDE_MACHINE_BUNDLE), 0, (MF_GENERATE_HORDE | MF_MONSTERS_DORMANT | MF_TREAT_AS_BLOCKING)},
+		{0,			SPIDERWEB_DORMANT,DUNGEON,	{3, 4},		1,			0,			-1,			0,		        3,				(HORDE_MACHINE_SPIDER),	0, (MF_GENERATE_HORDE | MF_MONSTERS_DORMANT | MF_TREAT_AS_BLOCKING | MF_NOT_IN_HALLWAY)}}},
     // -- FLAVOR MACHINES --
 
     // Bloodwort -- bloodwort stalk, some pods, and surrounding grass
@@ -2088,7 +2105,7 @@ const monsterWords monsterText[NUMBER_MONSTER_KINDS] = {
     {"A jelly that abosorbs crystals which have dissolved into the floor. Occasionally, parts of this jelly fall off and solidify once agian.",
         "absorbing", "Feeding",
         {"smears", "slimes", "drenches", {0}} },
-    {"Hatched and raised by kobolds, this young dragon is reckless and will attack anything that gets in its way. Including $HISHER caretakers.",
+    {"Hatched and raised by kobolds, this young dragon is reckless and will attack anything that gets inbetween it and its prey. Including $HISHER caretakers.",
         "consuming", "Consuming",
         {"claws", "tail-whips", "bites", {0}}},
 };
@@ -2111,6 +2128,14 @@ const mutation mutationCatalog[NUMBER_MUTATORS] = {
         "A rare mutation causes $HIMHER to poison $HISHER victims and sap their strength with every attack.",   true},
     {"reflective",  &darkTurquoise, 100,            100,        100,            100,    100,    -1, 0,      0,      MONST_REFLECT_4, 0,         (MONST_REFLECT_4 | MONST_ALWAYS_USE_ABILITY), 0,
         "A rare mutation has coated $HISHER flesh with reflective scales.",     true},
+    //gBrogue
+    {"skeletal",    &grayFungusColor,25,            100,        100,             50,    100,    -1, 0,      0,      (MONST_DIES_IF_NEGATED|MONST_IMMUNE_TO_WEAPONS|MONST_NEVER_SLEEPS), 0, (MONST_DIES_IF_NEGATED | MONST_IMMUNE_TO_WEAPONS), (MA_CLONE_SELF_ON_DEFEND),
+        "Only $HISHER magically animated skeleton remains, granting unnatural powers but compromising $HISHER total health.", true},
+    {"floating",    &pinkJellyColor,100,             75,         75,            100,     100,   -1, 0,      0,      (MONST_FLIES|MONST_FLITS), 0, (MONST_FLIES|MONST_SUBMERGES|MONST_INVISIBLE), 0,
+        "An unseen force causes $HIMHER to levitate, allowing $HIMHER to float over pits and lava at the cost of some navigational ability.", true},
+    //kBrogue
+    {"telepathic",  &goblinMysticColor,100,         100,        100,            100,    100,    -1, 0,      0,      MONST_ALWAYS_HUNTING, 0,    (MONST_ALWAYS_HUNTING|MONST_SUBMERGES), 0,
+        "A rare mutation allows you and $HIMHER to know each others locations at all times.", true},
 };
 
 const hordeType hordeCatalog[NUMBER_HORDES] = {
@@ -2263,9 +2288,19 @@ const hordeType hordeCatalog[NUMBER_HORDES] = {
     {MK_TENTACLE_HORROR,0,      {0},                                    {{0}},                          29,     DEEPEST_LEVEL,  100,    STATUE_DORMANT, 0,          HORDE_MACHINE_STATUE},
 
     //unBrogue
+
     // group ambushes -- elevator, chasm, stone bridge, deep water. note chasm edge ambushes are larger here because they are not multiplied in a machine
 	{MK_KOBOLD,			1,		{MK_KOBOLD},							{{2, 2, 1}},					1,		4,		100,	   TRAP_DOOR_ELEVATOR,0,			HORDE_MACHINE_AMBUSH},
+    // just a mandrake
 	{MK_MANDRAKE,		0,		{0},									{{0}},							1,		DEEPEST_LEVEL,	100,		0,			0,			HORDE_ALLIED_WITH_PLAYER | HORDE_NO_PERIODIC_SPAWN | HORDE_MACHINE_MANDRAKE},
+    // sticky bundle contents - monsters freed are weaker allies from earlier levels
+	{MK_KOBOLD,			0,		{0},									{{0}},							1,		DEEPEST_LEVEL,		10,		STICKY_BUNDLE_DORMANT, 0,		    HORDE_ALLIED_WITH_PLAYER | HORDE_MACHINE_BUNDLE},
+	{MK_GOBLIN,			0,		{0},									{{0}},							1,		DEEPEST_LEVEL,		30,		STICKY_BUNDLE_DORMANT, 0,		    HORDE_ALLIED_WITH_PLAYER | HORDE_MACHINE_BUNDLE},
+	{MK_GOBLIN_MYSTIC,	0,		{0},									{{0}},							1,		DEEPEST_LEVEL,		10,		STICKY_BUNDLE_DORMANT, 0,		    HORDE_ALLIED_WITH_PLAYER | HORDE_MACHINE_BUNDLE},
+	{MK_GOBLIN_THIEF,	0,		{0},									{{0}},							1,		DEEPEST_LEVEL,		20,		STICKY_BUNDLE_DORMANT, 0,		    HORDE_ALLIED_WITH_PLAYER | HORDE_MACHINE_BUNDLE},
+	{MK_GOBLIN_CONJURER,0,		{0},									{{0}},							1,		DEEPEST_LEVEL,		20,		STICKY_BUNDLE_DORMANT, 0,		    HORDE_ALLIED_WITH_PLAYER | HORDE_MACHINE_BUNDLE},
+    {MK_GOBLIN_BRAWLER, 0,		{0},									{{0}},							1,		DEEPEST_LEVEL,		20,		STICKY_BUNDLE_DORMANT, 0,		    HORDE_ALLIED_WITH_PLAYER | HORDE_MACHINE_BUNDLE},
+    {MK_SPIDER,		    0,		{0},									{{0}},							1,		DEEPEST_LEVEL,	    100,	0,                     0,		    HORDE_MACHINE_SPIDER | HORDE_NO_PERIODIC_SPAWN},
 
     // machine turrets
     {MK_ARROW_TURRET,   0,      {0},                                    {{0}},                          5,      13,     100,        TURRET_DORMANT, 0,              HORDE_MACHINE_TURRET},

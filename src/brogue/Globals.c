@@ -2080,7 +2080,7 @@ const monsterWords monsterText[NUMBER_MONSTER_KINDS] = {
     { "Once a beautiful dryad, $HESHE was cursed by the gods and has fled deep within the sunless dungeon. $HISHER hair is a tangle of poisonous asps and $HISHER scaly visage is so hideous that it will turn any who gazes at $HIMHER to stone!",
         "studying", "Studying",
         {"snakes bite", "snakes gnash at", {0}} },
-    { "This clever goblin will pelt you with spears before closing in to fight.",
+    { "This clever goblin will pelt you with darts before closing in to fight.",
         "chanting over", "Chanting",
         {"hits", "skewers", {0}} },
     //gBrogue
@@ -2745,8 +2745,8 @@ const bolt boltCatalog[NUMBER_BOLT_KINDS] = {
     {"poisoned dart",           "fires a dart",                 "fires strength-sapping darts",             G_WEAPON,&centipedeColor,NULL,              BE_ATTACK,      1,              0,          0,          0,                          (BF_TARGET_ENEMIES | BF_NEVER_REFLECTS | BF_NOT_LEARNABLE)},
     {"growing vines",           "releases carnivorous vines into the ground", "conjures carnivorous vines", G_GRASS,&tanColor,      NULL,               BE_NONE,        5,              DF_ANCIENT_SPIRIT_GRASS, DF_ANCIENT_SPIRIT_VINES, (MONST_INANIMATE | MONST_IMMUNE_TO_WEBS),   (BF_TARGET_ENEMIES | BF_NEVER_REFLECTS)},
     {"whip",                    "whips",                        "wields a whip",                            '*',    &tanColor,      NULL,               BE_ATTACK,      1,              0,          0,          MONST_IMMUNE_TO_WEAPONS,    (BF_TARGET_ENEMIES | BF_NEVER_REFLECTS | BF_NOT_LEARNABLE | BF_DISPLAY_CHAR_ALONG_LENGTH)},
-    {"spear",                   "throws a spear",               "can throw $HISHER weapon",                 G_WEAPON,&gray,         NULL,               BE_ATTACK,      1,              0,          0,          MONST_IMMUNE_TO_WEAPONS,    (BF_TARGET_ENEMIES | BF_NEVER_REFLECTS | BF_NOT_LEARNABLE)},
-    {"poisonous breath",        "breathes poisonous fumes", "can breathe poisonous fumes",                  0,    NULL,           &poisonColor,     BE_POISON,            5,              0,          0,         0,       (BF_TARGET_ENEMIES | BF_NOT_LEARNABLE)},
+    {"dart",                   "throws a dart",                 "can throw $HISHER weapon",                 G_WEAPON,&gray,         NULL,               BE_ATTACK,      1,              0,          0,          MONST_IMMUNE_TO_WEAPONS,    (BF_TARGET_ENEMIES | BF_NEVER_REFLECTS | BF_NOT_LEARNABLE)},
+    {"poisonous breath",        "breathes poisonous fumes",     "can breathe poisonous fumes",                  0,    NULL,           &poisonColor,     BE_POISON,            5,              0,          0,         0,       (BF_TARGET_ENEMIES | BF_NOT_LEARNABLE)},
 };
 
 const feat featTable[FEAT_COUNT] = {

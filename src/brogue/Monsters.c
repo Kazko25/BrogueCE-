@@ -549,7 +549,7 @@ void updateThrownSpears(creature* monst, boolean reload) {
         //message(buf, false);
 
         if (rand_percent(chanceToRunOut)) {
-            sprintf(buf, "%s is out of spears.", theMonsterName);
+            sprintf(buf, "%s is out of darts.", theMonsterName);
             message(buf, false);
             //monster doesn't have a spear anymore
             //monst->info.abilityFlags &= ~MA_ATTACKS_PENETRATE;

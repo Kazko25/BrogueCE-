@@ -1839,8 +1839,10 @@ creatureType monsterCatalog[NUMBER_MONSTER_KINDS] = {
     //kBrogue
     {0, "crystal jelly",   G_JELLY,    &goblinMysticColor,70,     0,      100,     {1, 4, 1},      0,  100,    100,    DF_FORCEFIELD,0,        true,   3, DF_FORCEFIELD, {0},
         (MONST_NEVER_SLEEPS), (MA_CLONE_SELF_ON_DEFEND) },
-    {0, "adolecent dragon", G_DRAGON,  &red,              100,    90,     250,    {8, 14, 4},     20, 100,     100,    DF_GREEN_BLOOD,0,       true,   0, 0,             {0},
+    {0, "adolecent dragon", G_DRAGON,  &red,              100,    50,     250,    {8, 14, 4},     20, 100,     100,    DF_GREEN_BLOOD,0,       true,   0, 0,             {0},
         (MONST_IMMUNE_TO_FIRE | MONST_CARRY_ITEM_25), (MA_ATTACKS_ALL_ADJACENT)},
+    {0, "crystal lizard", G_LIZARD,    &goblinMysticColor,  10,   20,     100,    {1, 1, 1},      20, 100,     100,    DF_DEWAR_GLASS,0,       false, 0,  0,             {0},
+        (MONST_NEVER_SLEEPS | MONST_CARRY_ITEM_100 | MONST_MAINTAINS_DISTANCE | MONST_FLEES_NEAR_DEATH), (0)},
 };
 
 const monsterWords monsterText[NUMBER_MONSTER_KINDS] = {
@@ -2108,6 +2110,9 @@ const monsterWords monsterText[NUMBER_MONSTER_KINDS] = {
     {"Hatched and raised by kobolds, this young dragon is reckless and will attack anything that gets inbetween it and its prey. Including $HISHER caretakers.",
         "consuming", "Consuming",
         {"claws", "tail-whips", "bites", {0}}},
+    {"A skiddish creature with a bright crystal on $HISHER back. $HESHE must have something valuable.",
+        "nibbling at", "Eating",
+        {"hit", {0}}},
 };
 
 const mutation mutationCatalog[NUMBER_MUTATORS] = {
@@ -2140,6 +2145,7 @@ const mutation mutationCatalog[NUMBER_MUTATORS] = {
 
 const hordeType hordeCatalog[NUMBER_HORDES] = {
     // leader       #members    member list                             member numbers                  minL    maxL    freq    spawnsIn        machine         flags
+    {MK_CRYSTAL_LIZARD, 0,      {0},                                    {{0}},                          1,      DEEPEST_LEVEL,5},
     {MK_RAT,            0,      {0},                                    {{0}},                          1,      5,      150},
     {MK_KOBOLD,         0,      {0},                                    {{0}},                          1,      6,      150},
     {MK_JACKAL,         0,      {0},                                    {{0}},                          1,      3,      100},

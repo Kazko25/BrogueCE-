@@ -324,7 +324,8 @@ enum displayGlyph {
     G_LICHEN,
     G_PIPES,
     G_SAC_ALTAR,
-    G_ORB_ALTAR
+    G_ORB_ALTAR,
+    G_LIZARD,
 };
 
 enum graphicsModes {
@@ -1080,13 +1081,14 @@ enum monsterTypes {
     //kBrogue
     MK_CRYSTAL_JELLY,
     MK_ADOLECENT_DRAGON,
+    MK_CRYSTAL_LIZARD,
 
     NUMBER_MONSTER_KINDS
 };
 
 #define NUMBER_MUTATORS             11
 
-#define NUMBER_HORDES               203
+#define NUMBER_HORDES               204
 
 #define MONSTER_CLASS_COUNT         15
 

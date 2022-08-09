@@ -1842,7 +1842,7 @@ creatureType monsterCatalog[NUMBER_MONSTER_KINDS] = {
     {0, "adolecent dragon", G_DRAGON,  &red,              100,    50,     250,    {8, 14, 4},     20, 100,     100,    DF_GREEN_BLOOD,0,       true,   0, 0,             {0},
         (MONST_IMMUNE_TO_FIRE | MONST_CARRY_ITEM_25), (MA_ATTACKS_ALL_ADJACENT)},
     {0, "crystal lizard", G_LIZARD,    &goblinMysticColor,  10,   20,     100,    {1, 1, 1},      20, 100,     100,    DF_DEWAR_GLASS,0,       false, 0,  0,             {0},
-        (MONST_NEVER_SLEEPS | MONST_CARRY_ITEM_100 | MONST_MAINTAINS_DISTANCE | MONST_FLEES_NEAR_DEATH), (0)},
+        (MONST_NEVER_SLEEPS | MONST_REFLECT_4), (0)},
 };
 
 const monsterWords monsterText[NUMBER_MONSTER_KINDS] = {
@@ -2145,7 +2145,6 @@ const mutation mutationCatalog[NUMBER_MUTATORS] = {
 
 const hordeType hordeCatalog[NUMBER_HORDES] = {
     // leader       #members    member list                             member numbers                  minL    maxL    freq    spawnsIn        machine         flags
-    {MK_CRYSTAL_LIZARD, 0,      {0},                                    {{0}},                          1,      DEEPEST_LEVEL,5},
     {MK_RAT,            0,      {0},                                    {{0}},                          1,      5,      150},
     {MK_KOBOLD,         0,      {0},                                    {{0}},                          1,      6,      150},
     {MK_JACKAL,         0,      {0},                                    {{0}},                          1,      3,      100},
@@ -2296,7 +2295,7 @@ const hordeType hordeCatalog[NUMBER_HORDES] = {
     //unBrogue
 
     // group ambushes -- elevator, chasm, stone bridge, deep water. note chasm edge ambushes are larger here because they are not multiplied in a machine
-	{MK_KOBOLD,			1,		{MK_KOBOLD},							{{2, 2, 1}},					1,		4,		100,	   TRAP_DOOR_ELEVATOR,0,			HORDE_MACHINE_AMBUSH},
+	{MK_KOBOLD,			1,		{MK_KOBOLD},							{{2, 4, 1}},					1,		4,		100,	   TRAP_DOOR_ELEVATOR,0,			HORDE_MACHINE_AMBUSH},
     // just a mandrake
 	{MK_MANDRAKE,		0,		{0},									{{0}},							1,		DEEPEST_LEVEL,	100,		0,			0,			HORDE_ALLIED_WITH_PLAYER | HORDE_NO_PERIODIC_SPAWN | HORDE_MACHINE_MANDRAKE},
     // sticky bundle contents - monsters freed are weaker allies from earlier levels
@@ -2355,6 +2354,7 @@ const hordeType hordeCatalog[NUMBER_HORDES] = {
     {MK_MONKEY,         0,      {0},                                    {{0}},                          1,      14,     100,     0,          0,                  HORDE_MACHINE_THIEF},
     {MK_GOBLIN_THIEF,   0,      {0},                                    {{0}},                          8,      20,     100,     0,          0,                  HORDE_MACHINE_THIEF},
     {MK_IMP,            0,      {0},                                    {{0}},                          15,     DEEPEST_LEVEL,  100, 0,      0,                  HORDE_MACHINE_THIEF},
+    {MK_CRYSTAL_LIZARD, 0,      {0},                                    {{0}},                          1,      DEEPEST_LEVEL,  50,  0,      0,                  HORDE_MACHINE_THIEF},
 
     // sacrifice victims
     {MK_MONKEY,         0,      {0},                                    {{0}},                          1,      5,      100,        STATUE_INSTACRACK, 0,           HORDE_SACRIFICE_TARGET},

@@ -1843,6 +1843,58 @@ creatureType monsterCatalog[NUMBER_MONSTER_KINDS] = {
         (MONST_IMMUNE_TO_FIRE | MONST_CARRY_ITEM_25), (MA_ATTACKS_ALL_ADJACENT)},
     {0, "crystal lizard", G_LIZARD,    &goblinMysticColor,  10,   20,     100,    {1, 1, 1},      20, 100,     100,    DF_DEWAR_GLASS,0,       false, 0,  0,             {0},
         (MONST_NEVER_SLEEPS | MONST_REFLECT_4), (0)},
+
+    //hallucination easter eggs (monsters that will show in text of hallucinations, but not in game)
+    //Generic things
+    {0, "skeleton",          G_SPIDER,    &gray,          6,      0,      80,     {1, 3, 1},      20, 100,    100,    DF_RED_BLOOD,   0,    false,      1,      DF_URINE,       {0}},
+    {0, "alien",          G_SPIDER,    &gray,          6,      0,      80,     {1, 3, 1},      20, 100,    100,    DF_RED_BLOOD,   0,    false,      1,      DF_URINE,       {0}},
+    {0, "frankenstein",          G_FLAMEDANCER,    &gray,          6,      0,      80,     {1, 3, 1},      20, 100,    100,    DF_RED_BLOOD,   0,    false,      1,      DF_URINE,       {0}},
+    {0, "werewolf",          G_WISP,    &gray,          6,      0,      80,     {1, 3, 1},      20, 100,    100,    DF_RED_BLOOD,   0,    false,      1,      DF_URINE,       {0}},
+    {0, "corpse",          G_CENTIPEDE,    &gray,          6,      0,      80,     {1, 3, 1},      20, 100,    100,    DF_RED_BLOOD,   0,    false,      1,      DF_URINE,       {0}},
+    {0, "giant",          G_GOBLIN,    &gray,          6,      0,      80,     {1, 3, 1},      20, 100,    100,    DF_RED_BLOOD,   0,    false,      1,      DF_URINE,       {0}},
+    {0, "mummy",          G_MONKEY,    &gray,          6,      0,      80,     {1, 3, 1},      20, 100,    100,    DF_RED_BLOOD,   0,    false,      1,      DF_URINE,       {0}},
+    {0, "devil",          G_DAR_PRIESTESS,    &gray,          6,      0,      80,     {1, 3, 1},      20, 100,    100,    DF_RED_BLOOD,   0,    false,      1,      DF_URINE,       {0}},
+    {0, "demon",          G_DAR_BATTLEMAGE,    &gray,          6,      0,      80,     {1, 3, 1},      20, 100,    100,    DF_RED_BLOOD,   0,    false,      1,      DF_URINE,       {0}},
+    {0, "leprechaun",       G_LIZARD,    &gray,          6,      0,      80,     {1, 3, 1},      20, 100,    100,    DF_RED_BLOOD,   0,    false,      1,      DF_URINE,       {0}},
+    {0, "killer bee",          G_BLOAT,    &gray,          6,      0,      80,     {1, 3, 1},      20, 100,    100,    DF_RED_BLOOD,   0,    false,      1,      DF_URINE,       {0}},
+    {0, "snake",       G_SPIDER,    &gray,          6,      0,      80,     {1, 3, 1},      20, 100,    100,    DF_RED_BLOOD,   0,    false,      1,      DF_URINE,       {0}},
+    {0, "shark",       G_SPIDER,    &gray,          6,      0,      80,     {1, 3, 1},      20, 100,    100,    DF_RED_BLOOD,   0,    false,      1,      DF_URINE,       {0}},
+    {0, "bear",       G_SPIDER,    &gray,          6,      0,      80,     {1, 3, 1},      20, 100,    100,    DF_RED_BLOOD,   0,    false,      1,      DF_URINE,       {0}},
+    {0, "tiger",       G_TOAD,    &gray,          6,      0,      80,     {1, 3, 1},      20, 100,    100,    DF_RED_BLOOD,   0,    false,      1,      DF_URINE,       {0}},
+    {0, "lion",       G_LIZARD,    &gray,          6,      0,      80,     {1, 3, 1},      20, 100,    100,    DF_RED_BLOOD,   0,    false,      1,      DF_URINE,       {0}},
+    {0, "yeti",       G_WARDEN,    &gray,          6,      0,      80,     {1, 3, 1},      20, 100,    100,    DF_RED_BLOOD,   0,    false,      1,      DF_URINE,       {0}},
+    {0, "hobgoblin",       G_TENTACLE_HORROR,    &gray,          6,      0,      80,     {1, 3, 1},      20, 100,    100,    DF_RED_BLOOD,   0,    false,      1,      DF_URINE,       {0}},
+    {0, "mom",          G_ANCIENT_SPIRIT,    &gray,          6,      0,      80,     {1, 3, 1},      20, 100,    100,    DF_RED_BLOOD,   0,    false,      1,      DF_URINE,       {0}},
+    {0, "pender",          G_PHANTOM,    &gray,          6,      0,      80,     {1, 3, 1},      20, 100,    100,    DF_RED_BLOOD,   0,    false,      1,      DF_URINE,       {0}},
+    {0, "kazko",          G_KRAKEN,    &gray,          6,      0,      80,     {1, 3, 1},      20, 100,    100,    DF_RED_BLOOD,   0,    false,      1,      DF_URINE,       {0}},
+    //Alien
+    {0, "xenomorph",          G_ANCIENT_SPIRIT,    &gray,          6,      0,      80,     {1, 3, 1},      20, 100,    100,    DF_RED_BLOOD,   0,    false,      1,      DF_URINE,       {0}},
+    //Zelda
+    {0, "floormaster",          G_FURY,    &gray,          6,      0,      80,     {1, 3, 1},      20, 100,    100,    DF_RED_BLOOD,   0,    false,      1,      DF_URINE,       {0}},
+    {0, "great fairy",          G_FLAMEDANCER,    &gray,          6,      0,      80,     {1, 3, 1},      20, 100,    100,    DF_RED_BLOOD,   0,    false,      1,      DF_URINE,       {0}},
+    {0, "redead",          G_REVENANT,    &gray,          6,      0,      80,     {1, 3, 1},      20, 100,    100,    DF_RED_BLOOD,   0,    false,      1,      DF_URINE,       {0}},
+    //StarWars
+    {0, "rancor",          G_REVENANT,    &gray,          6,      0,      80,     {1, 3, 1},      20, 100,    100,    DF_RED_BLOOD,   0,    false,      1,      DF_URINE,       {0}},
+    {0, "wampa",          G_WISP,    &gray,          6,      0,      80,     {1, 3, 1},      20, 100,    100,    DF_RED_BLOOD,   0,    false,      1,      DF_URINE,       {0}},
+    {0, "wookiee",          G_WRAITH,    &gray,          6,      0,      80,     {1, 3, 1},      20, 100,    100,    DF_RED_BLOOD,   0,    false,      1,      DF_URINE,       {0}},
+    //D&D
+    {0, "rust monster",          G_RAT,    &gray,          6,      0,      80,     {1, 3, 1},      20, 100,    100,    DF_RED_BLOOD,   0,    false,      1,      DF_URINE,       {0}},
+    {0, "invisible stalker",     G_IFRIT,    &gray,          6,      0,      80,     {1, 3, 1},      20, 100,    100,    DF_RED_BLOOD,   0,    false,      1,      DF_URINE,       {0}},
+    {0, "umber hulk",     G_UNDERWORM,    &gray,          6,      0,      80,     {1, 3, 1},      20, 100,    100,    DF_RED_BLOOD,   0,    false,      1,      DF_URINE,       {0}},
+    {0, "mind flayer",     G_MONKEY,    &gray,          6,      0,      80,     {1, 3, 1},      20, 100,    100,    DF_RED_BLOOD,   0,    false,      1,      DF_URINE,       {0}},
+    {0, "beholder",     G_BOG_MONSTER,    &gray,          6,      0,      80,     {1, 3, 1},      20, 100,    100,    DF_RED_BLOOD,   0,    false,      1,      DF_URINE,       {0}},
+    {0, "owl bear",     G_OGRE,    &gray,          6,      0,      80,     {1, 3, 1},      20, 100,    100,    DF_RED_BLOOD,   0,    false,      1,      DF_URINE,       {0}},
+    {0, "mimic",        G_MONKEY,    &gray,          6,      0,      80,     {1, 3, 1},      20, 100,    100,    DF_RED_BLOOD,   0,    false,      1,      DF_URINE,       {0}},
+    {0, "flumph",        G_FURY,    &gray,          6,      0,      80,     {1, 3, 1},      20, 100,    100,    DF_RED_BLOOD,   0,    false,      1,      DF_URINE,       {0}},
+    {0, "xorn",        G_FURY,    &gray,          6,      0,      80,     {1, 3, 1},      20, 100,    100,    DF_RED_BLOOD,   0,    false,      1,      DF_URINE,       {0}},
+    {0, "lampades",        G_LIZARD,    &gray,          6,      0,      80,     {1, 3, 1},      20, 100,    100,    DF_RED_BLOOD,   0,    false,      1,      DF_URINE,       {0}},
+    {0, "giant ant",        G_LIZARD,    &gray,          6,      0,      80,     {1, 3, 1},      20, 100,    100,    DF_RED_BLOOD,   0,    false,      1,      DF_URINE,       {0}},
+    //Minecraft
+    {0, "ghast",        G_GOBLIN,    &gray,          6,      0,      80,     {1, 3, 1},      20, 100,    100,    DF_RED_BLOOD,   0,    false,      1,      DF_URINE,       {0}},
+    {0, "enderman",        G_EEL,    &gray,          6,      0,      80,     {1, 3, 1},      20, 100,    100,    DF_RED_BLOOD,   0,    false,      1,      DF_URINE,       {0}},
+    //Heman
+    {0, "skeletor",        G_SALAMANDER,    &gray,          6,      0,      80,     {1, 3, 1},      20, 100,    100,    DF_RED_BLOOD,   0,    false,      1,      DF_URINE,       {0}},
+
 };
 
 const monsterWords monsterText[NUMBER_MONSTER_KINDS] = {
@@ -2234,7 +2286,7 @@ const hordeType hordeCatalog[NUMBER_HORDES] = {
 
     // captives
     {MK_MONKEY,         1,      {MK_KOBOLD},                            {{1, 2, 1}},                    1,      5,      10,     0,          0,                  HORDE_LEADER_CAPTIVE | HORDE_NEVER_OOD},
-    {MK_JACKAL,         1,      {MK_GOBLIN},                            {{1, 2, 1}},                    1,      5,      2,      0,          0,                  HORDE_LEADER_CAPTIVE | HORDE_NEVER_OOD},
+    {MK_JACKAL,         1,      {MK_KOBOLD},                            {{1, 2, 1}},                    1,      5,      2,      0,          0,                  HORDE_LEADER_CAPTIVE | HORDE_NEVER_OOD},
     {MK_GOBLIN,         1,      {MK_GOBLIN},                            {{1, 2, 1}},                    3,      7,      10,     0,          0,                  HORDE_LEADER_CAPTIVE | HORDE_NEVER_OOD},
     {MK_GOBLIN_BRAWLER, 1,	    {MK_GOBLIN},							{{2, 3, 1}},					5,		9,		2,		0,			0,					HORDE_LEADER_CAPTIVE | HORDE_NEVER_OOD},
     {MK_OGRE,           2,      {MK_GOBLIN,MK_GOBLIN_BRAWLER},          {{3, 5, 1},{0,1,1}},            4,      10,     10,     0,          0,                  HORDE_LEADER_CAPTIVE | HORDE_NEVER_OOD},
@@ -2295,7 +2347,7 @@ const hordeType hordeCatalog[NUMBER_HORDES] = {
     //unBrogue
 
     // group ambushes -- elevator, chasm, stone bridge, deep water. note chasm edge ambushes are larger here because they are not multiplied in a machine
-	{MK_KOBOLD,			1,		{MK_KOBOLD},							{{2, 4, 1}},					1,		4,		100,	   TRAP_DOOR_ELEVATOR,0,			HORDE_MACHINE_AMBUSH},
+	{MK_KOBOLD,			1,		{MK_KOBOLD},							{{2, 3, 1}},					1,		4,		100,	   TRAP_DOOR_ELEVATOR,0,			HORDE_MACHINE_AMBUSH},
     // just a mandrake
 	{MK_MANDRAKE,		0,		{0},									{{0}},							1,		DEEPEST_LEVEL,	100,		0,			0,			HORDE_ALLIED_WITH_PLAYER | HORDE_NO_PERIODIC_SPAWN | HORDE_MACHINE_MANDRAKE},
     // sticky bundle contents - monsters freed are weaker allies from earlier levels
@@ -2390,7 +2442,7 @@ const monsterClass monsterClassCatalog[MONSTER_CLASS_COUNT] = {
     // name             frequency   maxDepth    member list
     {"abomination",     10,         -1,         {MK_BOG_MONSTER, MK_UNDERWORM, MK_KRAKEN, MK_TENTACLE_HORROR}},
     {"dar",             10,         22,         {MK_DAR_BLADEMASTER, MK_DAR_PRIESTESS, MK_DAR_BATTLEMAGE, MK_DAR_ASSASSIN}},
-    {"animal",          10,         10,         {MK_RAT, MK_MONKEY, MK_JACKAL, MK_EEL, MK_TOAD, MK_VAMPIRE_BAT, MK_CENTIPEDE, MK_SPIDER}},
+    {"animal",          10,         10,         {MK_RAT, MK_MONKEY, MK_JACKAL, MK_EEL, MK_TOAD, MK_VAMPIRE_BAT, MK_CENTIPEDE, MK_SPIDER, MK_CRYSTAL_LIZARD}},
     {"goblin",          10,         10,         {MK_GOBLIN, MK_GOBLIN_CONJURER, MK_GOBLIN_MYSTIC, MK_GOBLIN_TOTEM, MK_GOBLIN_CHIEFTAN, MK_SPECTRAL_BLADE,MK_GOBLIN_BRAWLER, MK_GOBLIN_THIEF}},
     {"ogre",            10,         16,         {MK_OGRE, MK_OGRE_SHAMAN, MK_OGRE_TOTEM}},
     {"dragon",          10,         -1,         {MK_DRAGON, MK_ADOLECENT_DRAGON, MK_BLACK_DRAGON}},

@@ -1090,6 +1090,8 @@ enum monsterTypes {
     MK_WEREWOLF,
     MK_CORPSE,
     MK_GIANT,
+    MK_DWARF,
+    MK_ELF,
     MK_MUMMY,
     MK_DEVIL,
     MK_DEMON,
@@ -1125,6 +1127,9 @@ enum monsterTypes {
     MK_GIANT_ANT,
     MK_GHAST,
     MK_ENDERMAN,
+    MK_WALL_OF_FLESH,
+    MK_MOON_LORD,
+    MK_SKELETOR,
 
 
     NUMBER_MONSTER_KINDS

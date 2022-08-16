@@ -1224,6 +1224,7 @@ void victory(boolean superVictory) {
         if (rogue.featRecord[j]) {
             sprintf(buf, "%s: %s", featTable[j].name, featTable[j].description);
             printString(buf, mapToWindowX(2), i, &advancementMessageColor, &black, NULL);
+            saveFeatAccomplished(j + HIGH_SCORES_COUNT);
             i++;
         }
     }

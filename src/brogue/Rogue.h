@@ -55,7 +55,6 @@
 matches against a recording version string, it defines a "patch version." During
 normal play, rogue.patchVersion is set to the match of the game's recording
 version above, or 0 if it doesn't match.
-
 The game will only load a recording/save if either a) it has a patch version
 which is equal or less than the patch version of the current game
 (rogue.patchLevel is set to the recording's); or b) it doesn't match the version
@@ -1080,7 +1079,7 @@ enum monsterTypes {
 
     //kBrogue
     MK_CRYSTAL_JELLY,
-    MK_ADOLECENT_DRAGON,
+    MK_ADOLESCENT_DRAGON,
     MK_CRYSTAL_LIZARD,
 
     //hallucination easter eggs

@@ -62,20 +62,37 @@ ENEMIES
 - Adolescent Dragon
 - Crystal Jelly
 - Nether Jelly
+- Mandrake (legendary ally)
+- Crystal Lizard
 
 WEAPON CHANGES
 - Added armor runic of invisibility
 - Added weapon runic of poison
 - Ring of light reveals invisible enemies within physical vision
 
+MACHINES
+- Spider Biome
+- Kobolds worshipping sleeping dragon
+- Kobold Elevator Ambush
+- Stinkfruit Bushes
+
+MUTATIONS
+- Skeletal mutation
+- Floating mutation
+- Telepathic mutation
+
+FEATS
+- Gemini (Clone Yourself)
+- Esoteric (Get an allied flying Kraken)
+
 MISC CHANGES
 - % toggles hit points On/Off in game
 - ~ now shows feat progress and other playthrough information
 - Feature added to commutation room as a hint on what the altars do
 - Hybrid tileset adjusted to show more ASCII characters than before
-- New Feat: Gemini (Clone Yourself)
-- New Feat: Esoteric (Get an allied flying Kraken)
 - Shattered glass appears on the floor when throwing potions
+- Accomplished feats saves after closing game and displays on highscore screen
+- 40+ monsters that show up when hallucinating (and can spawn in when polymorphing)
 
 
 Useful Sites/Links

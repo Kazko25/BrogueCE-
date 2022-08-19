@@ -38,7 +38,7 @@
 // Brogue version number
 #define BROGUE_MAJOR 2
 #define BROGUE_MINOR 2
-#define BROGUE_PATCH 0
+#define BROGUE_PATCH 1
 
 // Expanding a macro as a string constant requires two levels of macros
 #define _str(x) #x
@@ -1114,7 +1114,6 @@ enum monsterTypes {
     MK_BEHOLDER,
     MK_OWL_BEAR,
     MK_BUG_BEAR,
-    MK_FLUMPH,
     MK_GIANT_ANT,
     MK_WALL_OF_FLESH,
 

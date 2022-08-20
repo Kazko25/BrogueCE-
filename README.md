@@ -66,8 +66,8 @@ ENEMIES
 - Crystal Lizard
 
 WEAPON CHANGES
-- Added armor runic of invisibility
-- Added weapon runic of poison
+- Armor runic of invisibility
+- Weapon runic of poison
 - Ring of light reveals invisible enemies within physical vision
 
 MACHINES
@@ -75,6 +75,7 @@ MACHINES
 - Kobolds worshipping sleeping dragon
 - Kobold Elevator Ambush
 - Stinkfruit Bushes
+- Eldritch Totem
 
 MUTATIONS
 - Skeletal mutation
@@ -82,16 +83,16 @@ MUTATIONS
 - Telepathic mutation
 
 FEATS
+- Accomplished feats saves after closing game and displays on highscore screen
+- Pressing '~' in-game now shows feat progress and other playthrough information
 - Gemini (Clone Yourself)
 - Esoteric (Get an allied flying Kraken)
 
 MISC CHANGES
 - % toggles hit points On/Off in game
-- ~ now shows feat progress and other playthrough information
 - Feature added to commutation room as a hint on what the altars do
 - Hybrid tileset adjusted to show more ASCII characters than before
 - Shattered glass appears on the floor when throwing potions
-- Accomplished feats saves after closing game and displays on highscore screen
 - 40+ monsters that show up when hallucinating (and can spawn in when polymorphing)
 
 

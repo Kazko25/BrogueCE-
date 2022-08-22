@@ -2771,9 +2771,8 @@ const char weaponRunicNames[NUMBER_WEAPON_RUNIC_KINDS][30] = {
     "confusion",
     "force",
     "slaying",
-    "poison",
     "mercy",
-    "plenty"
+    "plenty",
 };
 
 const char armorRunicNames[NUMBER_ARMOR_ENCHANT_KINDS][30] = {

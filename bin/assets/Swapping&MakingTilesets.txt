@@ -1,0 +1,32 @@
+----Swapping Tilesets----
+
+First, rename the files "tiles.bin" & "tiles.png" to something that you will remember them as for later. (I just do "original.bin" & original.png respectively)
+Move these files into the "Additional Tilesetss" folder.
+
+Then rename the tileset you want to use in the "Additional Tilesets" folder to "tiles.png" & "tiles.bin" and move them into the assets folder, and you're good to go!
+
+
+
+
+----Making Your Own Tileset----
+
+To make a tileset, first make a copy of tiles.png to edit however you would like. The restrictions for tiles are as follows:
+
+Single Tile 
+    Width: 128 px
+    Height: 232 px
+Total Size
+    Width: 2048 px
+    Height 5568 px
+
+You can use microsoft paint or any other photo editing software and change the tiles to whatever you'd like. When you have your .png edited,
+simply rename the files in your assets file "tiles.bin" & tiles.png" to something else (like "original.bin" & original.png") and move them into your 
+"Additional Tilesets" folder. Then rename your .png file to "tiles.png" and move it into "Assets" and run Brogue! It should have a new screen pop up 
+where you'll see your tiles displayed one by one. After it goes through all your tiles, Brogue will launch with your new tiles ready in game! It will
+also have generated a new "tiles.bin" file that should be used only with your specific .png. 
+
+
+
+
+
+credits to donutsfritos for the tileset I've included!

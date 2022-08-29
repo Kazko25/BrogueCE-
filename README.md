@@ -55,10 +55,10 @@ all the other variants in Brogue, many of the things I implemented
 are directly from these other variants, so make sure to try those
 out as well!
 
--Brogue+
--unBrogue
--gBrogue
--BrogueCE
+- Brogue+
+- unBrogue
+- gBrogue
+- BrogueCE
 
 
 New Content (*spoilers*)

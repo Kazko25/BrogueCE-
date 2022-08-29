@@ -48,6 +48,17 @@ on various playthroughs. More of the things I want to add you
 should not encounter on your first run, rather have the player
 discover this content across multiple playthroughs.
 
+Credits
+-----
+Huge shout out to all the other developers and maintainers of
+all the other variants in Brogue, many of the things I implemented
+are directly from these other variants, so make sure to try those
+out as well!
+-Brogue+
+-unBrogue
+-gBrogue
+-BrogueCE
+
 
 New Content (*spoilers*)
 -----

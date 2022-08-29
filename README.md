@@ -26,6 +26,9 @@ Brogue was created by Brian Walker. Brogue: Community Edition,
 is a continuation of its development lead by Temewett, which 
 kBrogue branches off from.
 
+Lots of other features have been implemented directly from other variants, 
+including Brogue+, gBrogue, and unBrogue.
+
 
 Main Goals of kBrogue
 -----

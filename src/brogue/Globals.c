@@ -607,10 +607,10 @@ const floorTileType tileCatalog[NUMBER_TILETYPES] = {
     {G_CHAIN_RIGHT,   &gray,                  0,                      20, 0,  0,              0,          0,              0,              NO_LIGHT,       0, 0,                                                                                               "an iron manacle",      "a thick iron manacle is anchored to the wall."},
     {0,             0,                      0,                      1,  0,  0,              0,          0,              10000,          PORTAL_ACTIVATE_LIGHT,(0), (TM_STAND_IN_TILE | TM_VANISHES_UPON_PROMOTION),                                         "blinding light",       "blinding light streams out of the archway."},
     {0,             0,                      0,                      100,0,  0,              0,          0,              10000,          GLYPH_LIGHT_BRIGHT,(0), (TM_STAND_IN_TILE | TM_VANISHES_UPON_PROMOTION),                                            "a red glow",           "a red glow fills the area."},
-    {G_WALL,		&gray,					0,						19,	100,DF_BURNING_BUNDLE,0,		DF_BURNING_BUNDLE,	0,				NO_LIGHT,		(T_OBSTRUCTS_EVERYTHING | T_IS_FLAMMABLE), (TM_STAND_IN_TILE | TM_VANISHES_UPON_PROMOTION | TM_PROMOTES_ON_PLAYER_ENTRY),			"a sticky bundle",		"you cut open the tightly wrapped bundle of webs."},
-	{G_WALL,		&gray,					0,						19,	100,DF_BURNING_BUNDLE,0,		DF_BURNING_BUNDLE,	0,				NO_LIGHT,		(T_OBSTRUCTS_EVERYTHING | T_IS_FLAMMABLE), (TM_STAND_IN_TILE | TM_VANISHES_UPON_PROMOTION | TM_PROMOTES_ON_PLAYER_ENTRY),			"a sticky bundle",		"you cut open the tightly wrapped bundle of webs."},
-	{G_WALL,		&gray,					0,						19,	100,0,				0,			0,	10000,			NO_LIGHT,		(T_OBSTRUCTS_PASSABILITY), (TM_STAND_IN_TILE | TM_VANISHES_UPON_PROMOTION | TM_IS_WIRED),			"a burning bundle",		"the bundle of webs burns with a thick, black smoke."},
-	{G_WEB,		    &white,					0,						19,	100,DF_SPIDER_BURNS,0,			DF_SPIDER_CLIMBS,0,				NO_LIGHT,		(T_ENTANGLES | T_IS_FLAMMABLE), (TM_STAND_IN_TILE | TM_VANISHES_UPON_PROMOTION | TM_IS_WIRED),		"a spiderweb",			"thick, sticky spiderwebs fill the area."},
+    {G_EGG,           &gray,					0,						19,	100,DF_BURNING_BUNDLE,0,		DF_BURNING_BUNDLE,	0,				NO_LIGHT,		(T_OBSTRUCTS_EVERYTHING | T_IS_FLAMMABLE), (TM_STAND_IN_TILE | TM_VANISHES_UPON_PROMOTION | TM_PROMOTES_ON_PLAYER_ENTRY),			"a sticky bundle",		"you cut open the tightly wrapped bundle of webs."},
+	{G_EGG,		      &gray,					0,						19,	100,DF_BURNING_BUNDLE,0,		DF_BURNING_BUNDLE,	0,				NO_LIGHT,		(T_OBSTRUCTS_EVERYTHING | T_IS_FLAMMABLE), (TM_STAND_IN_TILE | TM_VANISHES_UPON_PROMOTION | TM_PROMOTES_ON_PLAYER_ENTRY),			"a sticky bundle",		"you cut open the tightly wrapped bundle of webs."},
+	{G_EGG,		      &gray,					0,						19,	100,0,				0,			0,	10000,			NO_LIGHT,		(T_OBSTRUCTS_PASSABILITY), (TM_STAND_IN_TILE | TM_VANISHES_UPON_PROMOTION | TM_IS_WIRED),			"a burning bundle",		"the bundle of webs burns with a thick, black smoke."},
+	{G_WEB,		      &white,					0,						19,	100,DF_SPIDER_BURNS,0,			DF_SPIDER_CLIMBS,0,				NO_LIGHT,		(T_ENTANGLES | T_IS_FLAMMABLE), (TM_STAND_IN_TILE | TM_VANISHES_UPON_PROMOTION | TM_IS_WIRED),		"a spiderweb",			"thick, sticky spiderwebs fill the area."},
 
     // fire tiles
     {G_FIRE,     &fireForeColor,         0,                      10, 0,  0,              0,          DF_EMBERS,      500,            FIRE_LIGHT,     (T_IS_FIRE), (TM_STAND_IN_TILE | TM_VANISHES_UPON_PROMOTION | TM_VISUALLY_DISTINCT),                "billowing flames",     "flames billow upward."},
@@ -1861,7 +1861,7 @@ creatureType monsterCatalog[NUMBER_MONSTER_KINDS] = {
     {0, "mummy",          G_MONKEY,    &tanColor,          15,     30,     100,    {3, 5, 2},     20, 150,    200,    DF_NET,   0,    false,      1,      DF_NET,       {0}},
     {0, "devil",          G_DAR_PRIESTESS,    &red,          15,      20,      100,     {3, 5, 1},      20, 100,    100,    DF_RED_BLOOD,   0,    false,      0,      DF_URINE,       {BOLT_FIRE},
         (MONST_MAINTAINS_DISTANCE)},
-    {0, "demon",          G_MAGIC_GLYPH,    &darkGray,          60,      60,      100,     {1, 3, 1},      20, 100,    100,    DF_RED_BLOOD,   0,    true,      5,      DF_HOLE_POTION,       {BOLT_BECKONING},
+    {0, "demon",          G_DEMON,    &darkGray,          60,      60,      100,     {1, 3, 1},      20, 100,    100,    DF_RED_BLOOD,   0,    true,      5,      DF_HOLE_POTION,       {BOLT_BECKONING},
         (MONST_FLITS | MONST_FLIES)},
     {0, "leprechaun",       G_LIZARD,    &green,          15,      60,      100,     {1, 3, 1},      20, 100,    100,    DF_GREEN_BLOOD,   0,    false,      0,      DF_URINE,       {0},
         (MONST_FLEES_NEAR_DEATH | MONST_CARRY_ITEM_100)},

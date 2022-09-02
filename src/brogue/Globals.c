@@ -419,7 +419,7 @@ const autoGenerator autoGeneratorCatalog[NUMBER_AUTOGENERATORS] = {
     {0,                         0,      DF_LUMINESCENT_FUNGUS,      0,                          FLOOR,      NOTHING,    DEEPEST_LEVEL,DEEPEST_LEVEL,100,0,      0,          200},
     {0,                         0,      0,                          MT_BLOODFLOWER_AREA,        FLOOR,      NOTHING,    1,      30,             25,     140,    -10,        3},
     {0,                         0,      0,                          MT_STINKFRUIT_AREA,			FLOOR,		NOTHING,	3,      30,             20,		0,		0,			2},
-    {0,                         0,      0,                          MT_MANDRAKE_ROOT_AREA,      FLOOR,      NOTHING,    7,      30,             6,		0,		0,			2},
+    {0,                         0,      0,                          MT_MANDRAKE_ROOT_AREA,      FLOOR,      NOTHING,    7,      30,             3,		0,		0,			2},
     {0,                         0,      0,                          MT_SHRINE_AREA,             FLOOR,      NOTHING,    5,      AMULET_LEVEL,   7,      0,      0,          1},
     {0,                         0,      0,                          MT_IDYLL_AREA,              FLOOR,      NOTHING,    1,      5,              15,     0,      0,          1},
     {0,                         0,      0,                          MT_REMNANT_AREA,            FLOOR,      NOTHING,    10,     DEEPEST_LEVEL,  15,     0,      0,          2},

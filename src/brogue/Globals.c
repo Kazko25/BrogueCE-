@@ -1585,13 +1585,14 @@ const blueprint blueprintCatalog[NUMBER_BLUEPRINTS] = {
         {DF_BONES,  0,          0,              {1,1},      1,          0,          -1,         0,              1,              HORDE_MACHINE_BOSS, 0,  (MF_ADOPT_ITEM | MF_FAR_FROM_ORIGIN | MF_MONSTER_TAKE_ITEM | MF_GENERATE_HORDE | MF_MONSTER_SLEEPING)}}},
 
     // Sticky bundles - key is in bundle. Bundles must be cut open which awakes spiders hidden in webs. Some bundles contain monsters that become allies.
-	{{7, AMULET_LEVEL}, {80,160},	10,		6,			0,                  (BP_ROOM | BP_ADOPT_ITEM | BP_REDESIGN_INTERIOR | BP_PURGE_LIQUIDS | BP_MAXIMIZE_INTERIOR),	{ 
+	{{7, AMULET_LEVEL}, {80,160},	10,		7,			0,                  (BP_ROOM | BP_ADOPT_ITEM | BP_REDESIGN_INTERIOR | BP_PURGE_LIQUIDS | BP_MAXIMIZE_INTERIOR),	{ 
         {0,			SPIDERWEB,SURFACE,			    {5,10},	1,			0,			-1,			0,				0,				0,		0,			    (MF_BUILD_IN_WALLS | MF_NOT_ON_LEVEL_PERIMETER)},
         {0,			SPIDERWEB,SURFACE,			{15,20},	1,			0,			-1,			0,				0,				0,		0,			    (MF_PERMIT_BLOCKING)},
 		{0,			STICKY_BUNDLE_DORMANT,DUNGEON,{1,1},	1,			0,			-1,			0,				2,				0,		0,				(MF_ADOPT_ITEM | MF_TREAT_AS_BLOCKING | MF_NOT_IN_HALLWAY)},
 		{0,			STICKY_BUNDLE_EMPTY,DUNGEON,{1,2},		0,			0,			-1,			0,				2,				0,		0,				(MF_TREAT_AS_BLOCKING | MF_NOT_IN_HALLWAY)},
 		{0,			STICKY_BUNDLE_DORMANT,DUNGEON,{4,5},	1,			0,			-1,			0,				2,				(HORDE_MACHINE_BUNDLE), 0, (MF_GENERATE_HORDE | MF_MONSTERS_DORMANT | MF_TREAT_AS_BLOCKING)},
-		{0,			SPIDERWEB_DORMANT,DUNGEON,	{3, 4},		1,			0,			-1,			0,		        3,				(HORDE_MACHINE_SPIDER),	0, (MF_GENERATE_HORDE | MF_MONSTERS_DORMANT | MF_TREAT_AS_BLOCKING | MF_NOT_IN_HALLWAY)}}},
+		{0,			SPIDERWEB_DORMANT,DUNGEON,	{3,3},		1,			0,			-1,			0,		        3,				(HORDE_MACHINE_SPIDER),	0, (MF_GENERATE_HORDE | MF_MONSTERS_DORMANT | MF_TREAT_AS_BLOCKING | MF_NOT_IN_HALLWAY)},
+        {0,         0,DUNGEON,                  {1,2},      1,          0,          -1,         0,              3,              (HORDE_MACHINE_SPIDER), 0, (MF_GENERATE_HORDE | MF_MONSTER_SLEEPING)}}},
     // -- FLAVOR MACHINES --
 
     // Bloodwort -- bloodwort stalk, some pods, and surrounding grass
@@ -2341,7 +2342,7 @@ const hordeType hordeCatalog[NUMBER_HORDES] = {
     {MK_ACID_MOUND,     1,      {MK_ACID_MOUND},                        {{2, 4, 1}},                    9,      13,     30},
     {MK_SPIDER,         0,      {0},                                    {{0}},                          9,      16,     100},
     {MK_GOBLIN_THIEF,   1,      {MK_GOBLIN_THIEF},                      {{1,2,1}},                      9,      14,     20},
-    {MK_ADOLESCENT_DRAGON,1,     {MK_KOBOLD},                            {{3, 6, 1}},                    10,     16,     20,      0,             0,               HORDE_NO_PERIODIC_SPAWN},
+    {MK_ADOLESCENT_DRAGON,1,    {MK_KOBOLD},                            {{4, 6, 1}},                    10,     16,     20,      0,             0,               HORDE_NO_PERIODIC_SPAWN},
     {MK_DAR_BLADEMASTER,1,      {MK_DAR_BLADEMASTER},                   {{0, 1, 1}},                    10,     14,     100},
     {MK_WILL_O_THE_WISP,0,      {0},                                    {{0}},                          10,     17,     100},
     {MK_WRAITH,         0,      {0},                                    {{0}},                          10,     17,     100},

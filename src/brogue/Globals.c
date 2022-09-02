@@ -1840,7 +1840,7 @@ creatureType monsterCatalog[NUMBER_MONSTER_KINDS] = {
     {0, "crystal jelly",   G_JELLY,    &goblinMysticColor,70,     0,      100,     {1, 4, 1},      0,  100,    100,    DF_FORCEFIELD,0,        true,   3, DF_FORCEFIELD, {0},
         (MONST_NEVER_SLEEPS), (MA_CLONE_SELF_ON_DEFEND) },
     {0, "adolescent dragon", G_DRAGON,  &red,              100,    50,     250,    {8, 14, 4},     20, 100,     100,    DF_GREEN_BLOOD,0,       true,   0, 0,             {0},
-        (MONST_IMMUNE_TO_FIRE | MONST_CARRY_ITEM_25), (MA_ATTACKS_ALL_ADJACENT)},
+        (MONST_IMMUNE_TO_FIRE), (MA_ATTACKS_ALL_ADJACENT)},
     {0, "crystal lizard", G_LIZARD,    &goblinMysticColor,  10,   20,     100,    {1, 1, 1},      20, 100,     100,    DF_DEWAR_GLASS,0,       false, 0,  0,             {0},
         (MONST_NEVER_SLEEPS | MONST_REFLECT_4), (0)},
 

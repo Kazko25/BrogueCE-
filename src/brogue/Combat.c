@@ -1247,7 +1247,7 @@ boolean attack(creature *attacker, creature *defender, boolean lungeAttack) {
                 gameOver(attacker->info.monsterName, false);
                 return true;
             } else if (&player == attacker
-                       && (defender->info.monsterID == MK_DRAGON || defender->info.monsterID == MK_ADOLESCENT_DRAGON || defender->info.monsterID == MK_BLACK_DRAGON)) {
+                       && (defender->info.monsterID == MK_DRAGON || defender->info.monsterID == MK_YOUNG_DRAGON || defender->info.monsterID == MK_BLACK_DRAGON)) {
 
                 rogue.featRecord[FEAT_DRAGONSLAYER] = true;
             }

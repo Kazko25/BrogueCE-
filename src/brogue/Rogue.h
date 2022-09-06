@@ -1078,7 +1078,7 @@ enum monsterTypes {
 
     //kBrogue
     MK_CRYSTAL_JELLY,
-    MK_ADOLESCENT_DRAGON,
+    MK_YOUNG_DRAGON,
     MK_CRYSTAL_LIZARD,
 
     //hallucination easter eggs

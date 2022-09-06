@@ -1892,8 +1892,6 @@ creatureType monsterCatalog[NUMBER_MONSTER_KINDS] = {
     //D&D
     {0, "rust monster",          G_REVENANT,    &goblinColor,          50,      50,      130,     {6, 9, 1},      20, 100,    100,    DF_RED_BLOOD,   0,    true,      0,      DF_URINE,       {0},
         (MONST_DEFEND_DEGRADE_WEAPON), (MA_HIT_DEGRADE_ARMOR)},
-    {0, "invisible stalker",     G_IFRIT,    &ectoplasmColor,          30,      50,      150,     {4, 12, 1},      20, 100,    100,    DF_PURPLE_BLOOD,   0,    true,      0,      DF_URINE,       {0},
-        (MONST_INVISIBLE)},
     {0, "umber hulk",     G_UNDERWORM,    &jackalColor,          80,     100,     160,    {18, 22, 2},    20,  100,    200,    DF_WORM_BLOOD,   0,    true,      0,      DF_URINE,       {0}},
     {0, "mind flayer",     G_ANCIENT_SPIRIT,    &goblinMysticColor,          30,      30,      160,     {4, 12, 1},      20, 100,    100,    DF_PURPLE_BLOOD,   0,    false,      0,      DF_URINE,       {BOLT_ENTRANCEMENT, BOLT_DOMINATION, BOLT_BECKONING, BOLT_BLINKING},
         (MONST_MAINTAINS_DISTANCE | MONST_FLEES_NEAR_DEATH), (MA_AVOID_CORRIDORS)},
@@ -2250,9 +2248,6 @@ const monsterWords monsterText[NUMBER_MONSTER_KINDS] = {
         "studying", "Studying",
         {"hits", {0}}},
     {"a creature that corrodes and eats metal. Engaging this monster in combat will result in weakened gear.",
-        "studying", "Studying",
-        {"hits", {0}}},
-    {"Invisible stalkers are solitary creatures native to the Elemental Plane of Air",
         "studying", "Studying",
         {"hits", {0}}},
     {"Four-eyed monstrosity who lives deep under the earth. Their massive claws tunnele through rock with ease and their thick armor is as strong as plate armor.",

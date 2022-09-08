@@ -49,6 +49,196 @@ void mutateMonster(creature *monst, short mutationIndex) {
     }
 }
 
+void monsterThrowItem(item *theItem, creature *thrower, pos targetLoc, short maxDistance) {
+    short i, numCells;
+    creature *monst = NULL;
+    char buf[COLS*3], buf2[COLS*3], buf3[COLS*3];
+    enum displayGlyph displayChar;
+    color foreColor, backColor, multColor;
+    boolean hitSomethingSolid = false, fastForward = false;
+    enum dungeonLayers layer;
+
+    theItem->flags |= ITEM_PLAYER_AVOIDS; // Avoid thrown items, unless it's a weapon that misses a monster.
+
+    pos originLoc = thrower->loc;
+    short x = originLoc.x;
+    short y = originLoc.y;
+
+    // Using BOLT_NONE for throws because all flags are off, which means we'll try to avoid all obstacles in front of the target
+    pos listOfCoordinates[MAX_BOLT_LENGTH];
+    numCells = getLineCoordinates(listOfCoordinates, originLoc, targetLoc, &boltCatalog[BOLT_NONE]);
+
+    thrower->ticksUntilTurn = thrower->attackSpeed;
+
+    if (thrower != &player
+        && (pmap[originLoc.x][originLoc.y].flags & IN_FIELD_OF_VIEW)) {
+
+        monsterName(buf2, thrower, true);
+        itemName(theItem, buf3, false, true, NULL);
+        sprintf(buf, "%s hurls %s.", buf2, buf3);
+        message(buf, 0);
+    }
+
+    for (i=0; i<numCells && i < maxDistance; i++) {
+        x = listOfCoordinates[i].x;
+        y = listOfCoordinates[i].y;
+
+        if (pmap[x][y].flags & (HAS_MONSTER | HAS_PLAYER)) {
+            monst = monsterAtLoc(x, y);
+            if (!(monst->bookkeepingFlags & MB_SUBMERGED)) {
+//          if (projectileReflects(thrower, monst) && i < DCOLS*2) {
+//              if (projectileReflects(thrower, monst)) { // if it scores another reflection roll, reflect at caster
+//                  numCells = reflectBolt(originLoc[0], originLoc.y, listOfCoordinates, i, true);
+//              } else {
+//                  numCells = reflectBolt(-1, -1, listOfCoordinates, i, false); // otherwise reflect randomly
+//              }
+//
+//              monsterName(buf2, monst, true);
+//              itemName(theItem, buf3, false, false, NULL);
+//              sprintf(buf, "%s deflect%s the %s", buf2, (monst == &player ? "" : "s"), buf3);
+//              combatMessage(buf, 0);
+//              continue;
+//          }
+                break;
+            }
+        }
+
+        // We hit something!
+        if (cellHasTerrainFlag(x, y, (T_OBSTRUCTS_PASSABILITY | T_OBSTRUCTS_VISION))) {
+            if ((theItem->category & WEAPON)
+                && (theItem->kind == INCENDIARY_DART)
+                && (cellHasTerrainFlag(x, y, T_IS_FLAMMABLE) || (pmap[x][y].flags & (HAS_MONSTER | HAS_PLAYER)))) {
+                // Incendiary darts thrown at flammable obstructions (foliage, wooden barricades, doors) will hit the obstruction
+                // instead of bursting a cell earlier.
+            } else if (cellHasTerrainFlag(x, y, T_OBSTRUCTS_PASSABILITY)
+                       && cellHasTMFlag(x, y, TM_PROMOTES_ON_PLAYER_ENTRY)
+                       && tileCatalog[pmap[x][y].layers[layerWithTMFlag(x, y, TM_PROMOTES_ON_PLAYER_ENTRY)]].flags & T_OBSTRUCTS_PASSABILITY) {
+                layer = layerWithTMFlag(x, y, TM_PROMOTES_ON_PLAYER_ENTRY);
+                if (tileCatalog[pmap[x][y].layers[layer]].flags & T_OBSTRUCTS_PASSABILITY) {
+                    message(tileCatalog[pmap[x][y].layers[layer]].flavorText, 0);
+                    promoteTile(x, y, layer, false);
+                }
+            } else {
+                i--;
+                if (i >= 0) {
+                    x = listOfCoordinates[i].x;
+                    y = listOfCoordinates[i].y;
+                } else { // it was aimed point-blank into an obstruction
+                    x = thrower->loc.x;
+                    y = thrower->loc.y;
+                }
+            }
+            hitSomethingSolid = true;
+            break;
+        }
+
+        if (playerCanSee(x, y)) { // show the graphic
+            getCellAppearance(x, y, &displayChar, &foreColor, &backColor);
+            foreColor = *(theItem->foreColor);
+            if (playerCanDirectlySee(x, y)) {
+                colorMultiplierFromDungeonLight(x, y, &multColor);
+                applyColorMultiplier(&foreColor, &multColor);
+            } else { // clairvoyant visible
+                applyColorMultiplier(&foreColor, &clairvoyanceColor);
+            }
+            plotCharWithColor(theItem->displayChar, mapToWindowX(x), mapToWindowY(y), &foreColor, &backColor);
+
+            if (!fastForward) {
+                fastForward = rogue.playbackFastForward || pauseAnimation(25);
+            }
+
+            refreshDungeonCell(x, y);
+        }
+
+        if (x == targetLoc.x && y == targetLoc.y) { // reached its target
+            break;
+        }
+    }
+
+    if ((theItem->category & POTION) && (hitSomethingSolid || !cellHasTerrainFlag(x, y, T_AUTO_DESCENT))) {
+        if (theItem->kind == POTION_CONFUSION || theItem->kind == POTION_POISON
+            || theItem->kind == POTION_PARALYSIS || theItem->kind == POTION_INCINERATION
+            || theItem->kind == POTION_DARKNESS || theItem->kind == POTION_LICHEN
+            || theItem->kind == POTION_DESCENT) {
+            switch (theItem->kind) {
+                case POTION_POISON:
+                    strcpy(buf, "the flask shatters and a deadly purple cloud billows out!");
+                    spawnDungeonFeature(x, y, &dungeonFeatureCatalog[DF_POISON_GAS_CLOUD_POTION], true, false);
+                    message(buf, 0);
+                    break;
+                case POTION_CONFUSION:
+                    strcpy(buf, "the flask shatters and a multi-hued cloud billows out!");
+                    spawnDungeonFeature(x, y, &dungeonFeatureCatalog[DF_CONFUSION_GAS_CLOUD_POTION], true, false);
+                    message(buf, 0);
+                    break;
+                case POTION_PARALYSIS:
+                    strcpy(buf, "the flask shatters and a cloud of pink gas billows out!");
+                    spawnDungeonFeature(x, y, &dungeonFeatureCatalog[DF_PARALYSIS_GAS_CLOUD_POTION], true, false);
+                    message(buf, 0);
+                    break;
+                case POTION_INCINERATION:
+                    strcpy(buf, "the flask shatters and its contents burst violently into flame!");
+                    message(buf, 0);
+                    spawnDungeonFeature(x, y, &dungeonFeatureCatalog[DF_INCINERATION_POTION], true, false);
+                    break;
+                case POTION_DARKNESS:
+                    strcpy(buf, "the flask shatters and the lights in the area start fading.");
+                    spawnDungeonFeature(x, y, &dungeonFeatureCatalog[DF_DARKNESS_POTION], true, false);
+                    message(buf, 0);
+                    break;
+                case POTION_DESCENT:
+                    strcpy(buf, "as the flask shatters, the ground vanishes!");
+                    message(buf, 0);
+                    spawnDungeonFeature(x, y, &dungeonFeatureCatalog[DF_HOLE_POTION], true, false);
+                    break;
+                case POTION_LICHEN:
+                    strcpy(buf, "the flask shatters and deadly spores spill out!");
+                    message(buf, 0);
+                    spawnDungeonFeature(x, y, &dungeonFeatureCatalog[DF_LICHEN_PLANTED], true, false);
+                    break;
+            }
+
+            autoIdentify(theItem);
+
+            refreshDungeonCell(x, y);
+
+            //if (pmap[x][y].flags & (HAS_MONSTER | HAS_PLAYER)) {
+            //  monst = monsterAtLoc(x, y);
+            //  applyInstantTileEffectsToCreature(monst);
+            //}
+        } else {
+            if (cellHasTerrainFlag(x, y, T_OBSTRUCTS_PASSABILITY)) {
+                strcpy(buf2, "against");
+            } else if (tileCatalog[pmap[x][y].layers[highestPriorityLayer(x, y, false)]].mechFlags & TM_STAND_IN_TILE) {
+                strcpy(buf2, "into");
+            } else {
+                strcpy(buf2, "on");
+            }
+            sprintf(buf, "the flask shatters and %s liquid splashes harmlessly %s %s.",
+                    potionTable[theItem->kind].flavor, buf2, tileText(x, y));
+            message(buf, 0);
+        }
+
+        // Broken Glass when throwing potions
+        refreshDungeonCell(x, y);
+        spawnDungeonFeature(x, y, &dungeonFeatureCatalog[DF_DEWAR_GLASS], true, false);
+
+        deleteItem(theItem);
+        return; // potions disappear when they break
+    }
+    if ((theItem->category & WEAPON) && theItem->kind == INCENDIARY_DART) {
+        spawnDungeonFeature(x, y, &dungeonFeatureCatalog[DF_DART_EXPLOSION], true, false);
+        if (pmap[x][y].flags & (HAS_MONSTER | HAS_PLAYER)) {
+            exposeCreatureToFire(monsterAtLoc(x, y));
+        }
+        deleteItem(theItem);
+        return;
+    }
+    pos dropLoc;
+    getQualifyingLocNear(&dropLoc, x, y, true, 0, (T_OBSTRUCTS_ITEMS | T_OBSTRUCTS_PASSABILITY), (HAS_ITEM), false, false);
+    placeItem(theItem, dropLoc.x, dropLoc.y);
+    refreshDungeonCell(dropLoc.x, dropLoc.y);
+}
 // Allocates space, generates a creature of the given type,
 // prepends it to the list of creatures, and returns a pointer to that creature. Note that the creature
 // is not given a map location here!
@@ -3489,6 +3679,30 @@ void monstersTurn(creature *monst) {
         if (monsterSummons(monst, (monst->info.flags & MONST_ALWAYS_USE_ABILITY))) {
             return;
         }
+
+        if (fleeingMonsterAwareOfPlayer(monst)) {
+
+            if(openPathBetween(player.loc.x, player.loc.y, monst->loc.x, monst->loc.y)
+               && (monst->info.abilityFlags & MA_HIT_STEAL_FLEE)
+               && monst->carriedItem
+               && monst->carriedItem->category == POTION
+               && monst->carriedItem->kind >= POTION_POISON //any cursed potion
+               && monst->carriedItem->kind != POTION_HALLUCINATION
+               && distanceBetween(player.loc.x, player.loc.y, monst->loc.x, monst->loc.y) > 5) {
+                    pos potionTarget = {player.loc.x, player.loc.y};
+                    monsterThrowItem(monst->carriedItem, monst, potionTarget, 15);
+                    monst->carriedItem = NULL;
+               }
+
+			if (monst->safetyMap) {
+				freeGrid(monst->safetyMap);
+				monst->safetyMap = NULL;
+			}
+			if (!rogue.updatedSafetyMapThisTurn) {
+				updateSafetyMap();
+			}
+			dir = nextStep(safetyMap, monst->loc.x, monst->loc.y, NULL, true);
+		}
 
         dir = nextStep(getSafetyMap(monst), monst->loc.x, monst->loc.y, NULL, true);
         if (dir != -1) {

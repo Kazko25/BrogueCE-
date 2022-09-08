@@ -607,9 +607,9 @@ const floorTileType tileCatalog[NUMBER_TILETYPES] = {
     {G_CHAIN_RIGHT,   &gray,                  0,                      20, 0,  0,              0,          0,              0,              NO_LIGHT,       0, 0,                                                                                               "an iron manacle",      "a thick iron manacle is anchored to the wall."},
     {0,             0,                      0,                      1,  0,  0,              0,          0,              10000,          PORTAL_ACTIVATE_LIGHT,(0), (TM_STAND_IN_TILE | TM_VANISHES_UPON_PROMOTION),                                         "blinding light",       "blinding light streams out of the archway."},
     {0,             0,                      0,                      100,0,  0,              0,          0,              10000,          GLYPH_LIGHT_BRIGHT,(0), (TM_STAND_IN_TILE | TM_VANISHES_UPON_PROMOTION),                                            "a red glow",           "a red glow fills the area."},
-    {G_EGG,           &gray,					0,						19,	100,DF_BURNING_BUNDLE,0,		DF_BURNING_BUNDLE,	0,				NO_LIGHT,		(T_OBSTRUCTS_EVERYTHING | T_IS_FLAMMABLE), (TM_STAND_IN_TILE | TM_VANISHES_UPON_PROMOTION | TM_PROMOTES_ON_PLAYER_ENTRY),			"a sticky bundle",		"you cut open the tightly wrapped bundle of webs."},
-	{G_EGG,		      &gray,					0,						19,	100,DF_BURNING_BUNDLE,0,		DF_BURNING_BUNDLE,	0,				NO_LIGHT,		(T_OBSTRUCTS_EVERYTHING | T_IS_FLAMMABLE), (TM_STAND_IN_TILE | TM_VANISHES_UPON_PROMOTION | TM_PROMOTES_ON_PLAYER_ENTRY),			"a sticky bundle",		"you cut open the tightly wrapped bundle of webs."},
-	{G_EGG,		      &gray,					0,						19,	100,0,				0,			0,	10000,			NO_LIGHT,		(T_OBSTRUCTS_PASSABILITY), (TM_STAND_IN_TILE | TM_VANISHES_UPON_PROMOTION | TM_IS_WIRED),			"a burning bundle",		"the bundle of webs burns with a thick, black smoke."},
+    {G_STICKY_BUNDLE,           &gray,					0,						19,	100,DF_BURNING_BUNDLE,0,		DF_BURNING_BUNDLE,	0,				NO_LIGHT,		(T_OBSTRUCTS_EVERYTHING | T_IS_FLAMMABLE), (TM_STAND_IN_TILE | TM_VANISHES_UPON_PROMOTION | TM_PROMOTES_ON_PLAYER_ENTRY),			"a sticky bundle",		"you cut open the tightly wrapped bundle of webs."},
+	{G_STICKY_BUNDLE,		      &gray,					0,						19,	100,DF_BURNING_BUNDLE,0,		DF_BURNING_BUNDLE,	0,				NO_LIGHT,		(T_OBSTRUCTS_EVERYTHING | T_IS_FLAMMABLE), (TM_STAND_IN_TILE | TM_VANISHES_UPON_PROMOTION | TM_PROMOTES_ON_PLAYER_ENTRY),			"a sticky bundle",		"you cut open the tightly wrapped bundle of webs."},
+	{G_STICKY_BUNDLE,		      &gray,					0,						19,	100,0,				0,			0,	10000,			NO_LIGHT,		(T_OBSTRUCTS_PASSABILITY), (TM_STAND_IN_TILE | TM_VANISHES_UPON_PROMOTION | TM_IS_WIRED),			"a burning bundle",		"the bundle of webs burns with a thick, black smoke."},
 	{G_WEB,		      &white,					0,						19,	100,DF_SPIDER_BURNS,0,			DF_SPIDER_CLIMBS,0,				NO_LIGHT,		(T_ENTANGLES | T_IS_FLAMMABLE), (TM_STAND_IN_TILE | TM_VANISHES_UPON_PROMOTION | TM_IS_WIRED),		"a spiderweb",			"thick, sticky spiderwebs fill the area."},
 
     // fire tiles
@@ -1585,7 +1585,7 @@ const blueprint blueprintCatalog[NUMBER_BLUEPRINTS] = {
         {DF_BONES,  0,          0,              {1,1},      1,          0,          -1,         0,              1,              HORDE_MACHINE_BOSS, 0,  (MF_ADOPT_ITEM | MF_FAR_FROM_ORIGIN | MF_MONSTER_TAKE_ITEM | MF_GENERATE_HORDE | MF_MONSTER_SLEEPING)}}},
 
     // Sticky bundles - key is in bundle. Bundles must be cut open which awakes spiders hidden in webs. Some bundles contain monsters that become allies.
-	{{7, AMULET_LEVEL}, {80,160},	10,		7,			0,                  (BP_ROOM | BP_ADOPT_ITEM | BP_REDESIGN_INTERIOR | BP_PURGE_LIQUIDS | BP_MAXIMIZE_INTERIOR),	{ 
+	{{1, AMULET_LEVEL}, {80,160},	100,		7,			0,                  (BP_ROOM | BP_ADOPT_ITEM | BP_REDESIGN_INTERIOR | BP_PURGE_LIQUIDS | BP_MAXIMIZE_INTERIOR),	{ 
         {0,			SPIDERWEB,SURFACE,			    {5,10},	1,			0,			-1,			0,				0,				0,		0,			    (MF_BUILD_IN_WALLS | MF_NOT_ON_LEVEL_PERIMETER)},
         {0,			SPIDERWEB,SURFACE,			{15,20},	1,			0,			-1,			0,				0,				0,		0,			    (MF_PERMIT_BLOCKING)},
 		{0,			STICKY_BUNDLE_DORMANT,DUNGEON,{1,1},	1,			0,			-1,			0,				2,				0,		0,				(MF_ADOPT_ITEM | MF_TREAT_AS_BLOCKING | MF_NOT_IN_HALLWAY)},

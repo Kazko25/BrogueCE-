@@ -325,6 +325,7 @@ enum displayGlyph {
     G_SAC_ALTAR,
     G_ORB_ALTAR,
     G_LIZARD,
+    G_STICKY_BUNDLE,
 };
 
 enum graphicsModes {

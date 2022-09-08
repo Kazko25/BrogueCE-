@@ -1788,7 +1788,6 @@ void itemDetails(char *buf, item *theItem) {
         "the enemy will be confused",
         "the enemy will be flung",
         "[slaying]", // never used
-        "the enemy will be poisoned",
         "the enemy will be healed",
         "the enemy will be cloned"
     };
@@ -2220,13 +2219,14 @@ void itemDetails(char *buf, item *theItem) {
                         // A_VANISHING, A_MULTIPLICITY, A_MUTUALITY, A_ABSORPTION, A_REPRISAL, A_IMMUNITY, A_REFLECTION, A_BURDEN, A_VULNERABILITY, A_IMMOLATION
                         switch (theItem->enchant2) {
                             case A_VANISHING:
-								sprintf(buf2, "When worn, 10%% of the time that an enemy's attack connects, your attacker will lose your tail as you move to a nearby spot and become invisible for %i turn%s. ",
-										armorImageCount(enchant),
-                                        (armorImageCount(enchant) == 1 ? "":"s"));
+								sprintf(buf2, "When worn, 15%% of the time that an enemy's attack connects, your attacker will lose your tail as you move to a nearby spot and become invisible for 3 turns." //%i turn%s. ",
+										//armorImageCount(enchant),
+                                        //(armorImageCount(enchant) == 1 ? "":"s"));
+                                        );
 								if (true) {
-									sprintf(buf3, "(If the %s is enchanted, the chance will increase to 10%% and the duration will increase to %i.) ",
-											theName,
-                                            (armorImageCount(enchant + enchantIncrement(theItem))));
+									sprintf(buf3, "(If the %s is enchanted, the chance will stay at 15%% and the duration will stay at 3.) ", //increase to %i.) ", 
+											theName);/*,
+                                            (armorImageCount(enchant + enchantIncrement(theItem))));*/
 									strcat(buf2, buf3);
 								}
 								break;

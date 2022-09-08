@@ -891,10 +891,12 @@ void applyArmorRunicEffect(char returnString[DCOLS], creature *attacker, short *
 
     switch (rogue.armor->enchant2) {
         case A_VANISHING:
-	        if (melee && !(attacker->info.flags & (MONST_INANIMATE | MONST_INVULNERABLE)) && rand_percent(10)) {
+	        if (melee && !(attacker->info.flags & (MONST_INANIMATE | MONST_INVULNERABLE)) && rand_percent(15)) {
                     if (!(player.status[STATUS_INVISIBLE])){
-                        ninjaVanish(attacker, &player, armorImageCount(enchant));
+                        ninjaVanish(attacker, &player, 3);
                     }
+                    runicDiscovered = true;
+                    sprintf(returnString, "Your %s gathers darkness around it, and you disappear into the shadows!", armorName);
 	        }
 	        break;
         case A_MULTIPLICITY:

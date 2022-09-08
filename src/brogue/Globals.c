@@ -1585,7 +1585,7 @@ const blueprint blueprintCatalog[NUMBER_BLUEPRINTS] = {
         {DF_BONES,  0,          0,              {1,1},      1,          0,          -1,         0,              1,              HORDE_MACHINE_BOSS, 0,  (MF_ADOPT_ITEM | MF_FAR_FROM_ORIGIN | MF_MONSTER_TAKE_ITEM | MF_GENERATE_HORDE | MF_MONSTER_SLEEPING)}}},
 
     // Sticky bundles - key is in bundle. Bundles must be cut open which awakes spiders hidden in webs. Some bundles contain monsters that become allies.
-	{{1, AMULET_LEVEL}, {80,160},	100,		7,			0,                  (BP_ROOM | BP_ADOPT_ITEM | BP_REDESIGN_INTERIOR | BP_PURGE_LIQUIDS | BP_MAXIMIZE_INTERIOR),	{ 
+	{{7, AMULET_LEVEL}, {80,160},	10,		7,			0,                  (BP_ROOM | BP_ADOPT_ITEM | BP_REDESIGN_INTERIOR | BP_PURGE_LIQUIDS | BP_MAXIMIZE_INTERIOR),	{ 
         {0,			SPIDERWEB,SURFACE,			    {5,10},	1,			0,			-1,			0,				0,				0,		0,			    (MF_BUILD_IN_WALLS | MF_NOT_ON_LEVEL_PERIMETER)},
         {0,			SPIDERWEB,SURFACE,			{15,20},	1,			0,			-1,			0,				0,				0,		0,			    (MF_PERMIT_BLOCKING)},
 		{0,			STICKY_BUNDLE_DORMANT,DUNGEON,{1,1},	1,			0,			-1,			0,				2,				0,		0,				(MF_ADOPT_ITEM | MF_TREAT_AS_BLOCKING | MF_NOT_IN_HALLWAY)},

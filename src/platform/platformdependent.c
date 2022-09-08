@@ -180,6 +180,7 @@ unsigned int glyphToUnicode(enum displayGlyph glyph) {
         case G_SAC_ALTAR: return '|';
         case G_ORB_ALTAR: return '|';
         case G_LIZARD: return 'l';
+        case G_STICKY_BUNDLE: return '§';
 
         default:
             brogueAssert(false);

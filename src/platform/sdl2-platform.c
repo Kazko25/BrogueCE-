@@ -333,6 +333,7 @@ static int fontIndex(enum displayGlyph glyph) {
     if (glyph == G_UP_ARROW) return 0x90;
     if (glyph == G_DOWN_ARROW) return 0x91;
     if (glyph == G_LIZARD) return 0x6c;
+    if (glyph == G_STICKY_BUNDLE) return 0xa7;
 
     if (glyph < 128) {
         // ASCII characters map directly

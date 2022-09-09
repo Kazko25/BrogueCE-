@@ -38,7 +38,7 @@
 // Brogue version number
 #define BROGUE_MAJOR 2
 #define BROGUE_MINOR 2
-#define BROGUE_PATCH 1
+#define BROGUE_PATCH 3
 
 // Expanding a macro as a string constant requires two levels of macros
 #define _str(x) #x

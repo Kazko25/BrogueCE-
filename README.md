@@ -81,8 +81,7 @@ ENEMIES
 - Crystal Lizard
 
 WEAPON CHANGES
-- Armor runic of invisibility
-- Weapon runic of poison
+- Armor runic of vanishing
 - Ring of light reveals invisible enemies within physical vision
 
 MACHINES
@@ -109,6 +108,7 @@ MISC CHANGES
 - Hybrid tileset adjusted to show more ASCII characters than before
 - Shattered glass appears on the floor when throwing potions
 - 40+ monsters that show up when hallucinating (and can spawn in when polymorphing)
+- Thieves throw bad potions when they steal them and get more than 4 spaces away.
 
 
 Useful Sites/Links

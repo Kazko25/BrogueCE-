@@ -2024,11 +2024,11 @@ void itemDetails(char *buf, item *theItem) {
                     new = 0;
 
                     if ((theItem->flags & ITEM_IDENTIFIED) || rogue.playbackOmniscience) {
-                        new = theItem->armor / 10;
-                        new += netEnchant(theItem) / FP_FACTOR;
+                        new = theItem->armor;
+                        new += 10 * netEnchant(theItem) / FP_FACTOR;
+                        new /= 10;
                     } else {
-                        new = ((armorTable[theItem->kind].range.upperBound + armorTable[theItem->kind].range.lowerBound) / 2) / 10;
-                        new += strengthModifier(theItem) / FP_FACTOR;
+                        new = armorValueIfUnenchanted(theItem);
                     }
 
                     new = max(0, new);
@@ -3084,12 +3084,19 @@ void updateEncumbrance() {
     recalculateEquipmentBonuses();
 }
 
+// Estimates the armor value of the given item, assuming the item is unenchanted.
+short armorValueIfUnenchanted(item* theItem) {
+    short averageValue = (armorTable[theItem->kind].range.upperBound + armorTable[theItem->kind].range.lowerBound) / 2;
+    short strengthAdjusted = averageValue + 10 * strengthModifier(theItem) / FP_FACTOR;
+    return max(0, strengthAdjusted / 10);
+}
+
+// Calculates the armor value to display to the player (estimated if the item is unidentified).
 short displayedArmorValue() {
     if (!rogue.armor || (rogue.armor->flags & ITEM_IDENTIFIED)) {
         return player.info.defense / 10;
     } else {
-        return ((armorTable[rogue.armor->kind].range.upperBound + armorTable[rogue.armor->kind].range.lowerBound) * FP_FACTOR / 2 / 10
-                + strengthModifier(rogue.armor)) / FP_FACTOR;
+        return armorValueIfUnenchanted(rogue.armor);
     }
 }
 
@@ -3556,6 +3563,7 @@ boolean tunnelize(short x, short y) {
             monst = monsterAtLoc(x, y);
             if (monst->info.flags & MONST_ATTACKABLE_THRU_WALLS) {
                 inflictLethalDamage(NULL, monst);
+                killCreature(monst, false);
             }
         }
     }
@@ -4103,6 +4111,7 @@ void crystalize(short radius) {
                         monst = monsterAtLoc(i, j);
                         if (monst->info.flags & MONST_ATTACKABLE_THRU_WALLS) {
                             inflictLethalDamage(NULL, monst);
+                            killCreature(monst, false);
                         } else {
                             freeCaptivesEmbeddedAt(i, j);
                         }
@@ -4260,7 +4269,7 @@ void beckonMonster(creature *monst, short x, short y) {
     pos from = monst->loc;
     pos to = (pos){ .x = x, .y = y };
     theBolt.magnitude = max(1, (distanceBetween(x, y, monst->loc.x, monst->loc.y) - 2) / 2);
-    zap(from, to, &theBolt, false);
+    zap(from, to, &theBolt, false, true);
     if (monst->ticksUntilTurn < player.attackSpeed+1) {
         monst->ticksUntilTurn = player.attackSpeed+1;
     }
@@ -4339,6 +4348,7 @@ boolean updateBolt(bolt *theBolt, creature *caster, short x, short y,
                 } else if (inflictDamage(caster, monst, staffDamage(theBolt->magnitude * FP_FACTOR), theBolt->backColor, false)) {
                     // killed monster
                     if (player.currentHP <= 0) {
+                        killCreature(monst, false);
                         if (caster == &player) {
                             sprintf(buf, "Killed by a reflected %s", theBolt->name);
                             gameOver(buf, true);
@@ -4357,6 +4367,7 @@ boolean updateBolt(bolt *theBolt, creature *caster, short x, short y,
                         sprintf(buf, "you hear %s %s", monstName, ((monst->info.flags & MONST_INANIMATE) ? "get destroyed" : "die"));
                         combatMessage(buf, 0);
                     }
+                    killCreature(monst, false);
                 } else {
                     // monster lives
                     if (monst->creatureMode != MODE_PERM_FLEEING
@@ -4732,7 +4743,7 @@ void detonateBolt(bolt *theBolt, creature *caster, short x, short y, boolean *au
 }
 
 // returns whether the bolt effect should autoID any staff or wand it came from, if it came from a staff or wand
-boolean zap(pos originLoc, pos targetLoc, bolt *theBolt, boolean hideDetails) {
+boolean zap(pos originLoc, pos targetLoc, bolt* theBolt, boolean hideDetails, boolean reverseBoltDir) {
     pos listOfCoordinates[MAX_BOLT_LENGTH];
     short i, j, k, x, y, x2, y2, numCells, blinkDistance = 0, boltLength, initialBoltLength, lights[DCOLS][DROWS][3];
     creature *monst = NULL, *shootingMonst;
@@ -4760,7 +4771,36 @@ boolean zap(pos originLoc, pos targetLoc, bolt *theBolt, boolean hideDetails) {
     y = originLoc.y;
 
     initialBoltLength = boltLength = 5 * theBolt->magnitude;
-    numCells = getLineCoordinates(listOfCoordinates, originLoc, targetLoc, (hideDetails ? &boltCatalog[BOLT_NONE] : theBolt));
+
+    // Beckoning (from mirrored totems and the wand) is implemented as two bolts, one going from
+    // the totem/player to the target, and another from the target back to the source, to blink
+    // them adjacent. However, bolt paths are asymmetric; the path from A to B isn't necessarily
+    // the same as the path from B to A. If the second bolt (the blink) follows a different
+    // path, it's possible for the target not to be blinked all the way back to the source
+    // because it hits an obstacle (usually a monster). This results in issue #497, as well as
+    // unintuitive behavior for the wand of beckoning. As a workaround, for the second bolt, we
+    // compute it as if it went from the source to the target, and then reverse the list of
+    // coordinates. This ensures that the two bolts will include exactly the same coordinates,
+    // so the target won't get stuck on any obstacles while being beckoned.
+    if (reverseBoltDir) {
+        pos listOfCoordinatesTmp[MAX_BOLT_LENGTH];
+        short numCellsTmp = getLineCoordinates(listOfCoordinatesTmp, targetLoc, originLoc, (hideDetails ? &boltCatalog[BOLT_NONE] : theBolt));
+        numCells = -1;
+        for (int i = 0; i < numCellsTmp; i++) {
+            if (listOfCoordinatesTmp[i].x == originLoc.x && listOfCoordinatesTmp[i].y == originLoc.y) {
+                numCells = i + 1;
+                break;
+            }
+        }
+        brogueAssert(numCells > -1);
+        for (int i = 0; i < numCells - 1; i++) {
+            listOfCoordinates[i] = listOfCoordinatesTmp[numCells - 2 - i];
+        }
+        listOfCoordinates[numCells - 1] = targetLoc;
+    }
+    else {
+        numCells = getLineCoordinates(listOfCoordinates, originLoc, targetLoc, (hideDetails ? &boltCatalog[BOLT_NONE] : theBolt));
+    }
     shootingMonst = monsterAtLoc(originLoc.x, originLoc.y);
 
     if ((theBolt->boltEffect == BE_ATTACK) && (shootingMonst->info.abilityFlags & MA_LIMITED_AMMO)) {
@@ -5861,6 +5901,7 @@ boolean hitMonsterWithProjectileWeapon(creature *thrower, creature *monst, item 
                     (monst->info.flags & MONST_INANIMATE) ? "destroyed" : "killed",
                     targetName);
             messageWithColor(buf, messageColorFromVictim(monst), 0);
+            killCreature(monst, false);
         } else {
             sprintf(buf, "the %s hit %s.", theItemName, targetName);
             if (theItem->flags & ITEM_RUNIC) {
@@ -6440,7 +6481,8 @@ boolean useStaffOrWand(item *theItem, boolean *commandsRecorded) {
         if (theItem->charges > 0) {
             autoID = zap(originLoc, zapTarget,
                          &theBolt,
-                         !boltKnown);   // hide bolt details
+                         !boltKnown,   // hide bolt details
+                         false);
             if (autoID) {
                 if (!tableForItemCategory(theItem->category)[theItem->kind].identified) {
                     itemName(theItem, buf2, false, false, NULL);

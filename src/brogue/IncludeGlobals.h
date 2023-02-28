@@ -32,6 +32,8 @@ extern short **chokeMap;
 
 extern const short nbDirs[8][2];
 extern const short cDirs[8][2];
+extern short t2cDirs[3][3];
+extern short f2rcDirs[8];
 extern levelData *levels;
 extern creature player;
 extern playerCharacter rogue;
@@ -200,7 +202,7 @@ extern const monsterClass monsterClassCatalog[MONSTER_CLASS_COUNT];
 extern const feat featTable[FEAT_COUNT];
 
 // ITEMS
-extern char itemCategoryNames[NUMBER_ITEM_CATEGORIES][7];
+extern char itemCategoryNames[NUMBER_ITEM_CATEGORIES][11];
 extern char itemTitles[NUMBER_SCROLL_KINDS][30];
 extern char titlePhonemes[NUMBER_TITLE_PHONEMES][30];
 extern char itemColors[NUMBER_ITEM_COLORS][30];
@@ -233,3 +235,5 @@ extern const char armorRunicNames[NUMBER_ARMOR_ENCHANT_KINDS][30];
 extern const char monsterBehaviorFlagDescriptions[32][COLS];
 extern const char monsterAbilityFlagDescriptions[32][COLS];
 extern const char monsterBookkeepingFlagDescriptions[32][COLS];
+
+extern const pos WINDOW_POSITION_DUNGEON_TOP_LEFT;

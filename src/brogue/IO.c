@@ -301,32 +301,35 @@ short actionMenu(short x, boolean playingBack) {
             buttons[buttonCount].flags &= ~B_ENABLED;
             buttonCount++;
 
-            if(!serverMode) {
-                if (KEYBOARD_LABELS) {
-                    sprintf(buttons[buttonCount].text, "  %sS: %sSuspend game and quit  ",  yellowColorEscape, whiteColorEscape);
-                } else {
-                    strcpy(buttons[buttonCount].text, "  Suspend game and quit  ");
+            if (!serverMode) {
+                if (playingBack) {
+                    if (KEYBOARD_LABELS) {
+                        sprintf(buttons[buttonCount].text, "  %sO: %sOpen saved game  ", yellowColorEscape, whiteColorEscape);
+                    }
+                    else {
+                        strcpy(buttons[buttonCount].text, "  Open saved game  ");
+                    }
+                    buttons[buttonCount].hotkey[0] = LOAD_SAVED_GAME_KEY;
+                    buttonCount++;
+                    if (KEYBOARD_LABELS) {
+                        sprintf(buttons[buttonCount].text, "  %sV: %sView saved recording  ", yellowColorEscape, whiteColorEscape);
+                    }
+                    else {
+                        strcpy(buttons[buttonCount].text, "  View saved recording  ");
+                    }
+                    buttons[buttonCount].hotkey[0] = VIEW_RECORDING_KEY;
+                    buttonCount++;
                 }
-                buttons[buttonCount].hotkey[0] = SAVE_GAME_KEY;
-                buttonCount++;
-                if (KEYBOARD_LABELS) {
-                    sprintf(buttons[buttonCount].text, "  %sO: %sOpen suspended game  ",        yellowColorEscape, whiteColorEscape);
-                } else {
-                    strcpy(buttons[buttonCount].text, "  Open suspended game  ");
+                else {
+                    if (KEYBOARD_LABELS) {
+                        sprintf(buttons[buttonCount].text, "  %sS: %sSave and exit  ", yellowColorEscape, whiteColorEscape);
+                    }
+                    else {
+                        strcpy(buttons[buttonCount].text, "  Save and exit  ");
+                    }
+                    buttons[buttonCount].hotkey[0] = SAVE_GAME_KEY;
+                    buttonCount++;
                 }
-                buttons[buttonCount].hotkey[0] = LOAD_SAVED_GAME_KEY;
-                buttonCount++;
-                if (KEYBOARD_LABELS) {
-                    sprintf(buttons[buttonCount].text, "  %sV: %sView saved recording  ",       yellowColorEscape, whiteColorEscape);
-                } else {
-                    strcpy(buttons[buttonCount].text, "  View saved recording  ");
-                }
-                buttons[buttonCount].hotkey[0] = VIEW_RECORDING_KEY;
-                buttonCount++;
-
-                sprintf(buttons[buttonCount].text, "    %s---", darkGrayColorEscape);
-                buttons[buttonCount].flags &= ~B_ENABLED;
-                buttonCount++;
             }
         }
 
@@ -376,6 +379,15 @@ short actionMenu(short x, boolean playingBack) {
             strcpy(buttons[buttonCount].text, "  Discovered items  ");
         }
         buttons[buttonCount].hotkey[0] = DISCOVERIES_KEY;
+        DEBUG{
+            buttonCount++;
+            if (KEYBOARD_LABELS) {
+                sprintf(buttons[buttonCount].text, "  %sC: %sCreate item or monster  ", yellowColorEscape, whiteColorEscape);
+            }else {
+                strcpy(buttons[buttonCount].text, "  Create item or monster  ");
+            }
+            buttons[buttonCount].hotkey[0] = CREATE_ITEM_MONSTER_KEY;
+        }
         buttonCount++;
         if (KEYBOARD_LABELS) {
             sprintf(buttons[buttonCount].text, "  %s~: %sPlaythrough information  ",  yellowColorEscape, whiteColorEscape);
@@ -394,9 +406,9 @@ short actionMenu(short x, boolean playingBack) {
         buttonCount++;
 
         if (KEYBOARD_LABELS) {
-            sprintf(buttons[buttonCount].text, "  %sQ: %sQuit %s  ",    yellowColorEscape, whiteColorEscape, (playingBack ? "to title screen" : "without saving"));
+            sprintf(buttons[buttonCount].text, "  %sQ: %sQuit %s  ", yellowColorEscape, whiteColorEscape, (playingBack ? "to title screen" : "and abandon game"));
         } else {
-            sprintf(buttons[buttonCount].text, "  Quit %s  ",   (playingBack ? "to title screen" : "without saving"));
+            sprintf(buttons[buttonCount].text, "  Quit %s  ", (playingBack ? "to title screen" : "and abandon game"));
         }
         buttons[buttonCount].hotkey[0] = QUIT_KEY;
         buttonCount++;
@@ -2490,7 +2502,6 @@ void executeMouseClick(rogueEvent *theEvent) {
 }
 
 void executeKeystroke(signed long keystroke, boolean controlKey, boolean shiftKey) {
-    char path[BROGUE_FILENAME_MAX];
     short direction = -1;
 
     confirmMessages();
@@ -2655,43 +2666,16 @@ void executeKeystroke(signed long keystroke, boolean controlKey, boolean shiftKe
         case DISCOVERIES_KEY:
             printDiscoveriesScreen();
             break;
-        case VIEW_RECORDING_KEY:
-            if (rogue.playbackMode || serverMode) {
-                return;
-            }
-            confirmMessages();
-            if ((rogue.playerTurnNumber < 50 || confirm("End this game and view a recording?", false))
-                && dialogChooseFile(path, RECORDING_SUFFIX, "View recording: ")) {
-                if (fileExists(path)) {
-                    strcpy(rogue.nextGamePath, path);
-                    rogue.nextGame = NG_VIEW_RECORDING;
-                    rogue.gameHasEnded = true;
-                } else {
-                    message("File not found.", 0);
-                }
-            }
-            break;
-        case LOAD_SAVED_GAME_KEY:
-            if (rogue.playbackMode || serverMode) {
-                return;
-            }
-            confirmMessages();
-            if ((rogue.playerTurnNumber < 50 || confirm("End this game and load a saved game?", false))
-                && dialogChooseFile(path, GAME_SUFFIX, "Open saved game: ")) {
-                if (fileExists(path)) {
-                    strcpy(rogue.nextGamePath, path);
-                    rogue.nextGame = NG_OPEN_GAME;
-                    rogue.gameHasEnded = true;
-                } else {
-                    message("File not found.", 0);
-                }
+        case CREATE_ITEM_MONSTER_KEY:
+            DEBUG{
+                dialogCreateItemOrMonster();
             }
             break;
         case SAVE_GAME_KEY:
             if (rogue.playbackMode || serverMode) {
                 return;
             }
-            if (confirm("Suspend this game?", false)) {
+            if (confirm("Save this game and exit?", false)) {
                 saveGame();
             }
             break;
@@ -2702,7 +2686,7 @@ void executeKeystroke(signed long keystroke, boolean controlKey, boolean shiftKe
             }
             break;
         case QUIT_KEY:
-            if (confirm("Quit this game without saving?", false)) {
+            if (confirm("Quit and abandon this game?     (The save will be deleted.)", false)) {
                 recordKeystroke(QUIT_KEY, false, false);
                 rogue.quit = true;
                 gameOver("Quit", true);
@@ -4166,8 +4150,8 @@ void printHelpScreen() {
         "                    ****clear message",
         "                    ****cancel command",
         "",
-        "                 S  ****suspend game and quit",
-        "                 Q  ****quit to title screen",
+        "                 S  ****save and exit",
+        "                 Q  ****quit and abandon game",
         "",
         "",
         "",
@@ -4680,12 +4664,10 @@ void highlightScreenCell(short x, short y, color *highlightColor, short strength
     storeColorComponents(displayBuffer[x][y].backColorComponents, &tempColor);
 }
 
-short estimatedArmorValue() {
-    short retVal;
-
-    retVal = ((armorTable[rogue.armor->kind].range.upperBound + armorTable[rogue.armor->kind].range.lowerBound) / 2) / 10;
-    retVal += strengthModifier(rogue.armor) / FP_FACTOR;
-    retVal -= player.status[STATUS_DONNING];
+// Like `armorValueIfUnenchanted` for the currently-equipped armor, but takes the penalty from
+// donning into account.
+static short estimatedArmorValue() {
+    short retVal = armorValueIfUnenchanted(rogue.armor) - player.status[STATUS_DONNING];
 
     return max(0, retVal);
 }
@@ -4703,7 +4685,7 @@ short printMonsterInfo(creature *monst, short y, boolean dim, boolean highlight)
     char buf[COLS * 2], buf2[COLS * 2], monstName[COLS], tempColorEscape[5], grayColorEscape[5];
     enum displayGlyph monstChar;
     color monstForeColor, monstBackColor, healthBarColor, tempColor;
-    short initialY, i, j, highlightStrength, displayedArmor, percent, randomHallucinationHP;
+    short initialY, i, j, highlightStrength, percent, randomHallucinationHP;
     boolean inPath;
     short oldRNG;
 
@@ -4972,15 +4954,13 @@ short printMonsterInfo(creature *monst, short y, boolean dim, boolean highlight)
                     encodeMessageColor(grayColorEscape, 0, (dim ? &darkGray : &gray));
                 }
 
-                displayedArmor = displayedArmorValue();
-
                 if (!rogue.armor || rogue.armor->flags & ITEM_IDENTIFIED || rogue.playbackOmniscience) {
 
                     sprintf(buf, "Str: %s%i%s  Armor: %i",
                             tempColorEscape,
                             rogue.strength - player.weaknessAmount,
                             grayColorEscape,
-                            displayedArmor);
+                            displayedArmorValue());
                 } else {
                     sprintf(buf, "Str: %s%i%s  Armor: %i?",
                             tempColorEscape,

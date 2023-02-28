@@ -3690,7 +3690,7 @@ void monstersTurn(creature *monst) {
                && monst->carriedItem->category == POTION
                && monst->carriedItem->kind >= POTION_POISON //any cursed potion
                && monst->carriedItem->kind != POTION_HALLUCINATION
-               && distanceBetween(player.loc.x, player.loc.y, monst->loc.x, monst->loc.y) > 5) {
+               && distanceBetween(player.loc.x, player.loc.y, monst->loc.x, monst->loc.y) > 4) {
                     pos potionTarget = {player.loc.x, player.loc.y};
                     monsterThrowItem(monst->carriedItem, monst, potionTarget, 15);
                     monst->carriedItem = NULL;

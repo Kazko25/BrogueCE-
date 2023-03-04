@@ -670,6 +670,9 @@ enum tileType {
     MEDUSA_STATUE,
     MEDUSA_STATUE_CRACKING,
 
+    //Dense Jungle Room
+    VINE_WALL,
+
     NUMBER_TILETYPES,
 };
 
@@ -1122,7 +1125,7 @@ enum monsterTypes {
 
 #define NUMBER_MUTATORS             11
 
-#define NUMBER_HORDES               204
+#define NUMBER_HORDES               206
 
 #define MONSTER_CLASS_COUNT         15
 
@@ -1836,6 +1839,8 @@ enum dungeonProfileTypes {
     DP_SENTINEL_SANCTUARY,
     //Brogue+
     DP_MEDUSA_LAIR,
+    //Dense Jungle Room
+    DP_DENSE_JUNGLE,
 
     NUMBER_DUNGEON_PROFILES,
 };
@@ -2094,6 +2099,7 @@ enum hordeFlags {
     HORDE_MACHINE_MANDRAKE			= Fl(20),	// horde planted in mandrake roots by bolt of nature, summoned by bolt of mandrakes
     HORDE_MACHINE_BUNDLE			= Fl(21),	// monsters that can be captured but not killed by spiders
     HORDE_MACHINE_SPIDER            = Fl(22),   // spiders that spawn from the ceiling with webs
+    HORDE_MACHINE_DENSE_JUNGLE      = Fl(23),   // can spawn in dense jungles
 
     HORDE_MACHINE_ONLY              = (HORDE_MACHINE_BOSS | HORDE_MACHINE_WATER_MONSTER
                                        | HORDE_MACHINE_CAPTIVE | HORDE_MACHINE_STATUE
@@ -2103,7 +2109,7 @@ enum hordeFlags {
                                        | HORDE_MACHINE_GOBLIN_WARREN
                                        | HORDE_SACRIFICE_TARGET | HORDE_MACHINE_AMBUSH
                                        | HORDE_MACHINE_MANDRAKE | HORDE_MACHINE_BUNDLE
-                                       | HORDE_MACHINE_SPIDER),
+                                       | HORDE_MACHINE_SPIDER | HORDE_MACHINE_DENSE_JUNGLE),
 };
 
 enum monsterBehaviorFlags {
@@ -2656,6 +2662,8 @@ enum machineTypes {
     MT_REWARD_SENTINEL_SANCTUARY,
     //Brogue+
     MT_REWARD_MEDUSA_LAIR,
+    //Dense Jungle Room
+    MT_REWARD_DENSE_JUNGLE,
 
     // Amulet holder:
     MT_AMULET_AREA,

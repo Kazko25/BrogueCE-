@@ -716,6 +716,9 @@ const floorTileType tileCatalog[NUMBER_TILETYPES] = {
     //unfortunate creatures turned to stone
     {G_STATUE,	&wallBackColor,			&statueBackColor,		0,	0,	DF_PLAIN_FIRE,	0,			DF_MEDUSA_STATUE_CRACKING,-2,	NO_LIGHT,		(T_OBSTRUCTS_PASSABILITY | T_OBSTRUCTS_ITEMS | T_OBSTRUCTS_GAS | T_OBSTRUCTS_SURFACE_EFFECTS), (TM_VANISHES_UPON_PROMOTION),"a stone statue",	"The lifeless stone statue depicts a creature whose face is twisted in fear." },
     {G_STATUE,	&wallBackColor,			&statueBackColor,		0,	0,	DF_PLAIN_FIRE,	0,			DF_STATUE_SHATTER,-100,			NO_LIGHT,		(T_OBSTRUCTS_PASSABILITY | T_OBSTRUCTS_ITEMS | T_OBSTRUCTS_GAS | T_OBSTRUCTS_SURFACE_EFFECTS), (TM_VANISHES_UPON_PROMOTION),"a cracking statue",	"Deep cracks ramble down the side of the statue even as you watch." },
+
+    //Dense Jungle Room
+    {G_STICKY_BUNDLE,    &darkGreen,       0,                   0, 5,  DF_EMBERS,      0,          0,              0,              NO_LIGHT,       (T_IS_FLAMMABLE | T_OBSTRUCTS_VISION | T_ENTANGLES), (TM_STAND_IN_TILE | TM_VANISHES_UPON_PROMOTION),                                             "a wall of vines",        "Thick vines push against you so you can barely move." },
 };
 
 // Features in the gas layer use the startprob as volume, ignore probdecr, and spawn in only a single point.
@@ -1096,6 +1099,7 @@ dungeonProfile dungeonProfileCatalog[NUMBER_DUNGEON_PROFILES] = {
     {{0,    5,  0,  1,  0,  0,  0,  0}, 0},     // Sentinel sanctuaries
     //Brogue+
     {{0,    5,  0,  5,  0,  0,  10,  0}, 0},    // Medusa's lair
+    {{0,    0,  1,  0,  0,  0,  0,  0}, 0},     // Dense Jungle Room
 
 };
 
@@ -1286,7 +1290,7 @@ const blueprint blueprintCatalog[NUMBER_BLUEPRINTS] = {
     
     //Brogue+
     // Medusa's lair
-    { {10, 18},           {150, 300}, 10,  12,			DP_MEDUSA_LAIR, (BP_ROOM | BP_REWARD | BP_MAXIMIZE_INTERIOR | BP_REDESIGN_INTERIOR | BP_SURROUND_WITH_WALLS),	{
+    { {10, 18},           {150, 300}, 10,  10,			DP_MEDUSA_LAIR, (BP_ROOM | BP_REWARD | BP_MAXIMIZE_INTERIOR | BP_REDESIGN_INTERIOR | BP_SURROUND_WITH_WALLS),	{
         {0,			RUBBLE,DUNGEON,		        {0,0},		0,			0,			-1,			0,				0,				0,			0,			(MF_EVERYWHERE)},
         {0,         SACRED_GLYPH,  DUNGEON,     {1, 1},		1,			0,			-1,			0,				3,				0,			0,			(MF_BUILD_AT_ORIGIN)},
         {0,         WALL,DUNGEON,               {5,10},      0,          0,			-1,			0,				0,				0,			0,			(MF_BUILD_IN_WALLS)},//MF_EVERYWHERE
@@ -1299,6 +1303,15 @@ const blueprint blueprintCatalog[NUMBER_BLUEPRINTS] = {
         //{0,			0,			0,		    	{1,1},		1,			SCROLL,		SCROLL_SHATTERING, 0,       1,				0,			0,			(MF_GENERATE_ITEM | MF_BUILD_ANYWHERE_ON_LEVEL | MF_NOT_IN_HALLWAY)},
         {0,			0,			0,				{2,3},		2,			(GOLD),   -1,         0,				1,				0,			0,			(MF_GENERATE_ITEM | MF_TREAT_AS_BLOCKING | MF_NOT_IN_HALLWAY)},
         {0,			0,			0,				{0,2},		2,			(SCROLL),   -1,         0,				1,				0,			0,			(MF_GENERATE_ITEM | MF_TREAT_AS_BLOCKING | MF_NOT_IN_HALLWAY)}} },
+
+    //Dense Jungle Room
+    { {2, 6},           {50, 250}, 20,     6,          DP_DENSE_JUNGLE,   (BP_ROOM | BP_REWARD | BP_MAXIMIZE_INTERIOR | BP_REDESIGN_INTERIOR),    {
+        {0,         TRAMPLED_FUNGUS_FOREST,  SURFACE,    {0,0},      0,          0,          -1,         0,              0,              0,          0,          (MF_EVERYWHERE)},
+        {0,         VINE_WALL,  DUNGEON,        {1,1},      100,        0,          -1,         0,              1,              0,          0,          (MF_BUILD_IN_WALLS | MF_EVERYWHERE | MF_NOT_ON_LEVEL_PERIMETER)},
+        {0,         PEDESTAL,   DUNGEON,        {1,1},      1,          (SCROLL),   SCROLL_ENCHANTING, MK_MONKEY, 2,   0,          (ITEM_KIND_AUTO_ID),    (MF_GENERATE_ITEM | MF_ALTERNATIVE | MF_TREAT_AS_BLOCKING | MF_NOT_IN_HALLWAY | MF_FAR_FROM_ORIGIN)},
+        {0,         PEDESTAL,   DUNGEON,        {1,1},      1,          (POTION),   POTION_LIFE, MK_MONKEY, 2,         0,          (ITEM_KIND_AUTO_ID),    (MF_GENERATE_ITEM | MF_ALTERNATIVE | MF_TREAT_AS_BLOCKING | MF_NOT_IN_HALLWAY | MF_FAR_FROM_ORIGIN)},
+        {0,         0,          0,              {3, 5},     5,          0,          -1,         0,              2,              HORDE_MACHINE_DENSE_JUNGLE,    0,  (MF_GENERATE_HORDE | MF_NOT_IN_HALLWAY | MF_MONSTER_SLEEPING)},
+        {0,         0,          0,              {2,3},      2,          (WEAPON | ARMOR), -1,     0,              1,              0,          0,          (MF_GENERATE_ITEM | MF_TREAT_AS_BLOCKING | MF_NOT_IN_HALLWAY)}} },
 
     // -- AMULET HOLDER --
     // Statuary -- key on an altar, area full of statues; take key to cause statues to burst and reveal monsters
@@ -1684,7 +1697,7 @@ creatureType monsterCatalog[NUMBER_MONSTER_KINDS] = {
     {0, "eel",          G_EEL,    &eelColor,      18,     27,     100,    {3, 7, 2},      5,  50,     100,    0,              0,    false,      0,      0,              {0},
         (MONST_RESTRICTED_TO_LIQUID | MONST_IMMUNE_TO_WATER | MONST_SUBMERGES | MONST_FLITS | MONST_NEVER_SLEEPS)},
     {0, "monkey",       G_MONKEY,    &ogreColor,     12,     17,     100,    {1, 3, 1},      20, 100,    100,    DF_RED_BLOOD,   0,    false,      1,      DF_URINE,       {0},
-        (0), (MA_HIT_STEAL_FLEE)},
+        (MONST_IMMUNE_TO_WEBS), (MA_HIT_STEAL_FLEE)},
     {0, "bloat",        G_BLOAT,    &poisonGasColor,4,      0,      100,    {0, 0, 0},      5,  100,    100,    DF_PURPLE_BLOOD,0,    false,      0,      DF_BLOAT_DEATH, {0},
         (MONST_FLIES | MONST_FLITS), (MA_KAMIKAZE | MA_DF_ON_DEATH)},
     {0, "pit bloat",    G_BLOAT,    &lightBlue,     4,      0,      100,    {0, 0, 0},      5,  100,    100,    DF_PURPLE_BLOOD,0,    false,      0,      DF_HOLE_POTION, {0},
@@ -2542,6 +2555,10 @@ const hordeType hordeCatalog[NUMBER_HORDES] = {
     {MK_GOBLIN_CONJURER,2,      {MK_GOBLIN_CONJURER, MK_GOBLIN_MYSTIC}, {{0,1,1}, {1,1,1}},             7,      15,     40,      0,              0,              HORDE_MACHINE_GOBLIN_WARREN},
     {MK_GOBLIN_TOTEM,   4,      {MK_GOBLIN_TOTEM, MK_GOBLIN_CONJURER, MK_GOBLIN_MYSTIC, MK_GOBLIN}, {{1,2,1},{1,2,1},{1,2,1},{3,5,1}},10,17,80,0,MT_CAMP_AREA,  HORDE_MACHINE_GOBLIN_WARREN},
     {MK_GOBLIN,         1,      {MK_GOBLIN},                            {{1, 2, 1}},                    3,      7,      10,      0,              0,              HORDE_MACHINE_GOBLIN_WARREN | HORDE_LEADER_CAPTIVE},
+
+    // dense jungle
+    { MK_MONKEY,         0,      {0},                                    {{0}},                          1,      10,     100,     0,              0,              HORDE_MACHINE_DENSE_JUNGLE },
+    { MK_MONKEY,         1,      {MK_MONKEY},                            {{1, 2, 1}},                    3,      7,      10,      0,              0,              HORDE_MACHINE_DENSE_JUNGLE },
 };
 
 const monsterClass monsterClassCatalog[MONSTER_CLASS_COUNT] = {
